@@ -1,4 +1,4 @@
-<div>
+<div class="border rounded-sm box-border md:size-50 size-47">
     <p>{{ticket().name}}</p>
     @if(ticket().available===true){
         <p>Prix: {{ticket().price}}</p>
@@ -8,4 +8,5 @@
     }
     <p>Description: {{ticket().description}}</p>
      <p>Conditions: {{ticket().condition}}</p>
+     <button type="button" (click)="select(ticket())">Selectionner</button>
 </div>

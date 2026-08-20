@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-//import { Ticket } from '../../types/ticket-type.interface';
+import { Component, inject, Input, OnInit, signal,OnChanges,SimpleChanges } from '@angular/core';
+import { Ticket } from '../../types/ticket-type.interface';
 import { TicketService } from '../../services/ticket.service';
 import { TicketCardComponent } from '../../components/ticket-card.component/ticket-card.component';
 
@@ -13,8 +13,18 @@ import { TicketCardComponent } from '../../components/ticket-card.component/tick
 export class TicketListComponent implements OnInit {
   private readonly ticketServiceCall = inject(TicketService);
   readonly ticketList = this.ticketServiceCall.ticketListSignal; //Creation d'un signal d'une liste de ticket
-  
+ // @Input() selectedTicket:Ticket = {} as Ticket;
+  selectedTicketList:Ticket[] = [];
   ngOnInit(){
     this.ticketServiceCall.getTicketList();
+    //console.log(this.selectedTicket);
   }
+ /* ngOnChanges(changes:SimpleChanges){
+   // this.selectedTicketList.push(this.selectedTicket);
+    console.log(this.selectedTicketList);
+  }*/
+ selectedTicket(ticket:Ticket){
+  this.selectedTicketList.push(ticket);
+  console.log(this.selectedTicketList);
+ }
 }

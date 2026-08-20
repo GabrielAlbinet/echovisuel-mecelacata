@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Ticket } from '../../types/ticket-type.interface';
 
 @Component({
@@ -8,5 +8,10 @@ import { Ticket } from '../../types/ticket-type.interface';
   templateUrl: './ticket-card.component.html',
 })
 export class TicketCardComponent {
-  ticket=input.required<Ticket>();
+  ticket=input.required<Ticket>(); //parent vers enfant
+  selectedTicket=output<Ticket>(); //Enfant vers parent
+  select(ticket:Ticket){
+    this.selectedTicket.emit(ticket);
+    
+  }
 }
