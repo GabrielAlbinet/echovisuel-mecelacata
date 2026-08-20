@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Venue } from '../../../types/venue.interface';
 
 @Component({
@@ -8,6 +8,12 @@ import { Venue } from '../../../types/venue.interface';
   templateUrl: './venue-card.component.html',
 })
 export class VenueCardComponent {
+
+  venueSelected = output<Venue>();
+
+  selectVenue() {
+    this.venueSelected.emit(this.venue());
+  }
 
   venue = input.required<Venue>();
 

@@ -1,6 +1,11 @@
 
 <div class="flex flex-row gap-20">
 @for(venue of arrayOfVenues(); track venue.name) {
-    <app-venue-card [venue]="venue"/>
+    <app-venue-card [venue]="venue" (venueSelected)="onVenueSelected($event)" />
 }
 </div>
+
+@if (lastSelectedVenue; as venue) {
+    <p> {{ venue.name }}</p>
+}
+

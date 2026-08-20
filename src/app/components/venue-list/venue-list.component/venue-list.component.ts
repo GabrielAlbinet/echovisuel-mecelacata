@@ -12,6 +12,12 @@ import { VenueCardComponent } from '../../venue-card/venue-card.component/venue-
 
 export class VenueListComponent {
 
+  lastSelectedVenue: Venue | undefined;
+
+  onVenueSelected(venue: Venue) {
+    this.lastSelectedVenue = venue;
+  }
+
   venueService = inject(VenueServiceTs);
 
   arrayOfVenues =  signal<Venue[]>(this.venueService.getVenuesFromService());
