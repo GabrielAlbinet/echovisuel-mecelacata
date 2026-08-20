@@ -1,1 +1,3 @@
-<p>venue-list.component works!</p>
+@for(venue of arrayOfVenues; track venue.name) {
+    <p> {{ venue.name }}</p>
+}

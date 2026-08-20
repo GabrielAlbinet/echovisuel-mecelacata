@@ -1,4 +1,15 @@
-import { Service } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { data } from '../../data/venue.data';
 
-@Service()
-export class VenueServiceTs {}
+import { Venue } from '../../types/venue.interface';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class VenueServiceTs {
+    
+    getVenuesFromService(): Venue[] {
+        return data;
+    }
+
+}
