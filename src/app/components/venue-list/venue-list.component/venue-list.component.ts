@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { VenueServiceTs } from '../../../services/venue-service/venue.service';
+import { Venue } from '../../../types/venue.interface';
 
 @Component({
   imports: [],
@@ -12,5 +13,5 @@ export class VenueListComponent {
 
   venueService = inject(VenueServiceTs);
 
-  arrayOfVenues =  this.venueService.getVenuesFromService();
+  arrayOfVenues =  signal<Venue[]>(this.venueService.getVenuesFromService());
 }
