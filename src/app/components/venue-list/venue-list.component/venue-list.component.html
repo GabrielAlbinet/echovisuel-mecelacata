@@ -1,9 +1,12 @@
-
-<div class="flex flex-row gap-20">
-@for(venue of arrayOfVenues(); track venue.name) {
-    <app-venue-card [venue]="venue" (venueSelected)="onVenueSelected($event)" />
+@if (arrayOfVenues().length > 0) {
+    <div class="flex flex-row gap-20">
+    @for(venue of arrayOfVenues(); track venue.name) {
+        <app-venue-card [venue]="venue" (venueSelected)="onVenueSelected($event)" />
+    }
+    </div>
+} @else {
+    <p>Aucun lieu n'existe</p>
 }
-</div>
 
 @if (lastSelectedVenue; as venue) {
     <p> {{ venue.name }}</p>
