@@ -1,1 +1,11 @@
-<p>ticket-card.component works!</p>
+<div>
+    <p>{{ticket.name}}</p>
+    @if(ticket.available==true){
+        <p>{{ticket.price}}</p>
+        <p>{{ticket.quantity}}</p>
+    }@else{
+        <p>épuisé</p>
+    }
+    <p>{{ticket.description}}</p>
+     <p>{{ticket.condition}}</p>
+</div>
