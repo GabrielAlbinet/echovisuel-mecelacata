@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Participant } from '../../types/participant.interface';
 
 @Component({
   imports: [],
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './participant-card.component.css',
   templateUrl: './participant-card.component.html',
 })
-export class ParticipantCardComponent {}
+export class ParticipantCardComponent {
+  participant = input.required<Participant>();
+}

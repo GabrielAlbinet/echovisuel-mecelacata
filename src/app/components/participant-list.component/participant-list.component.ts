@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ParticipantService } from '../../services/participant.service';
+import { ParticipantCardComponent } from '../participant-card.component/participant-card.component';
 
 @Component({
-  imports: [],
+  imports: [ParticipantCardComponent],
   selector: 'app-participant-list',
   styleUrl: './participant-list.component.css',
   templateUrl: './participant-list.component.html',
