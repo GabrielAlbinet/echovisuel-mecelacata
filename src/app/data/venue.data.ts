@@ -44,6 +44,6 @@ export const data: Venue[] = [
         type: "Salle de Concert",
         capacity: 500,
         location: "Saint-Etienne",
-        image: ""
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbTluNIbPmNWniRTAEikAwfFSk5EqSI0P7eRbNU-DFqg&s=10"
     }
 ]
