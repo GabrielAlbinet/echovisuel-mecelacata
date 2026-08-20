@@ -1,0 +1,29 @@
+<article class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-orange-400/60 hover:shadow-md">
+  <div class="flex items-center justify-between">
+    <span class="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-orange-600">
+      Lieu #{{ event().venueId }}
+    </span>
+
+    @if (event().status === 'cancelled') {
+      <span class="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-red-600">
+        Annulé
+      </span>
+    } @else {
+      <span class="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-orange-600">
+        Programmé
+      </span>
+    }
+  </div>
+
+  <h3 class="mt-4 text-xl font-bold text-stone-900">
+    Artiste #{{ event().artistId }}
+  </h3>
+
+  <p class="mt-2 text-sm text-stone-500">
+    {{ event().date }}
+  </p>
+
+  <p class="mt-1 text-sm text-stone-500">
+    {{ event().startTime }} — {{ event().endTime }}
+  </p>
+</article>
