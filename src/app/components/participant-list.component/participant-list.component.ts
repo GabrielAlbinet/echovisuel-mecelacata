@@ -8,10 +8,12 @@ import { ParticipantService } from '../../services/participant.service';
   templateUrl: './participant-list.component.html',
 })
 export class ParticipantListComponent implements OnInit {
-  participantService = inject(ParticipantService);
+    private readonly participantService = inject(ParticipantService);
+    readonly participantTab = this.participantService.participantsSignal;
 
   ngOnInit(){
     this.participantService.getParticipants().subscribe();
+    console.log(this.participantTab);
   }
 
 }

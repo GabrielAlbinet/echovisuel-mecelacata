@@ -1,1 +1,3 @@
-<p>participant-list.component works!</p>
+@for(participant of participantTab(); track participant){
+	<p>{{ participant.firstName }}</p>
+}
