@@ -1,11 +1,11 @@
 <div>
-    <p>{{ticket.name}}</p>
-    @if(ticket.available==true){
-        <p>{{ticket.price}}</p>
-        <p>{{ticket.quantity}}</p>
+    <p>{{ticket().name}}</p>
+    @if(ticket().available===true){
+        <p>Prix: {{ticket().price}}</p>
+        <p>Nombre de ticket: {{ticket().quantity}}</p>
     }@else{
-        <p>épuisé</p>
+        <p>Épuisé</p>
     }
-    <p>{{ticket.description}}</p>
-     <p>{{ticket.condition}}</p>
+    <p>Description: {{ticket().description}}</p>
+     <p>Conditions: {{ticket().condition}}</p>
 </div>

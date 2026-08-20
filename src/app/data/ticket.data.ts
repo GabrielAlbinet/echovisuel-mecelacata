@@ -31,7 +31,7 @@ export let ticketData : Ticket[] = [{
     name:"la ligne verte",
     description:"Lorem Ipsum",
     price:11,
-    quantity:09,
+    quantity:11,
     condition:"Lorem Ipsum",
     available:true
 }, {
