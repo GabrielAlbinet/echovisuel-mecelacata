@@ -38,5 +38,12 @@ export const data: Venue[] = [
         capacity: 1000,
         location: "Lyon",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM_Wf26a1Q313DOQnRQEwKq1q4yNwod-ayND_CL5hPIg&s=10" 
+    },
+    {
+        name: "Le Fil",
+        type: "Salle de Concert",
+        capacity: 1000,
+        location: "Saint-Etienne",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbTluNIbPmNWniRTAEikAwfFSk5EqSI0P7eRbNU-DFqg&s=10"
     }
 ]
