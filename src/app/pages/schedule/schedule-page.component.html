@@ -1,0 +1,13 @@
+<section class="min-h-screen bg-stone-50 px-6 py-16 text-stone-900">
+  <div class="mx-auto max-w-6xl">
+    <h1 class="mb-10 text-4xl font-black">Programme du festival</h1>
+
+    @if (isLoading()) {
+      <p class="text-stone-500">Chargement du programme...</p>
+    } @else if (sortedDateKeys().length === 0) {
+      <p class="text-stone-500">Aucun événement n'est programmé pour le moment.</p>
+    } @else {
+      <app-schedule-list [dateKeys]="sortedDateKeys()" [groupedEvents]="groupedEvents()" />
+    }
+  </div>
+</section>
