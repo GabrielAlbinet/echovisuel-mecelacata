@@ -1,3 +1,5 @@
 @for(participant of participantTab(); track participant){
 	<app-participant-card [participant] = "participant"/>
+}@empty {
+	<p>Aucun participant à l'événement.</p>
 }
