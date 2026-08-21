@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col">
 
     <label for="name">Nom du lieu</label>
     <input id="name" type="text" formControlName="name" />
@@ -17,5 +17,7 @@
 
     <label for="image">URL d'image</label>
     <input id="image" type="text" formControlName="image" />
+
+    <button type="submit">Valider</button>
 
 </form>

@@ -17,4 +17,8 @@ export class VenueForm {
     location: new FormControl(''),
     image: new FormControl(''),
   });
+
+  onSubmit() {
+    console.log(this.form.value)
+  }
 }
