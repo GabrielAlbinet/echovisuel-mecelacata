@@ -1,12 +1,12 @@
-import { Service } from '@angular/core';
+import { Injectable } from '@angular/core';
 import artists from '../data/artist.data';
 import { Artist } from '../types/artist.interface';
 
-@Service()
+@Injectable({
+  providedIn: 'root',
+})
 export class ArtistService {
-getArtists(): Artist[]{
-
+  getArtists(): Artist[] {
     return artists;
-}
-
+  }
 }

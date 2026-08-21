@@ -1,7 +1,8 @@
 export interface Venue {
-    name: string;
-    type: string;
-    capacity: number;
-    location: string;
-    image: string;
+  id: number;
+  name: string;
+  type: string;
+  capacity: number;
+  location: string;
+  image: string;
 }
