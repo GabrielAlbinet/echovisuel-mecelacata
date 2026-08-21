@@ -26,6 +26,7 @@ export class VenueForm {
 
     if(this.venueForm.valid){
       this.venueService.addVenue(newVenue);
+      this.venueForm.reset();
     }
   }
 }
