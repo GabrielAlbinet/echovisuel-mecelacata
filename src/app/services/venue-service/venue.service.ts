@@ -15,14 +15,12 @@ export class VenueServiceTs {
     }
 
     addVenue(venue: Venue) {
-        this.venues().push(venue);
+        this.venues.update(current => [...current, venue]);
     }
 
     initVenue() {
         const venuesFromData = this.getVenuesFromService();
-        for(const venue of venuesFromData) {
-            this.venues().push(venue);
-        }
+        this.venues.update(current => [...current, ...venuesFromData]);
     }
 
 }

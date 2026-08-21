@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { VenueServiceTs } from '../../services/venue-service/venue.service';
 
 @Component({
   imports: [ ReactiveFormsModule ],
@@ -9,16 +10,20 @@ import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 })
 export class VenueForm {
 
-  form = new FormGroup({
-    name: new FormControl(''),
-    type: new FormControl(''),
-    description: new FormControl(''),
-    capacity: new FormControl(''),
-    location: new FormControl(''),
-    image: new FormControl(''),
+  venueService = inject(VenueServiceTs);
+
+  venueForm = new FormGroup({
+    name: new FormControl('', { nonNullable: true}),
+    type: new FormControl('', { nonNullable: true}),
+    description: new FormControl('', { nonNullable: true}),
+    capacity: new FormControl<number>(0, { nonNullable: true}),
+    location: new FormControl('', { nonNullable: true}),
+    image: new FormControl('', { nonNullable: true}),
   });
 
   onSubmit() {
-    console.log(this.form.value)
+    const newVenue = this.venueForm.getRawValue()
+
+    this.venueService.addVenue(newVenue);
   }
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col">
+<form [formGroup]="venueForm" (ngSubmit)="onSubmit()" class="flex flex-col">
 
     <label for="name">Nom du lieu</label>
     <input id="name" type="text" formControlName="name" />
@@ -10,7 +10,7 @@
     <input id="description" type="text" formControlName="description" />
 
     <label for="capacity">Capacité d'accueil (en nombre de personnes)</label>
-    <input id="capacity" type="text" formControlName="capacity" />
+    <input id="capacity" type="number" formControlName="capacity" />
 
     <label for="location">Ville</label>
     <input id="location" type="text" formControlName="location" />
