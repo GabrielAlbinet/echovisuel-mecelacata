@@ -12,6 +12,5 @@ export class TicketCardComponent {
   selectedTicket=output<Ticket>(); //Enfant vers parent
   select(ticket:Ticket){
     this.selectedTicket.emit(ticket);
-    
   }
 }

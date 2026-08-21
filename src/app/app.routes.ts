@@ -5,7 +5,7 @@ import { SchedulePageComponent } from './pages/schedule/schedule-page.component'
 
 export const routes: Routes = [
   {
-    path: 'ticket-list',
+    path: 'ticketlist',
     component: TicketListComponent,
   },
   {
