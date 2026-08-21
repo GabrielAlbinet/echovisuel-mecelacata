@@ -1,4 +1,4 @@
 <div class="m-3 p-2">
 	<label for="emailSearch">Recherche: </label>
-	<input id="emailSearch" [ngModel]="emailSearch()" (ngModelChange)="emailSearch.set($event); getParticipantsByMail($event)" class="border" type="email" placeholder="e-mail participant" required>
+	<input id="emailSearch" [ngModel]="emailSearch()" (ngModelChange)="emailSearch.set($event); getParticipantsByMail(emailSearch())" class="border" placeholder="e-mail participant" >
 </div>

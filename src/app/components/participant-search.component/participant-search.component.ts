@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ParticipantService } from '../../services/participant.service';
 
 @Component({
   imports: [FormsModule],
@@ -8,10 +9,13 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './participant-search.component.html',
 })
 export class ParticipantSearchComponent {
+  private readonly participantService = inject(ParticipantService);
+  
   emailSearch = signal<string>('');
 
 
-  getParticipantsByMail(event:Event){
-    
+  getParticipantsByMail(emailSearch:string){
+    let regex = new RegExp(".*" + emailSearch + ".*");
+    this.participantService.setParticipantTab(regex);
   }
 }
