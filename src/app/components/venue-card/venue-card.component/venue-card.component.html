@@ -1,0 +1,15 @@
+<article class="justify-center">
+    <div class="bg-neutral-primary-soft flex-col max-w-md border border-default rounded-sm shadow-xs justify-center">
+    <a href="#">
+        <img class="rounded-t-base" [src]="venue().image" [alt]="venue().name" />
+    </a>
+    <div class="p-6 text-center">
+            <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">{{ venue().name }}</h5>
+            <p class="mt-3 mb-6 text-xl font-semibold tracking-tight text-heading">{{ venue().type }}</p>
+            <p class="mt-3 mb-6 text-xl font-semibold tracking-tight text-heading">{{ venue().capacity }}</p>
+            <p class="mt-3 mb-6 text-xl font-semibold tracking-tight text-heading">{{ venue().location }}</p>
+            <button (click)="selectVenue()" class="inline-flex items-center text-white bg-red-900 box-border hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Sélectionner</button>
+        
+    </div>
+</div>
+</article>
