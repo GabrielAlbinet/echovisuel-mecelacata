@@ -6,7 +6,7 @@ import { FestivalPageComponent } from './pages/festival-page.component/festival-
 
 export const routes: Routes = [
   {
-    path: 'ticket-list',
+    path: 'tickets',
     component: TicketListComponent,
   },
   {
