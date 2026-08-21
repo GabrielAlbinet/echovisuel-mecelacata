@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { VenueServiceTs } from '../../../services/venue-service/venue.service';
 import { Venue } from '../../../types/venue.interface';
 import { VenueCardComponent } from '../../venue-card/venue-card.component/venue-card.component';
@@ -10,7 +10,15 @@ import { VenueCardComponent } from '../../venue-card/venue-card.component/venue-
   templateUrl: './venue-list.component.html',
 })
 
-export class VenueListComponent {
+export class VenueListComponent implements OnInit {
+
+  venueService = inject(VenueServiceTs);
+
+  ngOnInit() {
+    this.venueService.initVenue();
+  }
+
+  arrayOfVenues =  signal<Venue[]>(this.venueService.venues());
 
   lastSelectedVenue: Venue | undefined;
 
@@ -18,7 +26,5 @@ export class VenueListComponent {
     this.lastSelectedVenue = venue;
   }
 
-  venueService = inject(VenueServiceTs);
-
-  arrayOfVenues =  signal<Venue[]>(this.venueService.getVenuesFromService());
+  
 }
