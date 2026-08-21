@@ -14,11 +14,12 @@ export class CreateTicketComponent {
   createTicketForm = new FormGroup({
     name : new FormControl('', Validators.required),
     description : new FormControl('', Validators.required),
-    price : new FormControl(0, Validators.required),
-    quantity : new FormControl(0, Validators.required),
-    dateBeginning : new FormControl(new Date(), Validators.required),
-    dateEnd : new FormControl(new Date(), Validators.required),
+    price : new FormControl(0, Validators.min(0.50)),
+    quantity : new FormControl(0, Validators.min(0)),
+    dateBeginning : new FormControl(new Date(0), Validators.required),
+    dateEnd : new FormControl(new Date(0), Validators.required),
   });
+  dateCompare = new Date();
   submitTicket(){
     if(this.createTicketForm.controls.name.value != null &&
       this.createTicketForm.controls.description.value != null &&
@@ -26,7 +27,9 @@ export class CreateTicketComponent {
       this.createTicketForm.controls.quantity.value != null &&
       this.createTicketForm.controls.dateBeginning.value != null &&
       this.createTicketForm.controls.dateEnd.value != null &&
-      this.createTicketForm.controls.dateBeginning.value < this.createTicketForm.controls.dateEnd.value
+      this.createTicketForm.controls.dateBeginning.value >this.dateCompare &&
+      this.createTicketForm.controls.dateEnd.value > this.dateCompare &&
+      this.createTicketForm.controls.dateBeginning.value <= this.createTicketForm.controls.dateEnd.value
     ){
       if(this.createTicketForm.controls.quantity.value == 0){
         this.createdticket.emit({
