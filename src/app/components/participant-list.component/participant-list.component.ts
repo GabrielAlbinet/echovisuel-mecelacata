@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ParticipantService } from '../../services/participant.service';
 import { ParticipantCardComponent } from '../participant-card.component/participant-card.component';
+import { Participant } from '../../types/participant.interface';
 
 @Component({
   imports: [ParticipantCardComponent],
@@ -14,7 +15,8 @@ export class ParticipantListComponent implements OnInit {
 
   ngOnInit(){
     this.participantService.getParticipants().subscribe();
-    console.log(this.participantTab);
   }
+
+  whenChange(selectedParticipant:{participant: Participant, isChecked:boolean}){}
 
 }

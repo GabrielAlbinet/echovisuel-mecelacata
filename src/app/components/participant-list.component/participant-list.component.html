@@ -1,6 +1,6 @@
 <section class="grid grid-cols-1 md:grid-cols-3">
 	@for(participant of participantTab(); track participant){
-		<app-participant-card [participant] = "participant"/>
+		<app-participant-card [participant] = "participant" (selected)="whenChange($event)"/>
 	}@empty {
 		<p>Aucun participant à l'événement.</p>
 	}

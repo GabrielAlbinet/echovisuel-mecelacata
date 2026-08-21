@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Participant } from '../../types/participant.interface';
 
 @Component({
@@ -9,4 +9,10 @@ import { Participant } from '../../types/participant.interface';
 })
 export class ParticipantCardComponent {
   participant = input.required<Participant>();
+  selected = output<{participant: Participant, isChecked:boolean}>();
+
+  onChange(isChecked:boolean){
+    this.selected.emit({participant:this.participant(), isChecked:isChecked});
+  }
+
 }

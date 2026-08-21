@@ -4,4 +4,5 @@
 	<p>E-mail: {{ participant().email }}</p>
 	<p>Statut: {{ participant().status }}</p>
 	<p>Type de billet: {{ participant().ticketType }}</p>
+	<input type="checkbox" #check (change)="onChange(check?.checked)"/>
 </section>
