@@ -1,1 +1,21 @@
-<p>venue-form works!</p>
+<form [formGroup]="form">
+
+    <label for="name">Nom du lieu</label>
+    <input id="name" type="text" formControlName="name" />
+
+    <label for="type">Type de lieu</label>
+    <input id="type" type="text" formControlName="type" />
+
+    <label for="description">Description</label>
+    <input id="description" type="text" formControlName="description" />
+
+    <label for="capacity">Capacité d'accueil (en nombre de personnes)</label>
+    <input id="capacity" type="text" formControlName="capacity" />
+
+    <label for="location">Ville</label>
+    <input id="location" type="text" formControlName="location" />
+
+    <label for="image">URL d'image</label>
+    <input id="image" type="text" formControlName="image" />
+
+</form>
