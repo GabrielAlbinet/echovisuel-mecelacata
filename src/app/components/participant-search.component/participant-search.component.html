@@ -1,3 +1,4 @@
-<form>
-	<input type="email" name="searchBar" placeholder="e-mail participant" required>
-</form>
+<div class="m-3 p-2">
+	<label for="emailSearch">Recherche: </label>
+	<input id="emailSearch" [ngModel]="emailSearch()" (ngModelChange)="emailSearch.set($event); getParticipantsByMail($event)" class="border" type="email" placeholder="e-mail participant" required>
+</div>
