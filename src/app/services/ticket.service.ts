@@ -10,4 +10,7 @@ export class TicketService {
     getTicketList(){
         this.ticketList.set(ticketData);
     }
+    createTicket(ticket:Ticket){
+        ticketData.push(ticket);
+    }
 }

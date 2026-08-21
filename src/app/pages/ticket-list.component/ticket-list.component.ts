@@ -3,7 +3,6 @@ import { Ticket } from '../../types/ticket-type.interface';
 import { TicketService } from '../../services/ticket.service';
 import { TicketCardComponent } from '../../components/ticket-card.component/ticket-card.component';
 
-
 @Component({
   imports: [TicketCardComponent],
   selector: 'app-ticket-list.component',
