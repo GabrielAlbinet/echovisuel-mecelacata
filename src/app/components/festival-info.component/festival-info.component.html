@@ -1,0 +1,10 @@
+@if (infos(); as info) {
+<div class="bg-blue-50 flex flex-col justify-center items-center p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-bold">{{ info.name }}</h2>
+    <p>{{ info.description }}</p>
+    <h3 class="text-lg font-semibold">{{ info.mainLocation }}</h3>
+    <img [src]="info.poster" [alt]="info.name">
+</div>
+}@else {
+<p>Aucun festival de prévu.</p>
+}
