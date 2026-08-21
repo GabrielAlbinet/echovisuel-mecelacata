@@ -3,7 +3,7 @@ import { TicketListComponent } from './pages/ticket-list.component/ticket-list.c
 import { VenuePageComponent } from './pages/venue/venue-page.component/venue-page.component';
 import { SchedulePageComponent } from './pages/schedule/schedule-page.component';
 import { FestivalPageComponent } from './pages/festival-page.component/festival-page.component';
-import { ParticipantListComponent } from './components/participant-list.component/participant-list.component';
+import { ParticipantPageComponent } from './pages/participant/participant-page.component';
 
 export const routes: Routes = [
   {
@@ -25,7 +25,7 @@ export const routes: Routes = [
 
   {
     path: 'participants',
-    component: ParticipantListComponent,
+    component: ParticipantPageComponent,
   },
 ];
 
