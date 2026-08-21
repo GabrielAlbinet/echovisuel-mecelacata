@@ -1,0 +1,7 @@
+<div > <p>{{selectedTicket.name}}</p>
+</div>
+<div  class="grid md:grid-cols-5 md:grid-rows-4 grid-cols-2 grid-rows-10 gap-2 p-8 ">
+    @for(ticket of ticketList();track ticket){
+        <app-ticket-card [ticket]="ticket" (selectedTicket)="selectedTicket($event)"></app-ticket-card>
+    }
+</div>
