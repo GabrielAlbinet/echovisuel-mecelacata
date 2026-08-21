@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { TicketListComponent } from './pages/ticket-list.component/ticket-list.component';
 import { VenuePageComponent } from './pages/venue/venue-page.component/venue-page.component';
 import { SchedulePageComponent } from './pages/schedule/schedule-page.component';
+import { FestivalPageComponent } from './pages/festival-page.component/festival-page.component';
 
 export const routes: Routes = [
   {
@@ -16,4 +17,10 @@ export const routes: Routes = [
     path: 'schedule',
     component: SchedulePageComponent,
   },
+
+  { path: 'festival',
+    component: FestivalPageComponent 
+  },
 ];
+
+
