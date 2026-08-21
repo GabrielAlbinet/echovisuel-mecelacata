@@ -1,0 +1,5 @@
+<div class="border-black border-2"><p>{{artist().name}}</p>
+<p>{{artist().category}}</p>
+<img src="{{artist().image}}" alt="{{artist().name}}">
+<p>{{artist().description}}</p>
+<input type="checkbox" #inputBox (change)="onSelect(inputBox?.checked)"/></div>
