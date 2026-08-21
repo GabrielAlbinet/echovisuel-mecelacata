@@ -25,6 +25,4 @@ export class VenueListComponent implements OnInit {
   onVenueSelected(venue: Venue) {
     this.lastSelectedVenue = venue;
   }
-
-  
 }
