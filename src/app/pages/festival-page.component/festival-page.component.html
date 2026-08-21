@@ -1,0 +1,10 @@
+<div class="grid lg:grid-cols-4 gap-5">
+  @for(festival of festivals(); track festival.name) {
+  <div class="flex flex-col justify-center">
+    <app-festival-infocomponent [infos]="festival"></app-festival-infocomponent>
+    <app-festival-datescomponent [dates]="festival.dates"></app-festival-datescomponent>
+  </div>
+  }@empty {
+  <p>Aucun festival de prévu.</p>
+  }
+</div>

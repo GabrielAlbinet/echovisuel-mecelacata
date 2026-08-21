@@ -1,0 +1,8 @@
+@if (dates(); as date) {
+<div class="bg-red-50 flex flex-col justify-center items-center p-4 rounded-lg shadow-md">
+    @for(date of dates(); track date.startDate){
+    <h4 class="text-lg font-semibold">Dates :</h4>
+    <p> du {{ date.startDate|date: 'dd/MM/yyyy' }} au {{ date.endDate|date: 'dd/MM/yyyy' }}</p>
+    }
+</div>
+}
