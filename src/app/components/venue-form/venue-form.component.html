@@ -1,23 +1,70 @@
 <form [formGroup]="venueForm" (ngSubmit)="onSubmit()" class="flex flex-col">
 
     <label for="name">Nom du lieu</label>
-    <input id="name" type="text" formControlName="name" />
+    <input id="name" type="text" formControlName="name" required/>
+    @if( venueForm.controls.name.invalid && (venueForm.controls.name.dirty || venueForm.controls.name.touched)) {
+        <div class="text-red-900">
+            @if(venueForm.controls.name.hasError('required')) {
+                <p>Le nom est obligatoire</p>
+            }
+        </div>
+    }
 
     <label for="type">Type de lieu</label>
-    <input id="type" type="text" formControlName="type" />
+    <input id="type" type="text" formControlName="type" required/>
+    @if( venueForm.controls.type.invalid && (venueForm.controls.type.dirty || venueForm.controls.type.touched)) {
+        <div class="text-red-900">
+            @if(venueForm.controls.type.hasError('required')) {
+                <p>Le type de lieu est obligatoire</p>
+            }
+        </div>
+    }
 
     <label for="description">Description</label>
-    <input id="description" type="text" formControlName="description" />
+    <input id="description" type="text" formControlName="description" required/>
+    @if( venueForm.controls.description.invalid && (venueForm.controls.description.dirty || venueForm.controls.description.touched)) {
+        <div class="text-red-900">
+            @if(venueForm.controls.description.hasError('required')) {
+                <p>La description est obligatoire</p>
+            }
+        </div>
+    }
 
     <label for="capacity">Capacité d'accueil (en nombre de personnes)</label>
-    <input id="capacity" type="number" formControlName="capacity" />
+    <input id="capacity" type="number" formControlName="capacity" required/>
+    @if( venueForm.controls.capacity.invalid && (venueForm.controls.capacity.dirty || venueForm.controls.capacity.touched)) {
+        <div class="text-red-900">
+            @if(venueForm.controls.capacity.hasError('required')) {
+                <p>La capacité est obligatoire</p>
+            }
+
+            @if(venueForm.controls.capacity.hasError('min')) {
+                <p>La capacité doit être supérieure à 0</p>
+            }
+        </div>
+    }
 
     <label for="location">Ville</label>
-    <input id="location" type="text" formControlName="location" />
+    <input id="location" type="text" formControlName="location" required/>
+    @if( venueForm.controls.location.invalid && (venueForm.controls.location.dirty || venueForm.controls.location.touched)) {
+        <div class="text-red-900">
+            @if(venueForm.controls.location.hasError('required')) {
+                <p>La Ville est obligatoire</p>
+            }
+        </div>
+    }
 
     <label for="image">URL d'image</label>
-    <input id="image" type="text" formControlName="image" />
+    <input id="image" type="text" formControlName="image" required/>
+    @if( venueForm.controls.image.invalid && (venueForm.controls.image.dirty || venueForm.controls.image.touched)) {
+        <div class="text-red-900">
+            @if(venueForm.controls.image.hasError('required')) {
+                <p>Une image est obligatoire</p>
+            }
+        </div>
+    }
 
-    <button type="submit">Valider</button>
-
+    <button type="submit" [disabled]="form.invalid">Valider</button>
 </form>
+
+
