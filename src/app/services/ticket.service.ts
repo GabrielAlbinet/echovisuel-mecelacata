@@ -1,6 +1,7 @@
 import { Service, signal } from '@angular/core';
 import { Ticket } from '../types/ticket-type.interface';
 import { ticketData } from '../data/ticket.data';
+import { tick } from '@angular/core/testing';
 
 
 @Service()
@@ -11,6 +12,6 @@ export class TicketService {
         this.ticketList.set(ticketData);
     }
     createTicket(ticket: Ticket){
-        ticketData.push();
+        ticketData.push(ticket);
     }
 }
