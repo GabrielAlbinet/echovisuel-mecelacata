@@ -1,0 +1,15 @@
+<form [formGroup]="createTicketForm" (ngSubmit)="submitTicket()">
+    <p>Nom :</p>
+    <input type="text" placeholder="nom" formControlName="name">
+    <p>Description :</p>
+    <input type="text" placeholder="description" formControlName="description">
+    <p>Prix :</p>
+    <input type="number" step="0.01" formControlName="price">
+    <p>Quantité :</p>
+    <input type="number" formControlName="quantity">
+    <p>Date début validité :</p>
+    <input type="date" placeholder="name" formControlName="dateBeginning">
+    <p>Date fin validité :</p>
+    <input type="date" placeholder="name" formControlName="dateEnd">
+    <button type="submit" [disabled]="!createTicketForm.valid">Créer billet</button>
+</form>
