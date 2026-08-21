@@ -3,7 +3,6 @@ import { Ticket } from '../../types/ticket-type.interface';
 import { TicketService } from '../../services/ticket.service';
 import { TicketCardComponent } from '../../components/ticket-card.component/ticket-card.component';
 import { CreateTicketComponent } from '../../components/create-ticket.component/create-ticket.component';
-import { tick } from '@angular/core/testing';
 
 @Component({
   imports: [TicketCardComponent,CreateTicketComponent],

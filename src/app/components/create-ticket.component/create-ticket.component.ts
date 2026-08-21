@@ -27,8 +27,6 @@ export class CreateTicketComponent {
       this.createTicketForm.controls.quantity.value != null &&
       this.createTicketForm.controls.dateBeginning.value != null &&
       this.createTicketForm.controls.dateEnd.value != null &&
-      this.createTicketForm.controls.dateBeginning.value >this.dateCompare &&
-      this.createTicketForm.controls.dateEnd.value > this.dateCompare &&
       this.createTicketForm.controls.dateBeginning.value <= this.createTicketForm.controls.dateEnd.value
     ){
       if(this.createTicketForm.controls.quantity.value == 0){
