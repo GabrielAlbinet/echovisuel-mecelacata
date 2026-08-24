@@ -16,10 +16,10 @@ export class CreateTicketComponent {
     description : new FormControl('', Validators.required),
     price : new FormControl(0, Validators.min(0.50)),
     quantity : new FormControl(0, Validators.min(0)),
-    dateBeginning : new FormControl(new Date(0), Validators.required),
-    dateEnd : new FormControl(new Date(0), Validators.required),
+    dateBeginning : new FormControl('', Validators.required),
+    dateEnd : new FormControl('', Validators.required),
   });
-  dateCompare = new Date();
+  dateCompare = new Date().getTime();
   submitTicket(){
     if(this.createTicketForm.controls.name.value != null &&
       this.createTicketForm.controls.description.value != null &&

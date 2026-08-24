@@ -11,14 +11,11 @@
     <input type="date" placeholder="name" formControlName="dateBeginning" class="border">
     <p>Date fin validité :</p>
     <input type="date" placeholder="name" formControlName="dateEnd" class="border">
-    @if(!createTicketForm.valid||((createTicketForm.controls.dateBeginning.value!=null && createTicketForm.controls.dateBeginning.value <=dateCompare)||
-            (createTicketForm.controls.dateEnd.value!=null && createTicketForm.controls.dateEnd.value <=dateCompare))){
+    @if(!createTicketForm.valid){
         <div class="flex flex-row items-center">
             <button type="submit" [disabled]="!createTicketForm.valid" class="cursor-not-allowed border rounded m-2">Créer billet</button>
             @if(createTicketForm.controls.name.value==""||createTicketForm.controls.description.value==""||
-            createTicketForm.controls.price.value==null||createTicketForm.controls.quantity.value==null||
-            ((createTicketForm.controls.dateBeginning.value!=null && createTicketForm.controls.dateBeginning.value <=dateCompare)||
-            (createTicketForm.controls.dateEnd.value!=null && createTicketForm.controls.dateEnd.value <=dateCompare)))
+            createTicketForm.controls.price.value==null||createTicketForm.controls.quantity.value==null)
             {
                 <p>⚠️ Formulaire incomplet</p>
             }@else if (createTicketForm.controls.price.value<=0) {
