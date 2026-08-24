@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { VenueServiceTs } from '../../services/venue-service/venue.service';
+import { Venue } from '../../types/venue.interface';
 
 @Component({
   imports: [ ReactiveFormsModule ],
@@ -22,7 +23,15 @@ export class VenueForm {
   });
 
   onSubmit() {
-    const newVenue = this.venueForm.getRawValue()
+    const newVenue: Venue = {
+      id: this.venueService.venues().length + 1,
+      name: this.venueForm.getRawValue().name,
+      type: this.venueForm.getRawValue().type,
+      description: this.venueForm.getRawValue().description,
+      capacity: this.venueForm.getRawValue().capacity,
+      location: this.venueForm.getRawValue().location,
+      image: this.venueForm.getRawValue().image,
+    }
 
     if(this.venueForm.valid){
       this.venueService.addVenue(newVenue);
