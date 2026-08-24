@@ -1,12 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Service, signal } from '@angular/core';
 import artists from '../data/artist.data';
 import { Artist } from '../types/artist.interface';
+import { ArtistFormComponent } from '../components/artist-form/artist-form.component';
+import { form } from '@angular/forms/signals';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root'
 })
 export class ArtistService {
-  getArtists(): Artist[] {
-    return artists;
+    artists = signal<Artist[]>(artists);
+
+    getArtists(): Artist[] {
+
+        return this.artists();
+
+          
+    }
+addArtist(artist: Artist) {
+    this.artists.update(current => [...current, artist]);
   }
+
 }
+
+

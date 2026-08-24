@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {ArtistService} from '../../services/artist.service';
 import { ArtistCardComponent } from '../artist-card/artist-card.component';
 import { Artist } from '../../types/artist.interface';
@@ -12,13 +12,8 @@ import { Artist } from '../../types/artist.interface';
 export class ArtistListComponent {  
 private artistService = inject(ArtistService);
 
-artists: Artist[] = [];
+artists = this.artistService.artists;
 
-ngOnInit(){
 
- this.artists =  this.artistService.getArtists();
-}
-
-updateSelectedArtist(artistSelected: {name:string, isSelected:boolean}){}
-
+updateSelectedArtist(artistSelected: { name: string; isSelected: boolean }) {}
 }
