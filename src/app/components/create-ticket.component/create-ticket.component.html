@@ -14,21 +14,22 @@
     @if(!createTicketForm.valid){
         <div class="flex flex-row items-center">
             <button type="submit" [disabled]="!createTicketForm.valid" class="cursor-not-allowed border rounded m-2">Créer billet</button>
-            @if(createTicketForm.controls.name.value==""||createTicketForm.controls.description.value==""||
-            createTicketForm.controls.price.value==null||createTicketForm.controls.quantity.value==null)
+            @if(checkCondition())
             {
                 <p>⚠️ Formulaire incomplet</p>
-            }@else if (createTicketForm.controls.price.value<=0) {
+            }@else if (createTicketForm.controls.price.value!=null && createTicketForm.controls.price.value<=0) {
                 <p>⚠️ Prix inférieur ou égal à 0</p>
-            }@else if (createTicketForm.controls.quantity.value<0) {
+            }@else if (createTicketForm.controls.quantity.value!=null && createTicketForm.controls.quantity.value<0) {
                 <p>⚠️ Quantité inférieur à 0</p>
             }
         </div>
     }@else{
         <div class="flex flex-row items-center">
-            <button type="submit" [disabled]="!createTicketForm.valid" class="border rounded m-2">Créer billet</button>
-            @if((createTicketForm.controls.dateBeginning.value!=null && createTicketForm.controls.dateEnd.value!=null)&&(createTicketForm.controls.dateBeginning.value>createTicketForm.controls.dateEnd.value)){
-                <p>⚠️ Date de fin inférieure à date de début</p>
+            @if(!checkDate()){
+                <button type="submit" [disabled]="!createTicketForm.valid" class="cursor-not-allowed border rounded m-2">Créer billet</button>
+                <p>⚠️ Date de fin inférieure à date de début ou date de début inférieur à aujourd'hui</p>
+            }@else {
+                <button type="submit" [disabled]="!createTicketForm.valid" class="border rounded m-2">Créer billet</button>
             }
         </div>
     }

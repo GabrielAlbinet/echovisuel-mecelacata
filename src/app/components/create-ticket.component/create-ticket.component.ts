@@ -19,35 +19,40 @@ export class CreateTicketComponent {
     dateBeginning : new FormControl('', Validators.required),
     dateEnd : new FormControl('', Validators.required),
   });
-  dateCompare = new Date().getTime();
+  dateToday = new Date();
+  yesterday = new Date(this.dateToday);
+
   submitTicket(){
-    if(this.createTicketForm.controls.name.value != null &&
-      this.createTicketForm.controls.description.value != null &&
-      this.createTicketForm.controls.price.value != null &&
-      this.createTicketForm.controls.quantity.value != null &&
-      this.createTicketForm.controls.dateBeginning.value != null &&
-      this.createTicketForm.controls.dateEnd.value != null &&
-      this.createTicketForm.controls.dateBeginning.value <= this.createTicketForm.controls.dateEnd.value
-    ){
-      if(this.createTicketForm.controls.quantity.value == 0){
-        this.createdticket.emit({
-        name : this.createTicketForm.controls.name.value,
-        description : this.createTicketForm.controls.description.value,
-        price : this.createTicketForm.controls.price.value,
-        quantity : this.createTicketForm.controls.quantity.value,
-        available : false,
-        condition : `Validité : ${this.createTicketForm.controls.dateBeginning.value} au ${this.createTicketForm.controls.dateEnd.value}`,
+    this.yesterday.setDate(this.dateToday.getDate() -1);
+    if(this.checkCondition() && this.checkDate()){
+      let isAvailable = this.createTicketForm.controls.quantity.value == 0 ? false : true;
+      this.createdticket.emit({
+      name : this.createTicketForm.controls.name.value?this.createTicketForm.controls.name.value:"",
+      description : this.createTicketForm.controls.description.value?this.createTicketForm.controls.description.value:"",
+      price : this.createTicketForm.controls.price.value?this.createTicketForm.controls.price.value:1,
+      quantity : this.createTicketForm.controls.quantity.value?this.createTicketForm.controls.quantity.value:0,
+      available : isAvailable,
+      condition : `Validité : ${this.createTicketForm.controls.dateBeginning.value} au ${this.createTicketForm.controls.dateEnd.value}`,
       });
-      }else{
-        this.createdticket.emit({
-        name : this.createTicketForm.controls.name.value,
-        description : this.createTicketForm.controls.description.value,
-        price : this.createTicketForm.controls.price.value,
-        quantity : this.createTicketForm.controls.quantity.value,
-        available : true,
-        condition : `Validité : ${this.createTicketForm.controls.dateBeginning.value} au ${this.createTicketForm.controls.dateEnd.value}`,
-      });
-      }
+    }
   }
-}
+
+  checkCondition():Boolean{
+    if(this.createTicketForm.controls.name.value==null||this.createTicketForm.controls.description.value==null||
+      this.createTicketForm.controls.price.value==null||this.createTicketForm.controls.quantity.value==null ||
+      this.createTicketForm.controls.dateBeginning.value==null || this.createTicketForm.controls.dateEnd.value==null){
+        return false;
+    }else{
+      return true;
+    }
+  }
+
+  checkDate():boolean{
+    if(this.createTicketForm.controls.dateBeginning.value!=null && this.createTicketForm.controls.dateEnd.value!=null && 
+      new Date(this.createTicketForm.controls.dateBeginning.value).getDate() <= new Date(this.createTicketForm.controls.dateEnd.value).getDate()){
+        return new Date(this.createTicketForm.controls.dateBeginning.value).getTime()>this.yesterday.getTime()?true:false;
+    }else {
+      return false;
+    }
+  }
 }
