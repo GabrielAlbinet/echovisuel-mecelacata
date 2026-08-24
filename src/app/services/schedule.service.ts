@@ -27,6 +27,14 @@ export class ScheduleService {
     return event;
   }
 
+  updateEvent(updatedEvent: FestivalEvent): FestivalEvent {
+    this.events.update((events) =>
+      events.map((event) => (event.id === updatedEvent.id ? updatedEvent : event)),
+    );
+
+    return updatedEvent;
+  }
+
   private generateId(): number {
     const currentEvents = this.events();
     const maxId = currentEvents.reduce((max, event) => Math.max(max, event.id), 0);

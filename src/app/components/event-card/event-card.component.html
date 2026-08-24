@@ -16,7 +16,7 @@
   </div>
 
   <h3 class="mt-4 text-xl font-bold text-stone-900">
-    Artiste #{{ event().artistId }}
+    {{ artistName() }}
   </h3>
 
   <p class="mt-2 text-sm text-stone-500">
@@ -26,4 +26,12 @@
   <p class="mt-1 text-sm text-stone-500">
     {{ event().startTime }} — {{ event().endTime }}
   </p>
+
+  <button
+    type="button"
+    (click)="edit.emit(event())"
+    class="mt-4 rounded-full border border-stone-200 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-stone-500 transition hover:bg-stone-50"
+  >
+    Modifier
+  </button>
 </article>
