@@ -1,0 +1,8 @@
+<section class="p-2 m-3">
+	<p>Prénom: {{ participant().firstName }}</p>
+	<p>Nom: {{ participant().lastName }}</p>
+	<p>E-mail: {{ participant().email }}</p>
+	<p>Statut: {{ participant().status }}</p>
+	<p>Type de billet: {{ participant().ticketType }}</p>
+	<input type="checkbox" #check (change)="onChange(check?.checked)"/>
+</section>

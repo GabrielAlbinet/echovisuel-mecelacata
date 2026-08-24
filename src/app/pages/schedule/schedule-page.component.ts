@@ -1,11 +1,12 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { ScheduleService } from '../../services/schedule.service';
 import { ScheduleListComponent } from '../../components/schedule-list/schedule-list.component';
+import { ScheduleFormComponent } from '../../components/schedule-form/schedule-form.component';
 import { FestivalEvent } from '../../types/festival-event.interface';
 
 @Component({
   selector: 'app-schedule-page',
-  imports: [ScheduleListComponent],
+  imports: [ScheduleListComponent, ScheduleFormComponent],
   templateUrl: './schedule-page.component.html',
 })
 export class SchedulePageComponent implements OnInit {
@@ -20,6 +21,8 @@ export class SchedulePageComponent implements OnInit {
   ngOnInit() {
     this.loadSchedule();
   }
+
+  onEventCreated(event: FestivalEvent) {}
 
   private loadSchedule() {
     this.isLoading.set(true);

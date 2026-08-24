@@ -1,8 +1,15 @@
 import { Routes } from '@angular/router';
+import { TicketListComponent } from './pages/ticket-list.component/ticket-list.component';
 import { VenuePageComponent } from './pages/venue/venue-page.component/venue-page.component';
 import { SchedulePageComponent } from './pages/schedule/schedule-page.component';
+import { FestivalPageComponent } from './pages/festival-page.component/festival-page.component';
+import { ParticipantListComponent } from './components/participant-list.component/participant-list.component';
 
 export const routes: Routes = [
+  {
+    path: 'tickets',
+    component: TicketListComponent,
+  },
   {
     path: 'venues',
     component: VenuePageComponent,
@@ -10,5 +17,13 @@ export const routes: Routes = [
   {
     path: 'schedule',
     component: SchedulePageComponent,
+  },
+  { path: 'festival',
+    component: FestivalPageComponent 
+  },
+
+  {
+    path: 'participants',
+    component: ParticipantListComponent,
   },
 ];
