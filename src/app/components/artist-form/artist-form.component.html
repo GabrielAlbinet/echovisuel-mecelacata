@@ -1,0 +1,7 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<label>Nom :<input type="text" formControlName="name"></label>
+<label>Categorie :<input type="text" formControlName="category"></label>
+<label>Image :<input type="text" formControlName="image"></label>
+<label>Description : <textarea type="text" formControlName="description"></textarea></label>
+<button type="submit">Send</button>
+</form>
