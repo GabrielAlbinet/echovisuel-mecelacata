@@ -18,7 +18,6 @@ export const routes: Routes = [
     path: 'schedule',
     component: SchedulePageComponent,
   },
-
   { path: 'festival',
     component: FestivalPageComponent 
   },
@@ -28,4 +27,3 @@ export const routes: Routes = [
     component: ParticipantPageComponent,
   },
 ];
-
