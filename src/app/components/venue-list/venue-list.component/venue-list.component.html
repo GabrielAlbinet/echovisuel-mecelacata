@@ -1,6 +1,6 @@
-@if (arrayOfVenues().length > 0) {
+@if (venueService.venues().length > 0) {
     <div class="flex flex-col align-center gap-20 lg:flex-row ">
-    @for(venue of arrayOfVenues(); track venue.name) {
+    @for(venue of venueService.venues(); track venue.name) {
         <app-venue-card [venue]="venue" (venueSelected)="onVenueSelected($event)" />
     }
     </div>
