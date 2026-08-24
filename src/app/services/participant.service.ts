@@ -13,4 +13,13 @@ export class ParticipantService {
 		this.participants.set(participantTab);
 		return of(this.participants());
 	}
+
+	setParticipantTab(regex:RegExp){
+		this.participants.set([])
+		participantTab.forEach((participant)=>{
+	      if(regex.test(participant.email)){
+	        this.participants().push(participant);
+	      }
+	    });
+	}
 }
