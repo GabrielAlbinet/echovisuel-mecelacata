@@ -4,6 +4,7 @@ import { VenuePageComponent } from './pages/venue/venue-page.component/venue-pag
 import { SchedulePageComponent } from './pages/schedule/schedule-page.component';
 import { FestivalPageComponent } from './pages/festival-page.component/festival-page.component';
 import { ParticipantPageComponent } from './pages/participant/participant-page.component';
+import { FestivalFormComponent } from './pages/festival-form.component/festival-form.component';
 
 export const routes: Routes = [
   {
@@ -18,10 +19,14 @@ export const routes: Routes = [
     path: 'schedule',
     component: SchedulePageComponent,
   },
-  { path: 'festival',
-    component: FestivalPageComponent 
+  {
+    path: 'festival',
+    component: FestivalPageComponent
   },
-
+  {
+    path: 'festival/:name/edit',
+    component: FestivalFormComponent
+  },
   {
     path: 'participants',
     component: ParticipantPageComponent,

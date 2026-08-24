@@ -12,4 +12,16 @@ export class FestivalServiceService {
     private readonly festivals = signal<FestivalType[]>(FESTIVAL_DATA);
     readonly festivalsList = this.festivals.asReadonly();
 
+    getFestivalByName(name: string): FestivalType | undefined {
+        return this.festivals().find(f => f.name === name);
+    }
+
+    updateFestival(originName: string, updatedFestival: FestivalType): void {
+        this.festivals.update(festivals =>
+            festivals.map(f =>
+                f.name === originName ? updatedFestival : f
+            )
+        );
+    }
 }
+

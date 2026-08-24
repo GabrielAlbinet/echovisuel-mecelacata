@@ -1,0 +1,102 @@
+<h2 class="text-3xl font-bold p-5 text-center">Modifier ce festival</h2>
+<form [formGroup]="festivalForm" (ngSubmit)="onSubmit()"
+    class="max-w-3xl mx-auto p-6 bg-blue-50 rounded-2xl shadow-lg space-y-8">
+    <fieldset formGroupName='infos' class="space-y-5">
+        <legend class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 w-full">Informations du festival
+        </legend>
+        @if (
+        festivalForm.invalid || festivalForm.dirty
+        ) {
+        <p class="text-red-500 pb-3">
+            Veuillez remplir obligatoirement tous les champs de ce formulaire.
+        </p>
+        }
+        <div class="space-y-2">
+            <label for="name" id="name" class="block text-sm font-semibold text-gray-700">Nom : </label>
+            <input type="text" id="name" formControlName="name" class="w-full bg-white rounded-lg border border-gray-300 px-4 py-2.5
+               text-gray-900
+               shadow-sm
+               outline-none
+               transition
+               focus:border-blue-500
+               focus:ring-2
+               focus:ring-blue-200">
+            @if (
+            festivalForm.get('infos.name')?.invalid &&
+            festivalForm.get('infos.name')?.touched
+            ) {
+            <p class="text-red-500">
+                Le nom est obligatoire.
+            </p>
+            }
+        </div>
+        <div class="space-y-2">
+            <label for="description" id="description" class="block text-sm font-semibold text-gray-700">Description :
+            </label>
+            <textarea id="description" formControlName="description" class="w-full bg-white rounded-lg border border-gray-300 px-4 py-2.5
+               text-gray-900
+               shadow-sm
+               outline-none
+               transition
+               focus:border-blue-500
+               focus:ring-2
+               focus:ring-blue-200"></textarea>
+            @if (
+            festivalForm.get('infos.description')?.invalid &&
+            festivalForm.get('infos.description')?.touched
+            ) {
+            <p class="text-red-500">
+                La description est obligatoire.
+            </p>
+            }
+        </div>
+        <div class="space-y-2">
+            <label for="mainLocation" id="mainLocation" class="block text-sm font-semibold text-gray-700">Lieu principal
+                : </label>
+            <input type="text" id="mainLocation" formControlName="mainLocation" class="w-full bg-white rounded-lg border border-gray-300 px-4 py-2.5
+               text-gray-900
+               shadow-sm
+               outline-none
+               transition
+               focus:border-blue-500
+               focus:ring-2
+               focus:ring-blue-200">
+            @if (
+            festivalForm.get('infos.mainLocation')?.invalid &&
+            festivalForm.get('infos.mainLocation')?.touched
+            ) {
+            <p class="text-red-500">
+                Le lieu est obligatoire.
+            </p>
+            }
+        </div>
+    </fieldset>
+    <fieldset formGroupName="dates" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="space-y-2">
+            <label for="startDate" class="block text-sm font-semibold text-gray-700">Date de début : </label>
+            <input type="date" id="startDate" formControlName="startDate">
+            @if (
+            festivalForm.get('dates.startDate')?.hasError('required') &&
+            festivalForm.get('dates.startDate')?.touched
+            ) {
+            <p class="text-red-500 pb-3">
+                La date de début est obligatoire.
+            </p>
+            }
+        </div>
+        <div class="space-y-2">
+            <label for="endDate" class="block text-sm font-semibold text-gray-700">Date de fin : </label>
+            <input type="date" id="endDate" formControlName="endDate">
+            @if (
+            festivalForm.get('dates.endDate')?.hasError('required') &&
+            festivalForm.get('dates.endDate')?.touched
+            ) {
+            <p class="text-red-500">
+                La date de fin est obligatoire.
+            </p>
+            }
+        </div>
+    </fieldset>
+    <button type="submit" [disabled]="festivalForm.invalid || festivalForm.pristine"
+        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Enregistrer</button>
+</form>
