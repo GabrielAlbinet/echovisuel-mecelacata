@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, output } from '@angular/core';
+import { Component, OnInit, inject, signal, input, output, effect } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ArtistService } from '../../services/artist.service';
 import { VenueServiceTs } from '../../services/venue.service';
@@ -23,9 +23,13 @@ export class ScheduleFormComponent implements OnInit {
   private readonly venueService = inject(VenueServiceTs);
   private readonly scheduleService = inject(ScheduleService);
 
+  eventToEdit = input<FestivalEvent | null>(null);
+  eventCreated = output<FestivalEvent>();
+  eventUpdated = output<FestivalEvent>();
+  eventEditCancelled = output<void>();
+
   artists = signal<Artist[]>([]);
   venues = signal<Venue[]>([]);
-  eventCreated = output<FestivalEvent>();
 
   showTimeErrorModal = signal(false);
   showConfirmModal = signal(false);
@@ -38,6 +42,24 @@ export class ScheduleFormComponent implements OnInit {
     startTime: new FormControl('', Validators.required),
     endTime: new FormControl('', Validators.required),
   });
+
+  constructor() {
+    effect(() => {
+      const event = this.eventToEdit();
+
+      if (event) {
+        this.form.patchValue({
+          artistId: event.artistId,
+          venueId: event.venueId,
+          date: event.date,
+          startTime: event.startTime,
+          endTime: event.endTime,
+        });
+      } else {
+        this.form.reset();
+      }
+    });
+  }
 
   ngOnInit() {
     this.artists.set(this.artistService.getArtists());
@@ -69,22 +91,43 @@ export class ScheduleFormComponent implements OnInit {
 
   confirmSubmit() {
     const { artistId, venueId, date, startTime, endTime } = this.form.value;
+    const editingEvent = this.eventToEdit();
 
-    const event = this.scheduleService.createEvent({
-      artistId: artistId!,
-      venueId: venueId!,
-      date: date!,
-      startTime: startTime!,
-      endTime: endTime!,
-      status: 'scheduled',
-    });
+    if (editingEvent) {
+      const updated = this.scheduleService.updateEvent({
+        id: editingEvent.id,
+        artistId: artistId!,
+        venueId: venueId!,
+        date: date!,
+        startTime: startTime!,
+        endTime: endTime!,
+        status: editingEvent.status,
+      });
 
-    this.eventCreated.emit(event);
+      this.eventUpdated.emit(updated);
+    } else {
+      const created = this.scheduleService.createEvent({
+        artistId: artistId!,
+        venueId: venueId!,
+        date: date!,
+        startTime: startTime!,
+        endTime: endTime!,
+        status: 'scheduled',
+      });
+
+      this.eventCreated.emit(created);
+    }
+
     this.form.reset();
     this.showConfirmModal.set(false);
   }
 
   cancelSubmit() {
     this.showConfirmModal.set(false);
+  }
+
+  cancelEdit() {
+    this.form.reset();
+    this.eventEditCancelled.emit();
   }
 }

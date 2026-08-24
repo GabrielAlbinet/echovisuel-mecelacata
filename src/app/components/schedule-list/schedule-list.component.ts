@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { EventCardComponent } from '../event-card/event-card.component';
 import { FestivalEvent } from '../../types/festival-event.interface';
 
@@ -10,6 +10,7 @@ import { FestivalEvent } from '../../types/festival-event.interface';
 export class ScheduleListComponent {
   dateKeys = input.required<string[]>();
   groupedEvents = input.required<Record<string, FestivalEvent[]>>();
+  edit = output<FestivalEvent>();
 
   formatDate(dateKey: string): string {
     return new Date(dateKey).toLocaleDateString('fr-FR', {

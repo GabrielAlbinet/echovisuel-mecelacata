@@ -2,7 +2,12 @@
   <h1 class="mb-10 text-4xl font-black">Programme du festival</h1>
 
   <div class="mb-16">
-    <app-schedule-form (eventCreated)="onEventCreated($event)" />
+    <app-schedule-form
+      [eventToEdit]="eventToEdit()"
+      (eventCreated)="onEventCreated($event)"
+      (eventUpdated)="onEventUpdated()"
+      (eventEditCancelled)="onEditCancelled()"
+    />
   </div>
 
   @if (isLoading()) {
@@ -10,6 +15,10 @@
   } @else if (sortedDateKeys().length === 0) {
     <p class="text-stone-500">Aucun événement n'est programmé pour le moment.</p>
   } @else {
-    <app-schedule-list [dateKeys]="sortedDateKeys()" [groupedEvents]="groupedEvents()" />
+    <app-schedule-list
+      [dateKeys]="sortedDateKeys()"
+      [groupedEvents]="groupedEvents()"
+      (edit)="onEditRequested($event)"
+    />
   }
 </section>

@@ -14,6 +14,7 @@ export class SchedulePageComponent implements OnInit {
 
   readonly events = this.scheduleService.eventsSignal;
   isLoading = signal(true);
+  eventToEdit = signal<FestivalEvent | null>(null);
 
   readonly groupedEvents = computed(() => this.groupByDate(this.events()));
   readonly sortedDateKeys = computed(() => Object.keys(this.groupedEvents()).sort());
@@ -23,6 +24,18 @@ export class SchedulePageComponent implements OnInit {
   }
 
   onEventCreated(event: FestivalEvent) {}
+
+  onEditRequested(event: FestivalEvent) {
+    this.eventToEdit.set(event);
+  }
+
+  onEventUpdated() {
+    this.eventToEdit.set(null);
+  }
+
+  onEditCancelled() {
+    this.eventToEdit.set(null);
+  }
 
   private loadSchedule() {
     this.isLoading.set(true);
