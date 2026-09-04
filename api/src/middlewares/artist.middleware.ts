@@ -7,7 +7,7 @@ const checkExists = async (req, res, next) => {
     next();
   } catch (error) {
     return res.status(404).json({
-      message: "Aie aie aie ma canaille, on a pas trouvé d'artiste...",
+      message: "Aie aie aie tu dérailles espèce de canaille, on a pas trouvé d'artiste...",
     });
   }
 };

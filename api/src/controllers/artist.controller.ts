@@ -29,4 +29,23 @@ const create = async (req, res, next) => {
   }
 };
 
-export default { getAll, getById, create };
+const update = async (req, res, next) => {
+  try {
+    const data: Partial<CreateArtistDTO> = req.body;
+    const artist: ArtistDTO = await artistService.update(Number(req.params.id), data);
+    res.status(200).json(artist);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const remove = async (req, res, next) => {
+  try {
+    await artistService.remove(Number(req.params.id));
+    res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { getAll, getById, create, update, remove };
