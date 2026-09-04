@@ -10,4 +10,14 @@ const getAll = async (req, res, next) => {
   }
 };
 
-export default { getAll };
+const getById = async (req, res, next) => {
+  console.log(">>> getById appelé, id =", req.params.id);
+  try {
+    const artist: ArtistDTO = await artistService.getById(Number(req.params.id));
+    res.status(200).json(artist);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { getAll, getById };
