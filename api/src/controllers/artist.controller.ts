@@ -1,5 +1,5 @@
 import artistService from "../services/artist.apiservice.ts";
-import type { ArtistDTO } from "../dto/artist.dto.ts";
+import type { CreateArtistDTO, ArtistDTO } from "../dto/artist.dto.ts";
 
 const getAll = async (req, res, next) => {
   try {
@@ -11,7 +11,6 @@ const getAll = async (req, res, next) => {
 };
 
 const getById = async (req, res, next) => {
-  console.log(">>> getById appelé, id =", req.params.id);
   try {
     const artist: ArtistDTO = await artistService.getById(Number(req.params.id));
     res.status(200).json(artist);
@@ -20,4 +19,14 @@ const getById = async (req, res, next) => {
   }
 };
 
-export default { getAll, getById };
+const create = async (req, res, next) => {
+  try {
+    const data: CreateArtistDTO = req.body;
+    const artist: ArtistDTO = await artistService.create(data);
+    res.status(201).json(artist);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { getAll, getById, create };
