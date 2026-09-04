@@ -1,6 +1,7 @@
 import Express from "express";
 import rateLimit from "express-rate-limit";
 import artistRouter from "./src/routes/artist.router.ts";
+import cors from "cors";
 
 const express = Express;
 const app = express();
@@ -10,6 +11,7 @@ const limiter = rateLimit ({windowMs: 15 * 60 * 1000, limit: 5}); //5 reequêtes
 
 app.use(express.json());
 app.use(limiter);
+app.use(cors({origin: "http://localhost:4200"}))
 app.use("/api", artistRouter); // connection de l'API au projet
 
 app.listen(port, () => {
