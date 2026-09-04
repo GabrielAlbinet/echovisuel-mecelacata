@@ -42,7 +42,7 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     await artistService.remove(Number(req.params.id));
-    res.status(204).send();
+    res.status(200).json({ message: "Artist deleted successfully" });
   } catch (error) {
     next(error);
   }
