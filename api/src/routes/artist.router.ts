@@ -6,7 +6,7 @@ const artistRouter = express.Router();
 
 artistRouter.get("/artists", artistController.getAll);
 artistRouter.get("/artists/:id", artistController.getById);
-artistRouter.post("/artists", artistController.create);
+artistRouter.post("/artists", artistController.create); // On crée à partir de la racine artists, pas avec le futur ID (qui est incrémenté automatiquement)
 artistRouter.patch("/artists/:id", artistMiddleware.checkExists, artistController.update);
 artistRouter.delete("/artists/:id", artistMiddleware.checkExists, artistController.remove);
 

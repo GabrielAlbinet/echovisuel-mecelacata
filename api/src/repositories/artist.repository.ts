@@ -13,7 +13,7 @@ const create = async (data: CreateArtistDTO) => {
   return await prisma.artist.create({ data });
 };
 
-const update = async (id: number, data: Partial<CreateArtistDTO>) => { //Partial c'est pour que la requête PATCH
+const update = async (id: number, data: Partial<CreateArtistDTO>) => { //Partial c'est pour que la requête PATCH fonctionne
   return await prisma.artist.update({ where: { id }, data });
 };
 

@@ -13,3 +13,5 @@ const checkExists = async (req, res, next) => {
 };
 
 export default { checkExists };
+
+// Utile uniquement pour Patch et Delete

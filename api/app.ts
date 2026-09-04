@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use("/api", artistRouter);
+app.use("/api", artistRouter); // connection de l'API au projet
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
