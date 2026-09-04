@@ -13,3 +13,4 @@ const adapter = new PrismaMariaDb({
 const prisma = new PrismaClient({ adapter });
 
 export { prisma };
+
