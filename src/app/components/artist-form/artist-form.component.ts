@@ -26,7 +26,7 @@ private artistService = inject(ArtistService);
       return;
     }
 
-    const artist = this.form.value as Artist;
+    const artist = this.form.value as Omit<Artist, 'id'>;
     this.artistService.addArtist(artist);
     
   }

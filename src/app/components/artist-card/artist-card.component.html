@@ -1,5 +1,20 @@
-<div class="border-black border-2"><p>{{artist().name}}</p>
-<p>{{artist().category}}</p>
-<img src="{{artist().image}}" alt="{{artist().name}}">
-<p>{{artist().description}}</p>
-<input type="checkbox" #inputBox (change)="onSelect(inputBox?.checked)"/></div>
+<div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow bg-white">
+  <img
+    src="{{artist().image}}"
+    alt="{{artist().name}}"
+    class="w-full h-48 object-cover bg-gray-100"
+  />
+  <div class="p-4">
+    <div class="flex items-center justify-between mb-2">
+      <p class="text-lg font-semibold text-gray-900">{{artist().name}}</p>
+      <span class="text-xs font-medium text-white bg-indigo-500 px-2 py-1 rounded-full">
+        {{artist().category}}
+      </span>
+    </div>
+    <p class="text-sm text-gray-600 mb-3">{{artist().description}}</p>
+    <label class="flex items-center gap-2 text-sm text-gray-500">
+      <input type="checkbox" #inputBox (change)="onSelect(inputBox?.checked)" class="rounded" />
+      Sélectionner
+    </label>
+  </div>
+</div>
