@@ -12,9 +12,19 @@
       </span>
     </div>
     <p class="text-sm text-gray-600 mb-3">{{artist().description}}</p>
-    <label class="flex items-center gap-2 text-sm text-gray-500">
-      <input type="checkbox" #inputBox (change)="onSelect(inputBox?.checked)" class="rounded" />
-      Sélectionner
-    </label>
+    <div class="flex items-center justify-between">
+      <label class="flex items-center gap-2 text-sm text-gray-500">
+        <input type="checkbox" #inputBox (change)="onSelect(inputBox?.checked)" class="rounded" />
+        Sélectionner
+      </label>
+      <div class="flex gap-3">
+        <button (click)="onEdit()" class="text-sm text-indigo-500 hover:text-indigo-700 font-medium">
+          Modifier
+        </button>
+        <button (click)="onDelete()" class="text-sm text-red-500 hover:text-red-700 font-medium">
+          Supprimer
+        </button>
+      </div>
+    </div>
   </div>
 </div>
