@@ -1,12 +1,27 @@
-<div class="border rounded-sm box-border md:size-50 size-47">
-    <p>{{ticket().name}}</p>
-    @if(ticket().available===true){
-        <p>Prix: {{ticket().price}}</p>
-        <p>Nombre de ticket: {{ticket().quantity}}</p>
-    }@else{
-        <p>Épuisé</p>
-    }
-    <p>Description: {{ticket().description}}</p>
-     <p>Conditions: {{ticket().condition}}</p>
-     <button type="button" (click)="select(ticket())">Selectionner</button>
+<div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow bg-white p-4 flex flex-col gap-2">
+  <p class="text-lg font-semibold text-gray-900">{{ticket().name}}</p>
+
+  @if(ticket().available===true){
+    <p class="text-sm text-gray-700">Prix : <span class="font-medium">{{ticket().price}} €</span></p>
+    <p class="text-sm text-gray-700">Quantité restante : <span class="font-medium">{{ticket().quantity}}</span></p>
+  }@else{
+    <span class="text-xs font-medium text-white bg-red-500 px-2 py-1 rounded-full w-fit">Épuisé</span>
+  }
+
+  <p class="text-sm text-gray-600">{{ticket().description}}</p>
+  <p class="text-xs text-gray-400">{{ticket().condition}}</p>
+
+  <div class="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
+    <button type="button" (click)="select(ticket())" class="text-sm text-indigo-500 hover:text-indigo-700 font-medium">
+      Sélectionner
+    </button>
+    <div class="flex gap-3">
+      <button type="button" (click)="onEdit()" class="text-sm text-gray-500 hover:text-gray-700 font-medium">
+        Modifier
+      </button>
+      <button type="button" (click)="onDelete()" class="text-sm text-red-500 hover:text-red-700 font-medium">
+        Supprimer
+      </button>
+    </div>
+  </div>
 </div>

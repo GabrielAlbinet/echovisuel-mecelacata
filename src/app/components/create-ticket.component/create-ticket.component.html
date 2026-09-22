@@ -1,36 +1,60 @@
-<form [formGroup]="createTicketForm" (ngSubmit)="submitTicket()" class="p-5">
-    <p>Nom :</p>
-    <input type="text" placeholder="nom" formControlName="name" class="border">
-    <p>Description :</p>
-    <input type="text" placeholder="description" formControlName="description" class="border">
-    <p>Prix :</p>
-    <input type="number" step="0.01" formControlName="price" class="border">
-    <p>Quantité :</p>
-    <input type="number" formControlName="quantity" class="border">
-    <p>Date début validité :</p>
-    <input type="date" placeholder="name" formControlName="dateBeginning" class="border">
-    <p>Date fin validité :</p>
-    <input type="date" placeholder="name" formControlName="dateEnd" class="border">
-    @if(!createTicketForm.valid){
-        <div class="flex flex-row items-center">
-            <button type="submit" [disabled]="!createTicketForm.valid" class="cursor-not-allowed border rounded m-2">Créer billet</button>
-            @if(checkCondition())
-            {
-                <p>⚠️ Formulaire incomplet</p>
-            }@else if (createTicketForm.controls.price.value!=null && createTicketForm.controls.price.value<=0) {
-                <p>⚠️ Prix inférieur ou égal à 0</p>
-            }@else if (createTicketForm.controls.quantity.value!=null && createTicketForm.controls.quantity.value<0) {
-                <p>⚠️ Quantité inférieur à 0</p>
-            }
-        </div>
-    }@else{
-        <div class="flex flex-row items-center">
-            @if(!checkDate()){
-                <button type="submit" [disabled]="!createTicketForm.valid" class="cursor-not-allowed border rounded m-2">Créer billet</button>
-                <p>⚠️ Date de fin inférieure à date de début ou date de début inférieur à aujourd'hui</p>
-            }@else {
-                <button type="submit" [disabled]="!createTicketForm.valid" class="border rounded m-2">Créer billet</button>
-            }
-        </div>
-    }
+<form [formGroup]="createTicketForm" (ngSubmit)="submitTicket()" class="max-w-md mx-auto p-6 bg-white border border-gray-300 rounded-lg shadow-sm space-y-4">
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Nom :</span>
+    <input type="text" placeholder="nom" formControlName="name" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Description :</span>
+    <input type="text" placeholder="description" formControlName="description" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Prix :</span>
+    <input type="number" step="0.01" formControlName="price" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Quantité :</span>
+    <input type="number" formControlName="quantity" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Date début validité :</span>
+    <input type="date" formControlName="dateBeginning" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Date fin validité :</span>
+    <input type="date" formControlName="dateEnd" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  @if(!createTicketForm.valid){
+    <div class="space-y-2">
+      <button type="submit" [disabled]="!createTicketForm.valid" class="w-full bg-gray-300 text-gray-500 font-medium py-2 rounded-md cursor-not-allowed">
+        {{ ticketService.ticketIdBeingEdited() !== null ? 'Update' : 'Créer billet' }}
+      </button>
+      @if(!checkCondition()){
+        <p class="text-sm text-red-500">⚠️ Formulaire incomplet</p>
+      }@else if (createTicketForm.controls.price.value!=null && createTicketForm.controls.price.value<=0) {
+        <p class="text-sm text-red-500">⚠️ Prix inférieur ou égal à 0</p>
+      }@else if (createTicketForm.controls.quantity.value!=null && createTicketForm.controls.quantity.value<0) {
+        <p class="text-sm text-red-500">⚠️ Quantité inférieur à 0</p>
+      }
+    </div>
+  }@else{
+    <div class="space-y-2">
+      @if(!checkDate()){
+        <button type="submit" [disabled]="!createTicketForm.valid" class="w-full bg-gray-300 text-gray-500 font-medium py-2 rounded-md cursor-not-allowed">
+          {{ ticketService.ticketIdBeingEdited() !== null ? 'Update' : 'Créer billet' }}
+        </button>
+        <p class="text-sm text-red-500">⚠️ Date de fin inférieure à date de début ou date de début inférieur à aujourd'hui</p>
+      }@else {
+        <button type="submit" class="w-full bg-indigo-500 text-white font-medium py-2 rounded-md hover:bg-indigo-600 transition-colors">
+          {{ ticketService.ticketIdBeingEdited() !== null ? 'Update' : 'Créer billet' }}
+        </button>
+      }
+    </div>
+  }
 </form>

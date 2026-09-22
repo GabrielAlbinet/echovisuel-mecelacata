@@ -5,25 +5,27 @@ import { TicketCardComponent } from '../../components/ticket-card.component/tick
 import { CreateTicketComponent } from '../../components/create-ticket.component/create-ticket.component';
 
 @Component({
-  imports: [TicketCardComponent,CreateTicketComponent],
+  imports: [TicketCardComponent, CreateTicketComponent],
   selector: 'app-ticket-list.component',
   styleUrl: './ticket-list.component.css',
   templateUrl: './ticket-list.component.html',
 })
 export class TicketListComponent implements OnInit {
   private readonly ticketServiceCall = inject(TicketService);
-  readonly ticketList = this.ticketServiceCall.ticketListSignal; //Creation d'un signal d'une liste de ticket
-  selectedTicketList:Ticket[] = [];
-  showForm=false;
-  isAdmin=true;
-  ngOnInit(){
+  readonly ticketList = this.ticketServiceCall.ticketListSignal;
+  selectedTicketList: Ticket[] = [];
+  showForm = false;
+  isAdmin = true;
+
+  ngOnInit() {
     this.ticketServiceCall.getTicketList();
   }
- selectedTicket(ticket:Ticket){
-  this.selectedTicketList.push(ticket);
- }
-  createdticket(ticket:Ticket){
-  this.ticketServiceCall.createTicket(ticket);
-  this.ticketServiceCall.getTicketList();
- }
+
+  selectedTicket(ticket: Ticket) {
+    this.selectedTicketList.push(ticket);
+  }
+
+  createdticket(ticket: Ticket) {
+    this.showForm = false;
+  }
 }
