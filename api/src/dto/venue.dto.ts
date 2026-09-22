@@ -11,7 +11,7 @@ export interface VenueDTO {
   id: number;
   name: string;
   type: string;
-  description?: string;
+  description: string | null;
   capacity: number;
   location: string;
   image: string;
