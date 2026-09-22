@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Venue } from '../../../types/venue.interface';
+import { VenueServiceTs } from '../../../services/venue-service/venue.service';
 
 @Component({
   imports: [],
@@ -8,6 +9,7 @@ import { Venue } from '../../../types/venue.interface';
   templateUrl: './venue-card.component.html',
 })
 export class VenueCardComponent {
+  private venueService = inject(VenueServiceTs);
 
   venueSelected = output<Venue>();
 
@@ -17,4 +19,11 @@ export class VenueCardComponent {
 
   venue = input.required<Venue>();
 
+  onEdit() {
+    this.venueService.venueIdBeingEdited.set(this.venue().id);
+  }
+
+  onDelete() {
+    this.venueService.deleteVenue(this.venue().id);
+  }
 }
