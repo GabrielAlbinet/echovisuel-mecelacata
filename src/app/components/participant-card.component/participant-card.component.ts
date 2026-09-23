@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { Participant } from '../../types/participant.interface';
 
 @Component({
@@ -9,10 +9,13 @@ import { Participant } from '../../types/participant.interface';
 })
 export class ParticipantCardComponent {
   participant = input.required<Participant>();
-  selected = output<{participant: Participant, isChecked:boolean}>();
+  selected = output<{ participant: Participant; isChecked: boolean }>();
+  edit = output<Participant>();
+  remove = output<Participant>();
 
-  onChange(isChecked:boolean){
-    this.selected.emit({participant:this.participant(), isChecked:isChecked});
+  ticketName = computed(() => this.participant().ticket?.name ?? `Billet #${this.participant().ticketId}`);
+
+  onChange(isChecked: boolean) {
+    this.selected.emit({ participant: this.participant(), isChecked });
   }
-
 }

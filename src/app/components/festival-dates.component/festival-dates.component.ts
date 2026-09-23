@@ -1,9 +1,5 @@
-import { Component } from '@angular/core';
-import { Dates, FestivalType } from '../../types/festival.type';
-import { input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
-
-
 
 @Component({
   imports: [DatePipe],
@@ -12,5 +8,6 @@ import { DatePipe } from '@angular/common';
   templateUrl: './festival-dates.component.html',
 })
 export class FestivalDatesComponent {
-  dates = input<Dates[]>();
+  startDate = input.required<string>();
+  endDate = input.required<string>();
 }

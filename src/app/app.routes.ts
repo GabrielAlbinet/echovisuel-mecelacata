@@ -22,18 +22,22 @@ export const routes: Routes = [
   },
   {
     path: 'festival',
-    component: FestivalPageComponent
+    component: FestivalPageComponent,
   },
   {
-    path: 'festival/:name/edit',
-    component: FestivalFormComponent
+    path: 'festival/new',
+    component: FestivalFormComponent,
+  },
+  {
+    path: 'festival/:id/edit',
+    component: FestivalFormComponent,
   },
   {
     path: 'participants',
     component: ParticipantPageComponent,
   },
-
-  {path: 'artists',
-    component: ArtistPageComponent
-  }
+  {
+    path: 'artists',
+    component: ArtistPageComponent,
+  },
 ];

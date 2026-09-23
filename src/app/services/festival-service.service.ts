@@ -1,27 +1,47 @@
-import { Injectable, signal } from '@angular/core';
-import { FestivalType } from '../types/festival.type';
-import { FESTIVAL_DATA } from '../data/festival.data';
-import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs';
+import { Injectable, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { FestivalPayload, FestivalType } from '../types/festival.type';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class FestivalServiceService {
-    private readonly festivals = signal<FestivalType[]>(FESTIVAL_DATA);
-    readonly festivalsList = this.festivals.asReadonly();
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:3000/api/festivals';
 
-    getFestivalByName(name: string): FestivalType | undefined {
-        return this.festivals().find(f => f.name === name);
-    }
+  private readonly festivals = signal<FestivalType[]>([]);
+  readonly festivalsList = this.festivals.asReadonly();
 
-    updateFestival(originName: string, updatedFestival: FestivalType): void {
-        this.festivals.update(festivals =>
-            festivals.map(f =>
-                f.name === originName ? updatedFestival : f
-            )
-        );
-    }
+  loadFestivals(): Observable<FestivalType[]> {
+    return this.http.get<FestivalType[]>(this.apiUrl).pipe(
+      tap((festivals) => this.festivals.set(festivals)),
+    );
+  }
+
+  getFestivalById(id: number): Observable<FestivalType> {
+    return this.http.get<FestivalType>(`${this.apiUrl}/${id}`);
+  }
+
+  createFestival(data: FestivalPayload): Observable<FestivalType> {
+    return this.http.post<FestivalType>(this.apiUrl, data).pipe(
+      tap((created) => this.festivals.update((festivals) => [...festivals, created])),
+    );
+  }
+
+  updateFestival(id: number, data: Partial<FestivalPayload>): Observable<FestivalType> {
+    return this.http.patch<FestivalType>(`${this.apiUrl}/${id}`, data).pipe(
+      tap((updated) =>
+        this.festivals.update((festivals) =>
+          festivals.map((festival) => (festival.id === id ? updated : festival)),
+        ),
+      ),
+    );
+  }
+
+  deleteFestival(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      tap(() => this.festivals.update((festivals) => festivals.filter((festival) => festival.id !== id))),
+    );
+  }
 }
-

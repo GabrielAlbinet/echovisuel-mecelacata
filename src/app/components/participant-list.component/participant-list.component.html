@@ -1,7 +1,12 @@
 <section class="grid grid-cols-1 md:grid-cols-3">
-	@for(participant of participantTab(); track participant){
-		<app-participant-card [participant] = "participant" (selected)="whenChange($event)"/>
-	}@empty {
-		<p>Aucun participant trouvé.</p>
-	}
+  @for (participant of participantTab(); track participant.id) {
+    <app-participant-card
+      [participant]="participant"
+      (selected)="whenChange($event)"
+      (edit)="edit.emit($event)"
+      (remove)="remove.emit($event)"
+    />
+  } @empty {
+    <p>Aucun participant trouvé.</p>
+  }
 </section>

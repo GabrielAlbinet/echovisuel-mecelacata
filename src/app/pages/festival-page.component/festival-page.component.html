@@ -1,13 +1,65 @@
-<div class="grid lg:grid-cols-4 gap-5">
-  @for(festival of festivals(); track festival.name) {
-  <div class="flex flex-col justify-center">
-    <app-festival-infocomponent [infos]="festival"></app-festival-infocomponent>
-    <app-festival-datescomponent [dates]="festival.dates"></app-festival-datescomponent>
-    <button
-      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      [routerLink]="['/festival', festival.name,'edit']">Modifier</button>
-  </div>
-  }@empty {
-  <p>Aucun festival de prévu.</p>
-  }
+<div class="mb-5">
+  <button
+    [routerLink]="['/festival', 'new']"
+    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+  >
+    Ajouter un festival
+  </button>
 </div>
+
+@if (isLoading()) {
+  <p>Chargement des festivals...</p>
+} @else if (loadError()) {
+  <p class="text-red-600">Impossible de charger les festivals. Vérifiez que l'API est lancée.</p>
+} @else {
+  <div class="grid lg:grid-cols-4 gap-5">
+    @for (festival of festivals(); track festival.id) {
+      <div class="flex flex-col justify-center gap-2">
+        <app-festival-infocomponent [infos]="festival" />
+        <app-festival-datescomponent [startDate]="festival.startDate" [endDate]="festival.endDate" />
+        <button
+          class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+          [routerLink]="['/festival', festival.id, 'edit']"
+        >
+          Modifier
+        </button>
+        <button
+          type="button"
+          (click)="onRemoveRequested(festival)"
+          class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+        >
+          Supprimer
+        </button>
+      </div>
+    } @empty {
+      <p>Aucun festival de prévu.</p>
+    }
+  </div>
+}
+
+@if (festivalToDelete(); as festival) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 px-6">
+    <div class="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-sm">
+      <p class="text-lg font-bold text-stone-900">Supprimer ce festival ?</p>
+      <p class="mt-2 text-sm text-stone-500">{{ festival.name }} sera supprimé définitivement.</p>
+
+      <div class="mt-6 flex justify-center gap-3">
+        <button
+          type="button"
+          (click)="cancelRemove()"
+          class="rounded-full border border-stone-200 px-6 py-2 text-xs font-semibold uppercase tracking-wide text-stone-500 transition hover:bg-stone-50"
+        >
+          Annuler
+        </button>
+
+        <button
+          type="button"
+          (click)="confirmRemove()"
+          class="rounded-full bg-red-100 px-6 py-2 text-xs font-semibold uppercase tracking-wide text-red-600 transition hover:bg-red-200"
+        >
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+}
