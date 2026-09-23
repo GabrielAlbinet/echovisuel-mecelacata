@@ -6,6 +6,8 @@ import artistRouter from "./src/routes/artist.router.ts";
 import venueRouter from "./src/routes/venue.router.ts";
 import ticketRouter from "./src/routes/ticket.router.ts";
 import eventRouter from "./src/routes/event.router.ts";
+import participantRouter from "./src/routes/participant.router.ts";
+import festivalRouter from "./src/routes/festival.router.ts";
 
 const express = Express;
 const app = express();
@@ -25,6 +27,8 @@ app.use("/api", artistRouter);
 app.use("/api", venueRouter);
 app.use("/api", ticketRouter);
 app.use("/api", eventRouter);
+app.use("/api", participantRouter);
+app.use("/api", festivalRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
