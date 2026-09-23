@@ -2,6 +2,7 @@ import "dotenv/config";
 import Express from "express";
 import rateLimit from "express-rate-limit";
 import cors from "cors";
+import authRouter from "./src/routes/auth.router.ts";
 import artistRouter from "./src/routes/artist.router.ts";
 import venueRouter from "./src/routes/venue.router.ts";
 import ticketRouter from "./src/routes/ticket.router.ts";
@@ -23,6 +24,7 @@ app.use(limiter);
 app.use(cors({
   origin: "http://localhost:4200",
 }));
+app.use("/api", authRouter);
 app.use("/api", artistRouter);
 app.use("/api", venueRouter);
 app.use("/api", ticketRouter);
