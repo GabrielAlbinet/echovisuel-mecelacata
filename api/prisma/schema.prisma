@@ -74,3 +74,9 @@ model Festival {
   startDate    String
   endDate      String
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+}
