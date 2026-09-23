@@ -1,0 +1,4298 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+api/
+  prisma/
+    migrations/
+      20260903144215_init_artist/
+        migration.sql
+      20260904073537_artist/
+        migration.sql
+      20260922074511_add_venue_ticket/
+        migration.sql
+      migration_lock.toml
+    schema.prisma
+  src/
+    config/
+      prisma.ts
+    controllers/
+      artist.controller.ts
+      ticket.controller.ts
+      venue.controller.ts
+    dto/
+      artist.dto.ts
+      ticket.dto.ts
+      venue.dto.ts
+    middlewares/
+      artist.middleware.ts
+      ticket.middleware.ts
+      validateArtist.middleware.ts
+      validateTicket.middleware.ts
+      validateVenue.middleware.ts
+      venue.middleware.ts
+    repositories/
+      artist.repository.ts
+      ticket.repository.ts
+      venue.repository.ts
+    routes/
+      artist.router.ts
+      ticket.router.ts
+      venue.router.ts
+    services/
+      artist.apiservice.ts
+      ticket.apiservice.ts
+      venue.apiservice.ts
+    validators/
+      artist.validator.ts
+      ticket.validator.ts
+      venue.validator.ts
+  .env.exemple
+  .gitignore
+  app.ts
+  package.json
+  prisma7.config.ts
+  skills-lock.json
+  tsconfig.json
+public/
+  favicon.ico
+src/
+  app/
+    components/
+      artist-card/
+        artist-card.component.css
+        artist-card.component.html
+        artist-card.component.spec.ts
+        artist-card.component.ts
+      artist-form/
+        artist-form.component.css
+        artist-form.component.html
+        artist-form.component.spec.ts
+        artist-form.component.ts
+      artist-list/
+        artist-list.component.css
+        artist-list.component.html
+        artist-list.component.spec.ts
+        artist-list.component.ts
+      create-ticket.component/
+        create-ticket.component.css
+        create-ticket.component.html
+        create-ticket.component.spec.ts
+        create-ticket.component.ts
+      event-card/
+        event-card.component.html
+        event-card.component.ts
+      festival-dates.component/
+        festival-dates.component.css
+        festival-dates.component.html
+        festival-dates.component.spec.ts
+        festival-dates.component.ts
+      festival-info.component/
+        festival-info.component.css
+        festival-info.component.html
+        festival-info.component.spec.ts
+        festival-info.component.ts
+      participant-card.component/
+        participant-card.component.css
+        participant-card.component.html
+        participant-card.component.spec.ts
+        participant-card.component.ts
+      participant-list.component/
+        participant-list.component.css
+        participant-list.component.html
+        participant-list.component.spec.ts
+        participant-list.component.ts
+      participant-search.component/
+        participant-search.component.css
+        participant-search.component.html
+        participant-search.component.spec.ts
+        participant-search.component.ts
+      schedule-form/
+        schedule-form.component.html
+        schedule-form.component.ts
+      schedule-list/
+        schedule-list.component.html
+        schedule-list.component.ts
+      ticket-card.component/
+        ticket-card.component.css
+        ticket-card.component.html
+        ticket-card.component.spec.ts
+        ticket-card.component.ts
+      venue-card/
+        venue-card.component/
+          venue-card.component.css
+          venue-card.component.html
+          venue-card.component.spec.ts
+          venue-card.component.ts
+      venue-form/
+        venue-form.component.css
+        venue-form.component.html
+        venue-form.component.spec.ts
+        venue-form.component.ts
+      venue-list/
+        venue-list.component/
+          venue-list.component.css
+          venue-list.component.html
+          venue-list.component.spec.ts
+          venue-list.component.ts
+      .gitkeep
+    data/
+      artist.data.ts
+      festival-events.data.ts
+      festival.data.ts
+      participant.data.ts
+      ticket.data.ts
+      venue.data.ts
+    pages/
+      artist-page/
+        artist-page.component.css
+        artist-page.component.html
+        artist-page.component.spec.ts
+        artist-page.component.ts
+      festival-form.component/
+        festival-form.component.css
+        festival-form.component.html
+        festival-form.component.spec.ts
+        festival-form.component.ts
+      festival-page.component/
+        festival-page.component.css
+        festival-page.component.html
+        festival-page.component.spec.ts
+        festival-page.component.ts
+      participant/
+        participant-page.component.css
+        participant-page.component.html
+        participant-page.component.spec.ts
+        participant-page.component.ts
+      schedule/
+        schedule-page.component.html
+        schedule-page.component.ts
+      ticket-list.component/
+        ticket-list.component.css
+        ticket-list.component.html
+        ticket-list.component.spec.ts
+        ticket-list.component.ts
+      venue/
+        venue-page.component/
+          venue-page.component.css
+          venue-page.component.html
+          venue-page.component.spec.ts
+          venue-page.component.ts
+      .gitkeep
+    services/
+      venue-service/
+        venue.service.spec.ts
+        venue.service.ts
+      .gitkeep
+      artist.service.spec.ts
+      artist.service.ts
+      festival-service.service.spec.ts
+      festival-service.service.ts
+      participant.service.spec.ts
+      participant.service.ts
+      schedule.service.ts
+      ticket.service.spec.ts
+      ticket.service.ts
+      venue.service.ts
+    types/
+      .gitkeep
+      artist.interface.ts
+      artist.ts
+      festival-event.interface.ts
+      festival.type.ts
+      participant.interface.ts
+      ticket-type.interface.ts
+      venue.interface.ts
+      venue.ts
+    app.config.ts
+    app.css
+    app.html
+    app.routes.ts
+    app.spec.ts
+    app.ts
+  index.html
+  main.ts
+  styles.css
+.editorconfig
+.gitignore
+.postcssrc.json
+.prettierrc
+angular.json
+eslint.config.js
+package.json
+README.md
+tsconfig.app.json
+tsconfig.json
+tsconfig.spec.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="src/app/components/participant-card.component/participant-card.component.css">
+
+</file>
+
+<file path="src/app/components/participant-card.component/participant-card.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ParticipantCardComponent } from './participant-card.component';
+
+describe('ParticipantCardComponent', () => {
+  let component: ParticipantCardComponent;
+  let fixture: ComponentFixture<ParticipantCardComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ParticipantCardComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ParticipantCardComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/participant-list.component/participant-list.component.css">
+
+</file>
+
+<file path="src/app/components/participant-list.component/participant-list.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ParticipantListComponent } from './participant-list.component';
+
+describe('ParticipantListComponent', () => {
+  let component: ParticipantListComponent;
+  let fixture: ComponentFixture<ParticipantListComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ParticipantListComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ParticipantListComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/ticket-card.component/ticket-card.component.css">
+
+</file>
+
+<file path="src/app/components/ticket-card.component/ticket-card.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TicketCardComponent } from './ticket-card.component';
+
+describe('TicketCardComponent', () => {
+  let component: TicketCardComponent;
+  let fixture: ComponentFixture<TicketCardComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TicketCardComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TicketCardComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/venue-card/venue-card.component/venue-card.component.css">
+
+</file>
+
+<file path="src/app/components/venue-card/venue-card.component/venue-card.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { VenueCardComponent } from './venue-card.component';
+
+describe('VenueCardComponent', () => {
+  let component: VenueCardComponent;
+  let fixture: ComponentFixture<VenueCardComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [VenueCardComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(VenueCardComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/venue-list/venue-list.component/venue-list.component.css">
+
+</file>
+
+<file path="src/app/components/venue-list/venue-list.component/venue-list.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { VenueListComponent } from './venue-list.component';
+
+describe('VenueListComponent', () => {
+  let component: VenueListComponent;
+  let fixture: ComponentFixture<VenueListComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [VenueListComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(VenueListComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/.gitkeep">
+
+</file>
+
+<file path="src/app/pages/ticket-list.component/ticket-list.component.css">
+
+</file>
+
+<file path="src/app/pages/ticket-list.component/ticket-list.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TicketListComponent } from './ticket-list.component';
+
+describe('TicketListComponent', () => {
+  let component: TicketListComponent;
+  let fixture: ComponentFixture<TicketListComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TicketListComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TicketListComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/pages/.gitkeep">
+
+</file>
+
+<file path="src/app/services/venue-service/venue.service.spec.ts">
+import { TestBed } from '@angular/core/testing';
+import { VenueServiceTs } from './venue.service.js';
+
+describe('VenueServiceTs', () => {
+  let service: VenueServiceTs;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(VenueServiceTs);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/services/.gitkeep">
+
+</file>
+
+<file path="src/app/services/participant.service.spec.ts">
+import { TestBed } from '@angular/core/testing';
+import { ParticipantService } from './participant.service';
+
+describe('ParticipantService', () => {
+  let service: ParticipantService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ParticipantService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/services/ticket.service.spec.ts">
+import { TestBed } from '@angular/core/testing';
+import { TicketService } from './ticket.service';
+
+describe('TicketService', () => {
+  let service: TicketService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(TicketService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/types/.gitkeep">
+
+</file>
+
+<file path="src/app/types/participant.interface.ts">
+export interface Participant {
+	firstName: string;
+	lastName: string;
+	email: string;
+	status: string;
+	ticketType: string;
+}
+</file>
+
+<file path="src/app/types/ticket-type.interface.ts">
+export interface Ticket{
+    name: string;
+    description: string;
+    price: number;
+    quantity: number;
+    condition: string;
+    available: boolean;
+}
+</file>
+
+<file path="src/app/app.css">
+
+</file>
+
+<file path="src/app/app.spec.ts">
+import { TestBed } from '@angular/core/testing';
+import { App } from './app';
+
+describe('App', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [App],
+    })
+      .compileComponents();
+  });
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it('should render title', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, echo');
+  });
+});
+</file>
+
+<file path="src/main.ts">
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { App } from './app/app';
+
+bootstrapApplication(App, appConfig)
+  .catch((err) => console.error(err));
+</file>
+
+<file path="src/styles.css">
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+</file>
+
+<file path=".editorconfig">
+# Editor configuration, see https://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.ts]
+quote_type = single
+ij_typescript_use_double_quotes = false
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+</file>
+
+<file path=".gitignore">
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+__screenshots__/
+
+# System files
+.DS_Store
+Thumbs.db
+</file>
+
+<file path=".postcssrc.json">
+{
+  "plugins": {
+    "@tailwindcss/postcss": {}
+  }
+}
+</file>
+
+<file path=".prettierrc">
+{
+  "printWidth": 100,
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ]
+}
+</file>
+
+<file path="eslint.config.js">
+// @ts-check
+const eslint = require('@eslint/js');
+const { defineConfig } = require('eslint/config');
+const tseslint = require('typescript-eslint');
+const angular = require('angular-eslint');
+
+module.exports = defineConfig([
+  {
+    files: ['**/*.ts'],
+    extends: [
+      eslint.configs.recommended,
+      tseslint.configs.recommended,
+      tseslint.configs.stylistic,
+      angular.configs.tsRecommended,
+    ],
+    processor: angular.processInlineTemplates,
+    rules: {
+      '@angular-eslint/directive-selector': [
+        'error',
+        {
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase',
+        },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case',
+        },
+      ],
+    },
+  },
+  {
+    files: ['**/*.html'],
+    extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
+    rules: {},
+  },
+]);
+</file>
+
+<file path="README.md">
+# echovisuel
+
+Lancer le projet
+
+```
+npm run start
+```
+
+Lancer le lint
+
+```
+npm run lint
+```
+
+Lancer le lint
+
+```
+npm run lint:fix
+```
+</file>
+
+<file path="tsconfig.app.json">
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": []
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
+}
+</file>
+
+<file path="tsconfig.json">
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}
+</file>
+
+<file path="tsconfig.spec.json">
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "vitest/globals"
+    ]
+  },
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.spec.ts"
+  ]
+}
+</file>
+
+<file path="api/prisma/migrations/20260903144215_init_artist/migration.sql">
+-- CreateTable
+CREATE TABLE `Artist` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `genre` VARCHAR(191) NULL,
+    `bio` VARCHAR(191) NULL,
+    `imageUrl` VARCHAR(191) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+</file>
+
+<file path="api/prisma/migrations/20260904073537_artist/migration.sql">
+/*
+  Warnings:
+
+  - You are about to drop the column `bio` on the `artist` table. All the data in the column will be lost.
+  - You are about to drop the column `genre` on the `artist` table. All the data in the column will be lost.
+  - You are about to drop the column `imageUrl` on the `artist` table. All the data in the column will be lost.
+  - Added the required column `category` to the `Artist` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `description` to the `Artist` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `image` to the `Artist` table without a default value. This is not possible if the table is not empty.
+
+*/
+-- AlterTable
+ALTER TABLE `artist` DROP COLUMN `bio`,
+    DROP COLUMN `genre`,
+    DROP COLUMN `imageUrl`,
+    ADD COLUMN `category` VARCHAR(191) NOT NULL,
+    ADD COLUMN `description` VARCHAR(191) NOT NULL,
+    ADD COLUMN `image` VARCHAR(191) NOT NULL;
+</file>
+
+<file path="api/prisma/migrations/20260922074511_add_venue_ticket/migration.sql">
+-- CreateTable
+CREATE TABLE `Venue` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `type` VARCHAR(191) NOT NULL,
+    `description` VARCHAR(191) NULL,
+    `capacity` INTEGER NOT NULL,
+    `location` VARCHAR(191) NOT NULL,
+    `image` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Ticket` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `description` VARCHAR(191) NOT NULL,
+    `price` DOUBLE NOT NULL,
+    `quantity` INTEGER NOT NULL,
+    `condition` VARCHAR(191) NOT NULL,
+    `available` BOOLEAN NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+</file>
+
+<file path="api/prisma/migrations/migration_lock.toml">
+# Please do not edit this file manually
+# It should be added in your version-control system (e.g., Git)
+provider = "mysql"
+</file>
+
+<file path="api/src/controllers/ticket.controller.ts">
+import ticketService from "../services/ticket.apiservice.ts";
+import type { TicketDTO, CreateTicketDTO } from "../dto/ticket.dto.ts";
+
+const getAll = async (req, res, next) => {
+  try {
+    const tickets: TicketDTO[] = await ticketService.getAll();
+    res.status(200).json(tickets);
+  } catch (error) { next(error); }
+};
+
+const getById = async (req, res, next) => {
+  try {
+    const ticket: TicketDTO = await ticketService.getById(Number(req.params.id));
+    res.status(200).json(ticket);
+  } catch (error) { next(error); }
+};
+
+const create = async (req, res, next) => {
+  try {
+    const data: CreateTicketDTO = req.body;
+    const ticket: TicketDTO = await ticketService.create(data);
+    res.status(201).json(ticket);
+  } catch (error) { next(error); }
+};
+
+const update = async (req, res, next) => {
+  try {
+    const data: Partial<CreateTicketDTO> = req.body;
+    const ticket: TicketDTO = await ticketService.update(Number(req.params.id), data);
+    res.status(200).json(ticket);
+  } catch (error) { next(error); }
+};
+
+const remove = async (req, res, next) => {
+  try {
+    await ticketService.remove(Number(req.params.id));
+    res.status(204).send();
+  } catch (error) { next(error); }
+};
+
+export default { getAll, getById, create, update, remove };
+</file>
+
+<file path="api/src/controllers/venue.controller.ts">
+import venueService from "../services/venue.apiservice.ts";
+import type { VenueDTO, CreateVenueDTO } from "../dto/venue.dto.ts";
+
+const getAll = async (req, res, next) => {
+  try {
+    const venues: VenueDTO[] = await venueService.getAll();
+    res.status(200).json(venues);
+  } catch (error) { next(error); }
+};
+
+const getById = async (req, res, next) => {
+  try {
+    const venue: VenueDTO = await venueService.getById(Number(req.params.id));
+    res.status(200).json(venue);
+  } catch (error) { next(error); }
+};
+
+const create = async (req, res, next) => {
+  try {
+    const data: CreateVenueDTO = req.body;
+    const venue: VenueDTO = await venueService.create(data);
+    res.status(201).json(venue);
+  } catch (error) { next(error); }
+};
+
+const update = async (req, res, next) => {
+  try {
+    const data: Partial<CreateVenueDTO> = req.body;
+    const venue: VenueDTO = await venueService.update(Number(req.params.id), data);
+    res.status(200).json(venue);
+  } catch (error) { next(error); }
+};
+
+const remove = async (req, res, next) => {
+  try {
+    await venueService.remove(Number(req.params.id));
+    res.status(204).send();
+  } catch (error) { next(error); }
+};
+
+export default { getAll, getById, create, update, remove };
+</file>
+
+<file path="api/src/dto/artist.dto.ts">
+export interface CreateArtistDTO {
+  name: string;
+  category: string;
+  image: string;
+  description: string;
+}
+
+export interface ArtistDTO {
+  id: number; // On fait pas rentrer d'id (il s'auto-incrémente) mais on en renvoie un évidemment
+  name: string;
+  category: string;
+  image: string;
+  description: string;
+}
+</file>
+
+<file path="api/src/dto/ticket.dto.ts">
+export interface CreateTicketDTO {
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  condition: string;
+  available: boolean;
+}
+
+export interface TicketDTO {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  condition: string;
+  available: boolean;
+}
+</file>
+
+<file path="api/src/middlewares/ticket.middleware.ts">
+import ticketService from "../services/ticket.apiservice.ts";
+
+const checkExists = async (req, res, next) => {
+  try {
+    await ticketService.getById(Number(req.params.id));
+    next();
+  } catch (error) {
+    return res.status(404).json({ message: "Ticket not found" });
+  }
+};
+
+export default { checkExists };
+</file>
+
+<file path="api/src/middlewares/validateArtist.middleware.ts">
+import artistSchema from "../validators/artist.validator.ts";
+
+const validateArtist = (req, res, next) => {
+  const { error } = artistSchema.validate(req.body);
+
+  if (error) {
+    return res.status(400).json({
+      message: "Ouille ouille ouille mon fenouille les données sont invalides",
+    });
+  }
+  next();
+};
+
+export default validateArtist;
+</file>
+
+<file path="api/src/middlewares/validateTicket.middleware.ts">
+import ticketSchema from "../validators/ticket.validator.ts";
+
+const validateTicket = (req, res, next) => {
+  const { error } = ticketSchema.validate(req.body);
+  if (error) return res.status(400).json({ message: "Données invalides" });
+  next();
+};
+
+export default validateTicket;
+</file>
+
+<file path="api/src/middlewares/validateVenue.middleware.ts">
+import venueSchema from "../validators/venue.validator.ts";
+
+const validateVenue = (req, res, next) => {
+  const { error } = venueSchema.validate(req.body);
+  if (error) return res.status(400).json({ message: "Données invalides" });
+  next();
+};
+
+export default validateVenue;
+</file>
+
+<file path="api/src/middlewares/venue.middleware.ts">
+import venueService from "../services/venue.apiservice.ts";
+
+const checkExists = async (req, res, next) => {
+  try {
+    await venueService.getById(Number(req.params.id));
+    next();
+  } catch (error) {
+    return res.status(404).json({ message: "Venue not found" });
+  }
+};
+
+export default { checkExists };
+</file>
+
+<file path="api/src/repositories/ticket.repository.ts">
+import { prisma } from "../config/prisma.ts";
+import type { CreateTicketDTO } from "../dto/ticket.dto.ts";
+
+const findAll = async () => prisma.ticket.findMany();
+const findById = async (id: number) => prisma.ticket.findUnique({ where: { id } });
+const create = async (data: CreateTicketDTO) => prisma.ticket.create({ data });
+const update = async (id: number, data: Partial<CreateTicketDTO>) => prisma.ticket.update({ where: { id }, data });
+const remove = async (id: number) => prisma.ticket.delete({ where: { id } });
+
+export default { findAll, findById, create, update, remove };
+</file>
+
+<file path="api/src/repositories/venue.repository.ts">
+import { prisma } from "../config/prisma.ts";
+import type { CreateVenueDTO } from "../dto/venue.dto.ts";
+
+const findAll = async () => prisma.venue.findMany();
+const findById = async (id: number) => prisma.venue.findUnique({ where: { id } });
+const create = async (data: CreateVenueDTO) => prisma.venue.create({ data });
+const update = async (id: number, data: Partial<CreateVenueDTO>) => prisma.venue.update({ where: { id }, data });
+const remove = async (id: number) => prisma.venue.delete({ where: { id } });
+
+export default { findAll, findById, create, update, remove };
+</file>
+
+<file path="api/src/routes/ticket.router.ts">
+import express from "express";
+import ticketController from "../controllers/ticket.controller.ts";
+import ticketMiddleware from "../middlewares/ticket.middleware.ts";
+import validateTicket from "../middlewares/validateTicket.middleware.ts";
+
+const ticketRouter = express.Router();
+
+ticketRouter.get("/tickets", ticketController.getAll);
+ticketRouter.get("/tickets/:id", ticketController.getById);
+ticketRouter.post("/tickets", validateTicket, ticketController.create);
+ticketRouter.patch("/tickets/:id", ticketMiddleware.checkExists, ticketController.update);
+ticketRouter.delete("/tickets/:id", ticketMiddleware.checkExists, ticketController.remove);
+
+export default ticketRouter;
+</file>
+
+<file path="api/src/routes/venue.router.ts">
+import express from "express";
+import venueController from "../controllers/venue.controller.ts";
+import venueMiddleware from "../middlewares/venue.middleware.ts";
+import validateVenue from "../middlewares/validateVenue.middleware.ts";
+
+const venueRouter = express.Router();
+
+venueRouter.get("/venues", venueController.getAll);
+venueRouter.get("/venues/:id", venueController.getById);
+venueRouter.post("/venues", validateVenue, venueController.create);
+venueRouter.patch("/venues/:id", venueMiddleware.checkExists, venueController.update);
+venueRouter.delete("/venues/:id", venueMiddleware.checkExists, venueController.remove);
+
+export default venueRouter;
+</file>
+
+<file path="api/src/services/artist.apiservice.ts">
+import artistRepository from "../repositories/artist.repository.ts";
+import type { CreateArtistDTO } from "../dto/artist.dto.ts";
+
+const getAll = async () => {
+  return artistRepository.findAll();
+};
+
+const getById = async (id: number) => {
+  const artist = await artistRepository.findById(id);
+  if (!artist) {
+    throw new Error("Artist not found");
+  }
+  return artist;
+};
+
+const create = async (data: CreateArtistDTO) => {
+  return artistRepository.create(data);
+};
+
+const update = async (id: number, data: Partial<CreateArtistDTO>) => {
+  await getById(id);
+  return artistRepository.update(id, data);
+};
+
+const remove = async (id: number) => {
+  await getById(id);
+  return artistRepository.remove(id);
+};
+
+export default { getAll, getById, create, update, remove };
+</file>
+
+<file path="api/src/services/ticket.apiservice.ts">
+import ticketRepository from "../repositories/ticket.repository.ts";
+import type { CreateTicketDTO } from "../dto/ticket.dto.ts";
+
+const getAll = async () => ticketRepository.findAll();
+
+const getById = async (id: number) => {
+  const ticket = await ticketRepository.findById(id);
+  if (!ticket) throw new Error("Ticket not found");
+  return ticket;
+};
+
+const create = async (data: CreateTicketDTO) => ticketRepository.create(data);
+const update = async (id: number, data: Partial<CreateTicketDTO>) => ticketRepository.update(id, data);
+const remove = async (id: number) => ticketRepository.remove(id);
+
+export default { getAll, getById, create, update, remove };
+</file>
+
+<file path="api/src/services/venue.apiservice.ts">
+import venueRepository from "../repositories/venue.repository.ts";
+import type { CreateVenueDTO } from "../dto/venue.dto.ts";
+
+const getAll = async () => venueRepository.findAll();
+
+const getById = async (id: number) => {
+  const venue = await venueRepository.findById(id);
+  if (!venue) throw new Error("Venue not found");
+  return venue;
+};
+
+const create = async (data: CreateVenueDTO) => venueRepository.create(data);
+const update = async (id: number, data: Partial<CreateVenueDTO>) => venueRepository.update(id, data);
+const remove = async (id: number) => venueRepository.remove(id);
+
+export default { getAll, getById, create, update, remove };
+</file>
+
+<file path="api/src/validators/artist.validator.ts">
+import Joi from "joi";
+
+const artistSchema = Joi.object({
+  name: Joi.string().required(),
+  category: Joi.string().required(),
+  image: Joi.string().required(),
+  description: Joi.string().required(),
+});
+
+export default artistSchema;
+</file>
+
+<file path="api/src/validators/venue.validator.ts">
+import Joi from "joi";
+
+const venueSchema = Joi.object({
+  name: Joi.string().required(),
+  type: Joi.string().required(),
+  description: Joi.string().allow(""),
+  capacity: Joi.number().required(),
+  location: Joi.string().required(),
+  image: Joi.string().required(),
+});
+
+export default venueSchema;
+</file>
+
+<file path="api/.env.exemple">
+DATABASE_URL=
+DATABASE_HOST=
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_NAME=
+PORT=
+</file>
+
+<file path="api/prisma7.config.ts">
+// This file was generated by Prisma, and assumes you have installed the following:
+// npm install --save-dev prisma dotenv
+import "dotenv/config";
+import { defineConfig } from "prisma/config";
+
+export default defineConfig({
+  schema: "prisma/schema.prisma",
+  migrations: {
+    path: "prisma/migrations",
+  },
+  datasource: {
+    url: process.env["DATABASE_URL"],
+  },
+});
+</file>
+
+<file path="api/skills-lock.json">
+{
+  "version": 1,
+  "skills": {
+    "prisma-cli": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-cli/SKILL.md",
+      "computedHash": "b92e55aef78f6796d81433c44738a6733211a04c16e65cbad6d42c5f71092aab"
+    },
+    "prisma-client-api": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-client-api/SKILL.md",
+      "computedHash": "5dcc0793337151efa73a444e5adbc7e1c24180778e83b4fe94c9109c391bd333"
+    },
+    "prisma-compute": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-compute/SKILL.md",
+      "computedHash": "fbbdcf3e01ed876113d18804d38d17359d9f7ba7a4bd353193673d5924f19818"
+    },
+    "prisma-database-setup": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-database-setup/SKILL.md",
+      "computedHash": "0911d9454bd48df3badd23a50fd90a280eabb15dcbd472c14e7b729075dadefb"
+    },
+    "prisma-driver-adapter-implementation": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-driver-adapter-implementation/SKILL.md",
+      "computedHash": "07484627aea6cce4d0f94b4090ff9acc0caa7e104f9988b95abecf80132f4103"
+    },
+    "prisma-mongodb-upgrade": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-mongodb-upgrade/SKILL.md",
+      "computedHash": "f9ba440e88ca4cec9801d04762296e29e99ca08cb8a8156e4f783ecf90279c8f"
+    },
+    "prisma-postgres": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-postgres/SKILL.md",
+      "computedHash": "d669fbd0d8017d16c967f18b20e1c1345cd4a2a0076d762459bfef79f551f655"
+    },
+    "prisma-postgres-setup": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-postgres-setup/SKILL.md",
+      "computedHash": "c89d3aa91285d8e4964fcaa5238c99a3d3c20b617e032e731cf632330a85a5a6"
+    },
+    "prisma-upgrade-v7": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "skillPath": "prisma-upgrade-v7/SKILL.md",
+      "computedHash": "dcc6c71adca6b22f37c5bda5ac7fd63c3bb59495596a22e06a29c7c85371558f"
+    }
+  }
+}
+</file>
+
+<file path="src/app/components/artist-card/artist-card.component.css">
+
+</file>
+
+<file path="src/app/components/artist-card/artist-card.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ArtistCardComponent } from './artist-card.component';
+
+describe('ArtistCardComponent', () => {
+  let component: ArtistCardComponent;
+  let fixture: ComponentFixture<ArtistCardComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ArtistCardComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ArtistCardComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/artist-form/artist-form.component.css">
+
+</file>
+
+<file path="src/app/components/artist-form/artist-form.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ArtistFormComponent } from './artist-form.component';
+
+describe('ArtistFormComponent', () => {
+  let component: ArtistFormComponent;
+  let fixture: ComponentFixture<ArtistFormComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ArtistFormComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ArtistFormComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/artist-list/artist-list.component.css">
+
+</file>
+
+<file path="src/app/components/artist-list/artist-list.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ArtistListComponent } from './artist-list.component';
+
+describe('ArtistListComponent', () => {
+  let component: ArtistListComponent;
+  let fixture: ComponentFixture<ArtistListComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ArtistListComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ArtistListComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/create-ticket.component/create-ticket.component.css">
+
+</file>
+
+<file path="src/app/components/create-ticket.component/create-ticket.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CreateTicketComponent } from './create-ticket.component';
+
+describe('CreateTicketComponent', () => {
+  let component: CreateTicketComponent;
+  let fixture: ComponentFixture<CreateTicketComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [CreateTicketComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(CreateTicketComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/festival-dates.component/festival-dates.component.css">
+
+</file>
+
+<file path="src/app/components/festival-dates.component/festival-dates.component.html">
+@if (dates(); as date) {
+<div class="bg-red-50 flex flex-col justify-center items-center p-4 rounded-lg shadow-md">
+    @for(date of dates(); track date.startDate){
+    <h4 class="text-lg font-semibold">Dates :</h4>
+    <p> du {{ date.startDate|date: 'dd/MM/yyyy' }} au {{ date.endDate|date: 'dd/MM/yyyy' }}</p>
+    }
+</div>
+}
+</file>
+
+<file path="src/app/components/festival-dates.component/festival-dates.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FestivalDatesComponent } from './festival-dates.component';
+
+describe('FestivalDatesComponent', () => {
+  let component: FestivalDatesComponent;
+  let fixture: ComponentFixture<FestivalDatesComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FestivalDatesComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(FestivalDatesComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/festival-dates.component/festival-dates.component.ts">
+import { Component } from '@angular/core';
+import { Dates, FestivalType } from '../../types/festival.type';
+import { input } from '@angular/core';
+import { DatePipe } from '@angular/common';
+
+
+
+@Component({
+  imports: [DatePipe],
+  selector: 'app-festival-datescomponent',
+  styleUrl: './festival-dates.component.css',
+  templateUrl: './festival-dates.component.html',
+})
+export class FestivalDatesComponent {
+  dates = input<Dates[]>();
+}
+</file>
+
+<file path="src/app/components/festival-info.component/festival-info.component.css">
+
+</file>
+
+<file path="src/app/components/festival-info.component/festival-info.component.html">
+@if (infos(); as info) {
+<div class="bg-blue-50 flex flex-col justify-center items-center p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-bold">{{ info.name }}</h2>
+    <p>{{ info.description }}</p>
+    <h3 class="text-lg font-semibold">{{ info.mainLocation }}</h3>
+    <img [src]="info.poster" [alt]="info.name">
+</div>
+}@else {
+<p>Aucun festival de prévu.</p>
+}
+</file>
+
+<file path="src/app/components/festival-info.component/festival-info.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FestivalInfoComponent } from './festival-info.component';
+
+describe('FestivalInfoComponent', () => {
+  let component: FestivalInfoComponent;
+  let fixture: ComponentFixture<FestivalInfoComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FestivalInfoComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(FestivalInfoComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/festival-info.component/festival-info.component.ts">
+import { Component, input } from '@angular/core';
+import { FestivalType } from '../../types/festival.type';
+
+
+@Component({
+  imports: [],
+  selector: 'app-festival-infocomponent',
+  styleUrl: './festival-info.component.css',
+  templateUrl: './festival-info.component.html',
+})
+export class FestivalInfoComponent {
+  infos = input<FestivalType>();
+}
+</file>
+
+<file path="src/app/components/participant-search.component/participant-search.component.css">
+
+</file>
+
+<file path="src/app/components/participant-search.component/participant-search.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ParticipantSearchComponent } from './participant-search.component';
+
+describe('ParticipantSearchComponent', () => {
+  let component: ParticipantSearchComponent;
+  let fixture: ComponentFixture<ParticipantSearchComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ParticipantSearchComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ParticipantSearchComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/components/venue-card/venue-card.component/venue-card.component.ts">
+import { Component, inject, input, output } from '@angular/core';
+import { Venue } from '../../../types/venue.interface';
+import { VenueServiceTs } from '../../../services/venue-service/venue.service';
+
+@Component({
+  imports: [],
+  selector: 'app-venue-card',
+  styleUrl: './venue-card.component.css',
+  templateUrl: './venue-card.component.html',
+})
+export class VenueCardComponent {
+  private venueService = inject(VenueServiceTs);
+
+  venueSelected = output<Venue>();
+
+  selectVenue() {
+    this.venueSelected.emit(this.venue());
+  }
+
+  venue = input.required<Venue>();
+
+  onEdit() {
+    this.venueService.venueIdBeingEdited.set(this.venue().id);
+  }
+
+  onDelete() {
+    this.venueService.deleteVenue(this.venue().id);
+  }
+}
+</file>
+
+<file path="src/app/components/venue-form/venue-form.component.css">
+
+</file>
+
+<file path="src/app/components/venue-form/venue-form.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { VenueForm } from './venue-form.component';
+
+describe('VenueForm', () => {
+  let component: VenueForm;
+  let fixture: ComponentFixture<VenueForm>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [VenueForm],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(VenueForm);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/data/festival-events.data.ts">
+import { FestivalEvent } from '../types/festival-event.interface';
+
+export const FESTIVAL_EVENTS: FestivalEvent[] = [
+  { id: 1, artistId: 1, venueId: 1, date: '2026-08-21', startTime: '20:00', endTime: '21:30', status: 'scheduled' },
+  { id: 2, artistId: 2, venueId: 2, date: '2026-08-21', startTime: '22:00', endTime: '23:30', status: 'scheduled' },
+  { id: 3, artistId: 3, venueId: 1, date: '2026-08-22', startTime: '19:00', endTime: '20:00', status: 'scheduled' },
+];
+</file>
+
+<file path="src/app/data/festival.data.ts">
+import { FestivalType } from '../types/festival.type';
+
+export const FESTIVAL_DATA: FestivalType[] = [
+    {
+        name: "Festival de la Musique",
+        description: "Un festival de musique exceptionnel",
+        dates: [
+            {
+                startDate: new Date("2023-06-01"),
+                endDate: new Date("2023-06-03")
+            }
+        ],
+        mainLocation: "Paris",
+        poster: "https://img.freepik.com/vecteurs-premium/affiche-du-festival-musique-pour-soiree_622818-904.jpg"
+    },
+
+    {
+        name: "Festival de Jazz",
+        description: "Un festival de jazz exceptionnel",
+        dates: [
+            {
+                startDate: new Date("2023-07-11"),
+                endDate: new Date("2023-07-13")
+            }
+        ],
+        mainLocation: "Clermont-Ferrand",
+        poster: "https://img.freepik.com/vecteurs-premium/affiche-du-festival-musique-pour-soiree_622818-904.jpg"
+    },
+    {
+        name: "Festival de la musique",
+        description: "Un festival de musique exceptionnel",
+        dates: [
+            {
+                startDate: new Date("2023-06-01"),
+                endDate: new Date("2023-06-03")
+            }
+        ],
+        mainLocation: "Paris",
+        poster: "https://img.freepik.com/vecteurs-premium/affiche-du-festival-musique-pour-soiree_622818-904.jpg"
+    },
+
+    {
+        name: "Festival de Jazz",
+        description: "Un festival de jazz exceptionnel",
+        dates: [
+            {
+                startDate: new Date("2023-07-11"),
+                endDate: new Date("2023-07-13")
+            }
+        ],
+        mainLocation: "Clermont-Ferrand",
+        poster: "https://img.freepik.com/vecteurs-premium/affiche-du-festival-musique-pour-soiree_622818-904.jpg"
+    }
+];
+</file>
+
+<file path="src/app/data/participant.data.ts">
+export let participantTab = [
+	{
+		firstName : "Bob",
+		lastName : "Leponge",
+		email : "bob.leponge@gmail.com",
+		status: "spectateur",
+		ticketType: "1jour",
+	},
+
+	{
+		firstName : "Patrick",
+		lastName : "Letoile",
+		email : "pat.letoile@gmail.com",
+		status: "musicien",
+		ticketType: "2jours",
+	},
+
+	{
+		firstName : "Sandy",
+		lastName : "Kilo",
+		email : "sandy.kilo@gmail.com",
+		status: "spectatrice",
+		ticketType: "3jours",
+	},
+	
+	{
+		firstName : "Bob",
+		lastName : "Leponge",
+		email : "bob.leponge@gmail.com",
+		status: "spectateur",
+		ticketType: "1jour",
+	},
+
+	{
+		firstName : "Patrick",
+		lastName : "Letoile",
+		email : "pat.letoile@gmail.com",
+		status: "musicien",
+		ticketType: "2jours",
+	},
+
+	{
+		firstName : "Sandy",
+		lastName : "Kilo",
+		email : "sandy.kilo@gmail.com",
+		status: "spectatrice",
+		ticketType: "3jours",
+	},
+
+	{
+		firstName : "Bob",
+		lastName : "Leponge",
+		email : "bob.leponge@gmail.com",
+		status: "spectateur",
+		ticketType: "1jour",
+	},
+
+	{
+		firstName : "Patrick",
+		lastName : "Letoile",
+		email : "pat.letoile@gmail.com",
+		status: "musicien",
+		ticketType: "2jours",
+	},
+
+	{
+		firstName : "Sandy",
+		lastName : "Kilo",
+		email : "sandy.kilo@gmail.com",
+		status: "spectatrice",
+		ticketType: "3jours",
+	},
+
+	{
+		firstName : "Bob",
+		lastName : "Leponge",
+		email : "bob.leponge@gmail.com",
+		status: "spectateur",
+		ticketType: "1jour",
+	},
+
+	{
+		firstName : "Patrick",
+		lastName : "Letoile",
+		email : "pat.letoile@gmail.com",
+		status: "musicien",
+		ticketType: "2jours",
+	},
+
+	{
+		firstName : "Sandy",
+		lastName : "Kilo",
+		email : "sandy.kilo@gmail.com",
+		status: "spectatrice",
+		ticketType: "3jours",
+	},
+
+]
+</file>
+
+<file path="src/app/data/ticket.data.ts">
+import { Ticket } from "../types/ticket-type.interface"
+export let ticketData : Ticket[] = [{
+    name:"Pass journée",
+    description:"Lorem Ipsum",
+    price:10,
+    quantity:20,
+    condition:"Lorem Ipsum",
+    available:false
+}, {
+    name:"Pass 3 jours",
+    description:"Lorem Ipsum",
+    price:10,
+    quantity:25,
+    condition:"Lorem Ipsum",
+    available:true
+},
+]
+</file>
+
+<file path="src/app/pages/artist-page/artist-page.component.css">
+
+</file>
+
+<file path="src/app/pages/artist-page/artist-page.component.html">
+<app-artist-form></app-artist-form>
+<app-artist-list></app-artist-list>
+</file>
+
+<file path="src/app/pages/artist-page/artist-page.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ArtistPageComponent } from './artist-page.component';
+
+describe('ArtistPageComponent', () => {
+  let component: ArtistPageComponent;
+  let fixture: ComponentFixture<ArtistPageComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ArtistPageComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ArtistPageComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/pages/artist-page/artist-page.component.ts">
+import { Component } from '@angular/core';
+import { ArtistListComponent } from '../../components/artist-list/artist-list.component';
+import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
+
+@Component({
+  imports: [ArtistListComponent,ArtistFormComponent],
+  selector: 'app-artist-page',
+  styleUrl: './artist-page.component.css',
+  templateUrl: './artist-page.component.html',
+})
+export class ArtistPageComponent {}
+</file>
+
+<file path="src/app/pages/festival-form.component/festival-form.component.css">
+
+</file>
+
+<file path="src/app/pages/festival-form.component/festival-form.component.html">
+<h2 class="text-3xl font-bold p-5 text-center">Modifier ce festival</h2>
+<form [formGroup]="festivalForm" (ngSubmit)="onSubmit()"
+    class="max-w-3xl mx-auto p-6 bg-blue-50 rounded-2xl shadow-lg space-y-8">
+    <fieldset formGroupName='infos' class="space-y-5">
+        <legend class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 w-full">Informations du festival
+        </legend>
+        @if (
+        festivalForm.invalid || festivalForm.dirty
+        ) {
+        <p class="text-red-500 pb-3">
+            Veuillez remplir obligatoirement tous les champs de ce formulaire.
+        </p>
+        }
+        <div class="space-y-2">
+            <label for="name" id="name" class="block text-sm font-semibold text-gray-700">Nom : </label>
+            <input type="text" id="name" formControlName="name" class="w-full bg-white rounded-lg border border-gray-300 px-4 py-2.5
+               text-gray-900
+               shadow-sm
+               outline-none
+               transition
+               focus:border-blue-500
+               focus:ring-2
+               focus:ring-blue-200">
+            @if (
+            festivalForm.get('infos.name')?.invalid &&
+            festivalForm.get('infos.name')?.touched
+            ) {
+            <p class="text-red-500">
+                Le nom est obligatoire.
+            </p>
+            }
+        </div>
+        <div class="space-y-2">
+            <label for="description" id="description" class="block text-sm font-semibold text-gray-700">Description :
+            </label>
+            <textarea id="description" formControlName="description" class="w-full bg-white rounded-lg border border-gray-300 px-4 py-2.5
+               text-gray-900
+               shadow-sm
+               outline-none
+               transition
+               focus:border-blue-500
+               focus:ring-2
+               focus:ring-blue-200"></textarea>
+            @if (
+            festivalForm.get('infos.description')?.invalid &&
+            festivalForm.get('infos.description')?.touched
+            ) {
+            <p class="text-red-500">
+                La description est obligatoire.
+            </p>
+            }
+        </div>
+        <div class="space-y-2">
+            <label for="mainLocation" id="mainLocation" class="block text-sm font-semibold text-gray-700">Lieu principal
+                : </label>
+            <input type="text" id="mainLocation" formControlName="mainLocation" class="w-full bg-white rounded-lg border border-gray-300 px-4 py-2.5
+               text-gray-900
+               shadow-sm
+               outline-none
+               transition
+               focus:border-blue-500
+               focus:ring-2
+               focus:ring-blue-200">
+            @if (
+            festivalForm.get('infos.mainLocation')?.invalid &&
+            festivalForm.get('infos.mainLocation')?.touched
+            ) {
+            <p class="text-red-500">
+                Le lieu est obligatoire.
+            </p>
+            }
+        </div>
+    </fieldset>
+    <fieldset formGroupName="dates" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="space-y-2">
+            <label for="startDate" class="block text-sm font-semibold text-gray-700">Date de début : </label>
+            <input type="date" id="startDate" formControlName="startDate">
+            @if (
+            festivalForm.get('dates.startDate')?.hasError('required') &&
+            festivalForm.get('dates.startDate')?.touched
+            ) {
+            <p class="text-red-500 pb-3">
+                La date de début est obligatoire.
+            </p>
+            }
+        </div>
+        <div class="space-y-2">
+            <label for="endDate" class="block text-sm font-semibold text-gray-700">Date de fin : </label>
+            <input type="date" id="endDate" formControlName="endDate">
+            @if (
+            festivalForm.get('dates.endDate')?.hasError('required') &&
+            festivalForm.get('dates.endDate')?.touched
+            ) {
+            <p class="text-red-500">
+                La date de fin est obligatoire.
+            </p>
+            }
+        </div>
+    </fieldset>
+    <button type="submit" [disabled]="festivalForm.invalid || festivalForm.pristine"
+        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Enregistrer</button>
+</form>
+</file>
+
+<file path="src/app/pages/festival-form.component/festival-form.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FestivalFormComponent } from './festival-form.component';
+
+describe('FestivalFormComponent', () => {
+  let component: FestivalFormComponent;
+  let fixture: ComponentFixture<FestivalFormComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FestivalFormComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(FestivalFormComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/pages/festival-form.component/festival-form.component.ts">
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FestivalServiceService } from '../../services/festival-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FestivalType } from '../../types/festival.type';
+
+@Component({
+  imports: [ReactiveFormsModule],
+  selector: 'app-festival-form.component',
+  styleUrl: './festival-form.component.css',
+  templateUrl: './festival-form.component.html',
+})
+export class FestivalFormComponent implements OnInit {
+  private formBuilder = inject(FormBuilder);
+  private festivalService = inject(FestivalServiceService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
+  private formatDate(date: Date): string {
+    return date.toISOString().split('T')[0];
+  }
+
+  originName !: string;
+  festivalForm!: FormGroup;
+
+  ngOnInit(): void {
+    this.festivalForm = this.formBuilder.group({
+      infos: this.formBuilder.group({
+        name: ['', Validators.required],
+        mainLocation: ['', Validators.required],
+        description: ['', Validators.required],
+        poster: ['', Validators.required],
+      }),
+      dates: this.formBuilder.group({
+        startDate: ['', Validators.required],
+        endDate: ['', Validators.required]
+      })
+    });
+
+    this.originName = this.route.snapshot.paramMap.get('name') || '';
+
+    const fest = this.festivalService.getFestivalByName(this.originName);
+
+    if (fest) {
+      const date = fest.dates[0];
+
+      this.festivalForm.patchValue({
+        infos: {
+          name: fest.name,
+          mainLocation: fest.mainLocation,
+          description: fest.description,
+          poster: fest.poster
+        },
+        dates: {
+          startDate: date ? this.formatDate(date.startDate) : '',
+          endDate: date ? this.formatDate(date.endDate) : ''
+        }
+      });
+    }
+  }
+
+  onSubmit(): void {
+    if (this.festivalForm.invalid) {
+      this.festivalForm.markAllAsTouched();
+      return;
+    }
+
+    const formValue = this.festivalForm.value;
+
+    const updatedFestival: FestivalType = {
+      ...formValue.infos,
+
+      dates: [
+        {
+          startDate: new Date(formValue.dates.startDate),
+          endDate: new Date(formValue.dates.endDate)
+        }
+      ]
+    };
+
+    this.festivalService.updateFestival(
+      this.originName,
+      updatedFestival
+    );
+
+    this.router.navigate(['/festival']);
+  }
+
+}
+</file>
+
+<file path="src/app/pages/festival-page.component/festival-page.component.css">
+
+</file>
+
+<file path="src/app/pages/festival-page.component/festival-page.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FestivalPageComponent } from './festival-page.component';
+
+describe('FestivalPageComponent', () => {
+  let component: FestivalPageComponent;
+  let fixture: ComponentFixture<FestivalPageComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FestivalPageComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(FestivalPageComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/pages/participant/participant-page.component.css">
+
+</file>
+
+<file path="src/app/pages/participant/participant-page.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ParticipantPageComponent } from './participant-page.component';
+
+describe('ParticipantPageComponent', () => {
+  let component: ParticipantPageComponent;
+  let fixture: ComponentFixture<ParticipantPageComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ParticipantPageComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ParticipantPageComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/pages/venue/venue-page.component/venue-page.component.css">
+
+</file>
+
+<file path="src/app/pages/venue/venue-page.component/venue-page.component.spec.ts">
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { VenuePageComponent } from './venue-page.component';
+
+describe('VenuePageComponent', () => {
+  let component: VenuePageComponent;
+  let fixture: ComponentFixture<VenuePageComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [VenuePageComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(VenuePageComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/services/artist.service.spec.ts">
+import { TestBed } from '@angular/core/testing';
+import { ArtistService } from './artist.service';
+
+describe('ArtistService', () => {
+  let service: ArtistService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ArtistService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/services/festival-service.service.spec.ts">
+import { TestBed } from '@angular/core/testing';
+import { FestivalServiceService } from './festival-service.service';
+
+describe('FestivalServiceService', () => {
+  let service: FestivalServiceService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(FestivalServiceService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
+</file>
+
+<file path="src/app/services/participant.service.ts">
+import { Service, signal } from '@angular/core';
+import { participantTab } from '../data/participant.data';
+import { Participant } from '../types/participant.interface';
+import { Observable, of } from 'rxjs';
+
+@Service()
+export class ParticipantService {
+
+	private participants = signal<Participant[]>([]);
+	readonly participantsSignal = this.participants.asReadonly();
+
+	getParticipants(): Observable<Participant[]>{
+		this.participants.set(participantTab);
+		return of(this.participants());
+	}
+
+	setParticipantTab(regex:RegExp){
+		this.participants.set([])
+		participantTab.forEach((participant)=>{
+	      if(regex.test(participant.email)){
+	        this.participants().push(participant);
+	      }
+	    });
+	}
+}
+</file>
+
+<file path="src/app/services/venue.service.ts">
+import { Injectable } from '@angular/core';
+import { data } from '../data/venue.data';
+import { Venue } from '../types/venue.interface';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class VenueServiceTs {
+  getVenuesFromService(): Venue[] {
+    return data;
+  }
+}
+</file>
+
+<file path="src/app/types/artist.ts">
+export interface Artist {
+  id: number;
+  name: string;
+}
+</file>
+
+<file path="src/app/types/festival-event.interface.ts">
+export type EventStatus = 'scheduled' | 'cancelled';
+
+export interface FestivalEvent {
+  id: number;
+  artistId: number;
+  venueId: number;
+  date: string;      // "2026-08-21"
+  startTime: string; // "20:00"
+  endTime: string;   // "21:30"
+  status: EventStatus;
+}
+</file>
+
+<file path="src/app/types/festival.type.ts">
+export interface FestivalType {
+    name: string;
+    description: string;
+    dates: Dates[];
+    mainLocation: string;
+    poster: string;
+}
+export interface Dates {
+    startDate: Date;
+    endDate: Date;
+}
+</file>
+
+<file path="src/app/types/venue.ts">
+export interface Venue {
+  id: number;
+  name: string;
+}
+</file>
+
+<file path="src/app/app.config.ts">
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideRouter(routes),
+    provideHttpClient()
+  ]
+};
+</file>
+
+<file path="angular.json">
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "npm",
+    "schematicCollections": [
+      "angular-eslint"
+    ],
+    "analytics": false
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "echo": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": ["src/styles.css"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "echo:build:production"
+            },
+            "development": {
+              "buildTarget": "echo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
+        }
+      }
+    }
+  }
+}
+</file>
+
+<file path="package.json">
+{
+  "name": "echoVisuel",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix"
+  },
+  "private": true,
+  "packageManager": "npm@11.17.0",
+  "dependencies": {
+    "@angular/common": "^22.1.0",
+    "@angular/compiler": "^22.1.0",
+    "@angular/core": "^22.1.0",
+    "@angular/forms": "^22.1.0",
+    "@angular/platform-browser": "^22.1.0",
+    "@angular/router": "^22.1.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.1.5",
+    "@angular/cli": "^22.1.5",
+    "@angular/compiler-cli": "^22.1.0",
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/postcss": "^4.1.12",
+    "angular-eslint": "22.1.0",
+    "eslint": "^10.6.0",
+    "jsdom": "^28.0.0",
+    "postcss": "^8.5.3",
+    "prettier": "^3.8.1",
+    "tailwindcss": "^4.1.12",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "8.62.1",
+    "vitest": "^4.0.8"
+  }
+}
+</file>
+
+<file path="api/src/config/prisma.ts">
+import "dotenv/config";
+import { PrismaMariaDb } from "@prisma/adapter-mariadb";
+import { PrismaClient } from "../../generated/prisma/client.ts";
+
+const adapter = new PrismaMariaDb({
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
+  connectionLimit: 5,
+});
+
+const prisma = new PrismaClient({ adapter });
+
+export { prisma };
+</file>
+
+<file path="api/src/dto/venue.dto.ts">
+export interface CreateVenueDTO {
+  name: string;
+  type: string;
+  description?: string;
+  capacity: number;
+  location: string;
+  image: string;
+}
+
+export interface VenueDTO {
+  id: number;
+  name: string;
+  type: string;
+  description: string | null;
+  capacity: number;
+  location: string;
+  image: string;
+}
+</file>
+
+<file path="api/src/repositories/artist.repository.ts">
+import { prisma } from "../config/prisma.ts";
+import type { CreateArtistDTO } from "../dto/artist.dto.ts";
+
+const findAll = async () => {
+  return await prisma.artist.findMany();
+};
+
+const findById = async (id: number) => {
+  return await prisma.artist.findUnique({ where: { id } });
+};
+
+const create = async (data: CreateArtistDTO) => {
+  return await prisma.artist.create({ data });
+};
+
+const update = async (id: number, data: Partial<CreateArtistDTO>) => { //Partial c'est pour que la requête PATCH fonctionne
+  return await prisma.artist.update({ where: { id }, data });
+};
+
+const remove = async (id: number) => {
+  return await prisma.artist.delete({ where: { id } });
+};
+
+export default { findAll, findById, create, update, remove };
+</file>
+
+<file path="api/src/validators/ticket.validator.ts">
+import Joi from "joi";
+
+const ticketSchema = Joi.object({
+  name: Joi.string().required(),
+  description: Joi.string().required(),
+  price: Joi.number().required(),
+  quantity: Joi.number().required(),
+  condition: Joi.string().required(),
+  available: Joi.boolean().required(),
+});
+
+export default ticketSchema;
+</file>
+
+<file path="api/tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    // "strict": true,
+    "skipLibCheck": true
+  }
+}
+</file>
+
+<file path="src/app/components/artist-card/artist-card.component.ts">
+import { Component, inject, input, output } from '@angular/core';
+import { Artist } from '../../types/artist.interface';
+import { ArtistService } from '../../services/artist.service';
+
+@Component({
+  imports: [],
+  selector: 'app-artist-card',
+  styleUrl: './artist-card.component.css',
+  templateUrl: './artist-card.component.html',
+})
+export class ArtistCardComponent {
+  private artistService = inject(ArtistService);
+
+  artist = input.required<Artist>();
+
+  selectedArtist = output<{name:string, isSelected:boolean}>();
+
+  onSelect(isSelected: boolean){
+    this.selectedArtist.emit({name:this.artist().name, isSelected:isSelected});
+  }
+
+  onDelete() {
+    this.artistService.deleteArtist(this.artist().id);
+  }
+
+  onEdit() {
+    this.artistService.artistIdBeingEdited.set(this.artist().id);
+  }
+}
+</file>
+
+<file path="src/app/components/event-card/event-card.component.html">
+<article class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-orange-400/60 hover:shadow-md">
+  <div class="flex items-center justify-between">
+    <span class="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-orange-600">
+      Lieu #{{ event().venueId }}
+    </span>
+
+    @if (event().status === 'cancelled') {
+      <span class="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-red-600">
+        Annulé
+      </span>
+    } @else {
+      <span class="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-orange-600">
+        Programmé
+      </span>
+    }
+  </div>
+
+  <h3 class="mt-4 text-xl font-bold text-stone-900">
+    {{ artistName() }}
+  </h3>
+
+  <p class="mt-2 text-sm text-stone-500">
+    {{ event().date }}
+  </p>
+
+  <p class="mt-1 text-sm text-stone-500">
+    {{ event().startTime }} — {{ event().endTime }}
+  </p>
+
+  <button
+    type="button"
+    (click)="edit.emit(event())"
+    class="mt-4 rounded-full border border-stone-200 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-stone-500 transition hover:bg-stone-50"
+  >
+    Modifier
+  </button>
+</article>
+</file>
+
+<file path="src/app/components/event-card/event-card.component.ts">
+import { Component, input, output, inject, computed } from '@angular/core';
+import { FestivalEvent } from '../../types/festival-event.interface';
+import { ArtistService } from '../../services/artist.service';
+
+@Component({
+  selector: 'app-event-card',
+  imports: [],
+  templateUrl: './event-card.component.html',
+})
+export class EventCardComponent {
+  private readonly artistService = inject(ArtistService);
+
+  event = input.required<FestivalEvent>();
+  edit = output<FestivalEvent>();
+
+  artistName = computed(() => {
+    const artist = this.artistService.getArtists().find((artist) => artist.id === this.event().artistId);
+    return artist?.name ?? 'Artiste inconnu';
+  });
+}
+</file>
+
+<file path="src/app/components/participant-card.component/participant-card.component.ts">
+import { Component, input, output } from '@angular/core';
+import { Participant } from '../../types/participant.interface';
+
+@Component({
+  imports: [],
+  selector: 'app-participant-card',
+  styleUrl: './participant-card.component.css',
+  templateUrl: './participant-card.component.html',
+})
+export class ParticipantCardComponent {
+  participant = input.required<Participant>();
+  selected = output<{participant: Participant, isChecked:boolean}>();
+
+  onChange(isChecked:boolean){
+    this.selected.emit({participant:this.participant(), isChecked:isChecked});
+  }
+
+}
+</file>
+
+<file path="src/app/components/schedule-form/schedule-form.component.html">
+<form
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+  class="flex flex-wrap items-center gap-3 rounded-2xl border border-stone-200 bg-white p-6 shadow-sm"
+>
+  <select
+    formControlName="artistId"
+    class="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm text-stone-900"
+  >
+    <option [ngValue]="null">Artiste</option>
+    @for (artist of artists(); track artist.id) {
+      <option [ngValue]="artist.id">{{ artist.name }}</option>
+    }
+  </select>
+
+  <select
+    formControlName="venueId"
+    class="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm text-stone-900"
+  >
+    <option [ngValue]="null">Lieu</option>
+    @for (venue of venues(); track venue.id) {
+      <option [ngValue]="venue.id">{{ venue.name }}</option>
+    }
+  </select>
+
+  <input
+    type="date"
+    formControlName="date"
+    class="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm text-stone-900"
+  />
+
+  <input
+    type="time"
+    formControlName="startTime"
+    class="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm text-stone-900"
+  />
+
+  <input
+    type="time"
+    formControlName="endTime"
+    class="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm text-stone-900"
+  />
+
+  <button
+    type="submit"
+    class="rounded-full bg-orange-100 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-orange-600 transition hover:bg-orange-200"
+  >
+    {{ eventToEdit() ? 'Modifier' : 'Programmer' }}
+  </button>
+
+  @if (eventToEdit()) {
+    <button
+      type="button"
+      (click)="cancelEdit()"
+      class="rounded-full border border-stone-200 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-stone-500 transition hover:bg-stone-50"
+    >
+      Annuler l'édition
+    </button>
+  }
+</form>
+
+@if (showTimeErrorModal()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 px-6">
+    <div class="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-sm">
+      <p class="text-lg font-bold text-stone-900">Heures incohérentes</p>
+      <p class="mt-2 text-sm text-stone-500">
+        L'heure de fin doit être postérieure à l'heure de début.
+      </p>
+
+      <button
+        type="button"
+        (click)="closeTimeErrorModal()"
+        class="mt-6 rounded-full bg-orange-100 px-6 py-2 text-xs font-semibold uppercase tracking-wide text-orange-600 transition hover:bg-orange-200"
+      >
+        Annuler
+      </button>
+    </div>
+  </div>
+}
+
+@if (showConfirmModal()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 px-6">
+    <div class="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-sm">
+      <p class="text-lg font-bold text-stone-900">
+        {{ eventToEdit() ? 'Confirmer la modification' : 'Confirmer la programmation' }}
+      </p>
+      <p class="mt-2 text-sm text-stone-500">
+        Voulez-vous {{ eventToEdit() ? 'modifier' : 'ajouter' }} {{ pendingEvent()?.artistName }} le {{ pendingEvent()?.date }} à {{ pendingEvent()?.time }} ?
+      </p>
+
+      <div class="mt-6 flex justify-center gap-3">
+        <button
+          type="button"
+          (click)="cancelSubmit()"
+          class="rounded-full border border-stone-200 px-6 py-2 text-xs font-semibold uppercase tracking-wide text-stone-500 transition hover:bg-stone-50"
+        >
+          Annuler
+        </button>
+
+        <button
+          type="button"
+          (click)="confirmSubmit()"
+          class="rounded-full bg-orange-100 px-6 py-2 text-xs font-semibold uppercase tracking-wide text-orange-600 transition hover:bg-orange-200"
+        >
+          Confirmer
+        </button>
+      </div>
+    </div>
+  </div>
+}
+</file>
+
+<file path="src/app/components/schedule-form/schedule-form.component.ts">
+import { Component, OnInit, inject, signal, input, output, effect } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ArtistService } from '../../services/artist.service';
+import { VenueServiceTs } from '../../services/venue.service';
+import { ScheduleService } from '../../services/schedule.service';
+import { Artist } from '../../types/artist.interface';
+import { Venue } from '../../types/venue.interface';
+import { FestivalEvent } from '../../types/festival-event.interface';
+
+interface PendingEvent {
+  artistName: string;
+  date: string;
+  time: string;
+}
+
+@Component({
+  imports: [ReactiveFormsModule],
+  selector: 'app-schedule-form',
+  templateUrl: './schedule-form.component.html',
+})
+export class ScheduleFormComponent implements OnInit {
+  private readonly artistService = inject(ArtistService);
+  private readonly venueService = inject(VenueServiceTs);
+  private readonly scheduleService = inject(ScheduleService);
+
+  eventToEdit = input<FestivalEvent | null>(null);
+  eventCreated = output<FestivalEvent>();
+  eventUpdated = output<FestivalEvent>();
+  eventEditCancelled = output<void>();
+
+  artists = signal<Artist[]>([]);
+  venues = signal<Venue[]>([]);
+
+  showTimeErrorModal = signal(false);
+  showConfirmModal = signal(false);
+  pendingEvent = signal<PendingEvent | null>(null);
+
+  form = new FormGroup({
+    artistId: new FormControl<number | null>(null, Validators.required),
+    venueId: new FormControl<number | null>(null, Validators.required),
+    date: new FormControl('', Validators.required),
+    startTime: new FormControl('', Validators.required),
+    endTime: new FormControl('', Validators.required),
+  });
+
+  constructor() {
+    effect(() => {
+      const event = this.eventToEdit();
+
+      if (event) {
+        this.form.patchValue({
+          artistId: event.artistId,
+          venueId: event.venueId,
+          date: event.date,
+          startTime: event.startTime,
+          endTime: event.endTime,
+        });
+      } else {
+        this.form.reset();
+      }
+    });
+  }
+
+  ngOnInit() {
+    this.artists.set(this.artistService.getArtists());
+    this.venues.set(this.venueService.getVenuesFromService());
+  }
+
+  submit() {
+    const { artistId, venueId, date, startTime, endTime } = this.form.value;
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    if (!startTime || !endTime || endTime <= startTime) {
+      this.showTimeErrorModal.set(true);
+      return;
+    }
+
+    const artistName = this.artists().find((artist) => artist.id === artistId)?.name ?? 'Artiste inconnu';
+    const formattedDate = new Date(date!).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
+
+    this.pendingEvent.set({ artistName, date: formattedDate, time: startTime });
+    this.showConfirmModal.set(true);
+  }
+
+  closeTimeErrorModal() {
+    this.showTimeErrorModal.set(false);
+  }
+
+  confirmSubmit() {
+    const { artistId, venueId, date, startTime, endTime } = this.form.value;
+    const editingEvent = this.eventToEdit();
+
+    if (editingEvent) {
+      const updated = this.scheduleService.updateEvent({
+        id: editingEvent.id,
+        artistId: artistId!,
+        venueId: venueId!,
+        date: date!,
+        startTime: startTime!,
+        endTime: endTime!,
+        status: editingEvent.status,
+      });
+
+      this.eventUpdated.emit(updated);
+    } else {
+      const created = this.scheduleService.createEvent({
+        artistId: artistId!,
+        venueId: venueId!,
+        date: date!,
+        startTime: startTime!,
+        endTime: endTime!,
+        status: 'scheduled',
+      });
+
+      this.eventCreated.emit(created);
+    }
+
+    this.form.reset();
+    this.showConfirmModal.set(false);
+  }
+
+  cancelSubmit() {
+    this.showConfirmModal.set(false);
+  }
+
+  cancelEdit() {
+    this.form.reset();
+    this.eventEditCancelled.emit();
+  }
+}
+</file>
+
+<file path="src/app/components/schedule-list/schedule-list.component.html">
+<div class="space-y-12">
+  @for (dateKey of dateKeys(); track dateKey) {
+    <div>
+      <h2 class="mb-6 text-2xl font-bold capitalize text-orange-600">
+        {{ formatDate(dateKey) }}
+      </h2>
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        @for (event of groupedEvents()[dateKey]; track event.id) {
+          <app-event-card [event]="event" (edit)="edit.emit($event)" />
+        }
+      </div>
+    </div>
+  }
+</div>
+</file>
+
+<file path="src/app/components/schedule-list/schedule-list.component.ts">
+import { Component, input, output } from '@angular/core';
+import { EventCardComponent } from '../event-card/event-card.component';
+import { FestivalEvent } from '../../types/festival-event.interface';
+
+@Component({
+  selector: 'app-schedule-list',
+  imports: [EventCardComponent],
+  templateUrl: './schedule-list.component.html',
+})
+export class ScheduleListComponent {
+  dateKeys = input.required<string[]>();
+  groupedEvents = input.required<Record<string, FestivalEvent[]>>();
+  edit = output<FestivalEvent>();
+
+  formatDate(dateKey: string): string {
+    return new Date(dateKey).toLocaleDateString('fr-FR', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+    });
+  }
+}
+</file>
+
+<file path="src/app/components/venue-card/venue-card.component/venue-card.component.html">
+<article class="justify-center">
+    <div class="bg-neutral-primary-soft flex-col max-w-md border border-default rounded-sm shadow-xs justify-center">
+    <a href="#">
+        <img class="rounded-t-base" [src]="venue().image" [alt]="venue().name" />
+    </a>
+    <div class="p-6 text-center">
+            <h5 class="mt-3 mb-6 text-2xl font-semibold tracking-tight text-heading">{{ venue().name }}</h5>
+            <p class="mt-3 mb-6 text-xl font-semibold tracking-tight text-heading">{{ venue().type }}</p>
+            <p class="mt-3 mb-6 text-xl font-semibold tracking-tight text-heading">{{ venue().capacity }}</p>
+            <p class="mt-3 mb-6 text-xl font-semibold tracking-tight text-heading">{{ venue().location }}</p>
+            <div class="flex gap-2 justify-center">
+                <button (click)="selectVenue()" class="inline-flex items-center text-white bg-red-900 box-border hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Sélectionner</button>
+                <button (click)="onEdit()" class="inline-flex items-center text-white bg-indigo-600 box-border hover:bg-indigo-700 font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Modifier</button>
+                <button (click)="onDelete()" class="inline-flex items-center text-white bg-gray-600 box-border hover:bg-gray-700 font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Supprimer</button>
+            </div>
+    </div>
+</div>
+</article>
+</file>
+
+<file path="src/app/components/venue-list/venue-list.component/venue-list.component.ts">
+import { Component, inject, signal, OnInit } from '@angular/core';
+import { VenueServiceTs } from '../../../services/venue-service/venue.service';
+import { Venue } from '../../../types/venue.interface';
+import { VenueCardComponent } from '../../venue-card/venue-card.component/venue-card.component';
+
+@Component({
+  imports: [ VenueCardComponent ],
+  selector: 'app-venue-list',
+  styleUrl: './venue-list.component.css',
+  templateUrl: './venue-list.component.html',
+})
+
+export class VenueListComponent implements OnInit {
+
+  venueService = inject(VenueServiceTs);
+
+  ngOnInit() {
+    this.venueService.initVenue();
+  }
+
+  arrayOfVenues =  signal<Venue[]>(this.venueService.venues());
+
+  lastSelectedVenue: Venue | undefined;
+
+  onVenueSelected(venue: Venue) {
+    this.lastSelectedVenue = venue;
+  }
+}
+</file>
+
+<file path="src/app/pages/festival-page.component/festival-page.component.html">
+<div class="grid lg:grid-cols-4 gap-5">
+  @for(festival of festivals(); track festival.name) {
+  <div class="flex flex-col justify-center">
+    <app-festival-infocomponent [infos]="festival"></app-festival-infocomponent>
+    <app-festival-datescomponent [dates]="festival.dates"></app-festival-datescomponent>
+    <button
+      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+      [routerLink]="['/festival', festival.name,'edit']">Modifier</button>
+  </div>
+  }@empty {
+  <p>Aucun festival de prévu.</p>
+  }
+</div>
+</file>
+
+<file path="src/app/pages/festival-page.component/festival-page.component.ts">
+import { Component, inject, input, signal } from '@angular/core';
+import { FestivalServiceService } from '../../services/festival-service.service';
+import { FestivalDatesComponent } from '../../components/festival-dates.component/festival-dates.component';
+import { FestivalInfoComponent } from '../../components/festival-info.component/festival-info.component';
+import { FestivalType } from '../../types/festival.type';
+import { RouterLink } from '@angular/router';
+
+
+@Component({
+  imports: [FestivalDatesComponent, FestivalInfoComponent, RouterLink],
+  selector: 'app-festival-page.component',
+  styleUrl: './festival-page.component.css',
+  templateUrl: './festival-page.component.html',
+})
+export class FestivalPageComponent {
+  private festivalservice = inject(FestivalServiceService);
+
+  festivals = this.festivalservice.festivalsList;
+}
+</file>
+
+<file path="src/app/pages/venue/venue-page.component/venue-page.component.html">
+<div class="p-5 m-5">
+    <h1 class="text-center text-3xl mb-6">Lieux disponibles</h1>
+    <app-venue-list/>
+    <app-venue-form/>
+</div>
+</file>
+
+<file path="src/app/pages/venue/venue-page.component/venue-page.component.ts">
+import { Component } from '@angular/core';
+import { VenueListComponent } from '../../../components/venue-list/venue-list.component/venue-list.component';
+import { VenueForm } from '../../../components/venue-form/venue-form.component';
+
+@Component({
+  imports: [ VenueListComponent, VenueForm ],
+  selector: 'app-venue-page.component',
+  styleUrl: './venue-page.component.css',
+  templateUrl: './venue-page.component.html',
+})
+export class VenuePageComponent {
+
+}
+</file>
+
+<file path="src/app/services/festival-service.service.ts">
+import { Injectable, signal } from '@angular/core';
+import { FestivalType } from '../types/festival.type';
+import { FESTIVAL_DATA } from '../data/festival.data';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs';
+
+@Injectable({
+    providedIn: 'root'
+})
+
+export class FestivalServiceService {
+    private readonly festivals = signal<FestivalType[]>(FESTIVAL_DATA);
+    readonly festivalsList = this.festivals.asReadonly();
+
+    getFestivalByName(name: string): FestivalType | undefined {
+        return this.festivals().find(f => f.name === name);
+    }
+
+    updateFestival(originName: string, updatedFestival: FestivalType): void {
+        this.festivals.update(festivals =>
+            festivals.map(f =>
+                f.name === originName ? updatedFestival : f
+            )
+        );
+    }
+}
+</file>
+
+<file path="src/app/types/artist.interface.ts">
+export interface Artist {
+  id: number;
+  name: string;
+  category: string;
+  image: string;
+  description: string;
+}
+</file>
+
+<file path="src/app/types/venue.interface.ts">
+export interface Venue {
+  id: number;
+  name: string;
+  type: string;
+  description?: string,
+  capacity: number;
+  location: string;
+  image: string;
+}
+</file>
+
+<file path="src/app/app.html">
+<router-outlet>
+</file>
+
+<file path="src/app/app.ts">
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  imports: [RouterOutlet],
+  selector: 'app-root',
+  styleUrl: './app.css',
+  templateUrl: './app.html',
+})
+export class App {
+  protected readonly title = signal('echo');
+}
+</file>
+
+<file path="src/index.html">
+<!doctype html>
+<html>
+<head>
+  <title>Echovisuel</title>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+</file>
+
+<file path="api/src/middlewares/artist.middleware.ts">
+import artistService from "../services/artist.apiservice.ts";
+
+const checkExists = async (req, res, next) => {
+  try {
+    const artist = await artistService.getById(Number(req.params.id));
+    req.artist = artist;
+    next();
+  } catch (error) {
+    return res.status(404).json({
+      message: "Aie aie aie tu dérailles espèce de canaille, on a pas trouvé d'artiste...",
+    });
+  }
+};
+
+export default { checkExists };
+
+// Utile uniquement pour Patch et Delete
+</file>
+
+<file path="api/.gitignore">
+node_modules/
+.env
+dist/
+src/generated/
+/generated/prisma
+.agents/
+.claude/
+.windsurf/
+</file>
+
+<file path="src/app/components/artist-card/artist-card.component.html">
+<div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow bg-white">
+  <img
+    src="{{artist().image}}"
+    alt="{{artist().name}}"
+    class="w-full h-48 object-cover bg-gray-100"
+  />
+  <div class="p-4">
+    <div class="flex items-center justify-between mb-2">
+      <p class="text-lg font-semibold text-gray-900">{{artist().name}}</p>
+      <span class="text-xs font-medium text-white bg-indigo-500 px-2 py-1 rounded-full">
+        {{artist().category}}
+      </span>
+    </div>
+    <p class="text-sm text-gray-600 mb-3">{{artist().description}}</p>
+    <div class="flex items-center justify-between">
+      <label class="flex items-center gap-2 text-sm text-gray-500">
+        <input type="checkbox" #inputBox (change)="onSelect(inputBox?.checked)" class="rounded" />
+        Sélectionner
+      </label>
+      <div class="flex gap-3">
+        <button (click)="onEdit()" class="text-sm text-indigo-500 hover:text-indigo-700 font-medium">
+          Modifier
+        </button>
+        <button (click)="onDelete()" class="text-sm text-red-500 hover:text-red-700 font-medium">
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</file>
+
+<file path="src/app/components/artist-form/artist-form.component.html">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-md mx-auto p-6 bg-white border border-gray-300 rounded-lg shadow-sm space-y-4">
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Nom :</span>
+    <input type="text" formControlName="name" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Categorie :</span>
+    <input type="text" formControlName="category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Image :</span>
+    <input type="text" formControlName="image" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Description :</span>
+    <textarea formControlName="description" rows="3" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+  </label>
+
+  <button type="submit" class="w-full bg-indigo-500 text-white font-medium py-2 rounded-md hover:bg-indigo-600 transition-colors">
+    {{ artistService.artistIdBeingEdited() !== null ? 'Update' : 'Send' }}
+  </button>
+
+</form>
+</file>
+
+<file path="src/app/components/artist-form/artist-form.component.ts">
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ArtistService } from '../../services/artist.service';
+import { Artist } from '../../types/artist.interface';
+
+@Component({
+  imports: [ReactiveFormsModule],
+  selector: 'app-artist-form',
+  styleUrl: './artist-form.component.css',
+  templateUrl: './artist-form.component.html',
+})
+export class ArtistFormComponent {
+  artistService = inject(ArtistService);
+
+  form = new FormGroup({
+    name: new FormControl(''),
+    category: new FormControl(''),
+    image: new FormControl(''),
+    description: new FormControl('',[Validators.maxLength(300)])
+  });
+
+  onSubmit(){
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const editingId = this.artistService.artistIdBeingEdited();
+    const value = this.form.value;
+
+    if (editingId !== null) {
+      const data: Partial<Omit<Artist, 'id'>> = {};
+      if (value.name) data.name = value.name;
+      if (value.category) data.category = value.category;
+      if (value.image) data.image = value.image;
+      if (value.description) data.description = value.description;
+
+      this.artistService.updateArtist(editingId, data);
+      this.artistService.artistIdBeingEdited.set(null);
+    } else {
+      this.artistService.addArtist(value as Artist);
+    }
+
+    this.form.reset();
+  }
+}
+</file>
+
+<file path="src/app/components/artist-list/artist-list.component.html">
+<div class="p-6">
+  <div class="grid gap-6 md:grid-cols-3">
+    @for (artist of artists(); track artist.name){
+    <div>
+        <app-artist-card (selectedArtist)="updateSelectedArtist($event)" [artist]='artist'></app-artist-card>
+    </div>
+    }
+    @empty {
+     <p class="text-gray-500 italic col-span-full">Aucun artiste trouvé.</p>
+     }
+  </div>
+</div>
+</file>
+
+<file path="src/app/components/artist-list/artist-list.component.ts">
+import { Component, inject, OnInit } from '@angular/core';
+import { ArtistService } from '../../services/artist.service';
+import { ArtistCardComponent } from '../artist-card/artist-card.component';
+
+@Component({
+  imports: [ArtistCardComponent],
+  selector: 'app-artist-list',
+  styleUrl: './artist-list.component.css',
+  templateUrl: './artist-list.component.html',
+})
+export class ArtistListComponent implements OnInit {
+  private artistService = inject(ArtistService);
+
+  artists = this.artistService.artists;
+
+  ngOnInit() {
+    this.artistService.getArtists();
+  }
+
+  updateSelectedArtist(artistSelected: { name: string; isSelected: boolean }) {}
+}
+</file>
+
+<file path="src/app/components/participant-card.component/participant-card.component.html">
+<section class="p-2 m-3">
+	<p>Prénom: {{ participant().firstName }}</p>
+	<p>Nom: {{ participant().lastName }}</p>
+	<p>E-mail: {{ participant().email }}</p>
+	<p>Statut: {{ participant().status }}</p>
+	<p>Type de billet: {{ participant().ticketType }}</p>
+	<input type="checkbox" #check (change)="onChange(check?.checked)"/>
+</section>
+</file>
+
+<file path="src/app/components/participant-list.component/participant-list.component.ts">
+import { Component, inject, OnInit } from '@angular/core';
+import { ParticipantService } from '../../services/participant.service';
+import { ParticipantCardComponent } from '../participant-card.component/participant-card.component';
+import { Participant } from '../../types/participant.interface';
+
+@Component({
+  imports: [ParticipantCardComponent],
+  selector: 'app-participant-list',
+  styleUrl: './participant-list.component.css',
+  templateUrl: './participant-list.component.html',
+})
+export class ParticipantListComponent implements OnInit {
+    private readonly participantService = inject(ParticipantService);
+    readonly participantTab = this.participantService.participantsSignal;
+
+  ngOnInit(){
+    this.participantService.getParticipants().subscribe();
+  }
+
+  whenChange(selectedParticipant:{participant: Participant, isChecked:boolean}){}
+
+}
+</file>
+
+<file path="src/app/components/participant-search.component/participant-search.component.ts">
+import { Component, signal, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ParticipantService } from '../../services/participant.service';
+
+@Component({
+  imports: [FormsModule],
+  selector: 'app-participant-search',
+  styleUrl: './participant-search.component.css',
+  templateUrl: './participant-search.component.html',
+})
+export class ParticipantSearchComponent {
+  private readonly participantService = inject(ParticipantService);
+  
+  emailSearch = signal<string>('');
+
+
+  getParticipantsByMail(emailSearch:string){
+    let regex = new RegExp(".*" + emailSearch + ".*");
+    this.participantService.setParticipantTab(regex);
+  }
+}
+</file>
+
+<file path="src/app/components/ticket-card.component/ticket-card.component.html">
+<div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow bg-white p-4 flex flex-col gap-2">
+  <p class="text-lg font-semibold text-gray-900">{{ticket().name}}</p>
+
+  @if(ticket().available===true){
+    <p class="text-sm text-gray-700">Prix : <span class="font-medium">{{ticket().price}} €</span></p>
+    <p class="text-sm text-gray-700">Quantité restante : <span class="font-medium">{{ticket().quantity}}</span></p>
+  }@else{
+    <span class="text-xs font-medium text-white bg-red-500 px-2 py-1 rounded-full w-fit">Épuisé</span>
+  }
+
+  <p class="text-sm text-gray-600">{{ticket().description}}</p>
+  <p class="text-xs text-gray-400">{{ticket().condition}}</p>
+
+  <div class="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
+    <button type="button" (click)="select(ticket())" class="text-sm text-indigo-500 hover:text-indigo-700 font-medium">
+      Sélectionner
+    </button>
+    <div class="flex gap-3">
+      <button type="button" (click)="onEdit()" class="text-sm text-gray-500 hover:text-gray-700 font-medium">
+        Modifier
+      </button>
+      <button type="button" (click)="onDelete()" class="text-sm text-red-500 hover:text-red-700 font-medium">
+        Supprimer
+      </button>
+    </div>
+  </div>
+</div>
+</file>
+
+<file path="src/app/components/ticket-card.component/ticket-card.component.ts">
+import { Component, inject, input, output } from '@angular/core';
+import { Ticket } from '../../types/ticket-type.interface';
+import { TicketService } from '../../services/ticket.service';
+
+@Component({
+  imports: [],
+  selector: 'app-ticket-card',
+  styleUrl: './ticket-card.component.css',
+  templateUrl: './ticket-card.component.html',
+})
+export class TicketCardComponent {
+  private ticketService = inject(TicketService);
+
+  ticket = input.required<Ticket & { id: number }>();
+  selectedTicket = output<Ticket>();
+
+  select(ticket: Ticket) {
+    this.selectedTicket.emit(ticket);
+  }
+
+  onEdit() {
+    this.ticketService.ticketIdBeingEdited.set(this.ticket().id);
+  }
+
+  onDelete() {
+    this.ticketService.deleteTicket(this.ticket().id);
+  }
+}
+</file>
+
+<file path="src/app/components/venue-list/venue-list.component/venue-list.component.html">
+@if (venueService.venues().length > 0) {
+    <div class="flex flex-col align-center gap-20 lg:flex-row ">
+    @for(venue of venueService.venues(); track venue.name) {
+        <app-venue-card [venue]="venue" (venueSelected)="onVenueSelected($event)" />
+    }
+    </div>
+} @else {
+    <p>Aucun lieu n'existe</p>
+}
+
+@if (lastSelectedVenue; as venue) {
+    <p class="bg-red-900 text-white rounded-sm mt-6 p-2"> Vous avez sélectionné : {{ venue.name }}</p>
+}
+</file>
+
+<file path="src/app/data/artist.data.ts">
+import { Artist } from "../types/artist.interface";
+
+let artists: Artist[] = [
+  {
+    id: 1,
+    name: "Imagine Dragons",
+    category: "Rock",
+    image: "https://i.scdn.co/image/ab67616100005174ab47d8dae2b24f5afe7f9d38",
+    description: "Imagine Dragons are an American pop rock band formed in 2008, based in Las Vegas, Nevada. The band currently consists of lead singer Dan Reynolds, guitarist Wayne Sermon, and bassist Ben McKee. Their debut single, 'It's Time', was released in February 2012, reaching the Top 20 of various charts around the world.",
+  },
+  {
+    id: 2,
+    name: "Adele",
+    category: "Pop",
+    image: "data:image/jpeg;base64,...",
+    description: "Adele Laurie Blue Adkins, known professionally as Adele, is an English singer and songwriter. She is one of the world's best-selling music artists, with sales of over 120 million records. Adele has received numerous awards, including 16 Grammy Awards, an Academy Award, a Golden Globe Award, and a Brit Award. She is known for her powerful voice and emotive ballads.",
+  },
+  {
+    id: 3,
+    name: "Martin BurgerMan Mabrut",
+    category: "Rock",
+    image: "https://i.scdn.co/image/ab67616100005174ab47d8dae2b24f5afe7f9d38",
+    description: "Imagine Dragons are an American pop rock band formed in 2008, based in Las Vegas, Nevada. The band currently consists of lead singer Dan Reynolds, guitarist Wayne Sermon, and bassist Ben McKee. Their debut single, 'It's Time', was released in February 2012, reaching the Top 20 of various charts around the world.",
+  },
+];
+
+export default artists;
+</file>
+
+<file path="src/app/data/venue.data.ts">
+import { Venue } from "../types/venue.interface";
+
+export const data: Venue[] = [
+  { id: 1, name: "Coopérative de mai", type: "Salle de Concert", capacity: 500, location: "Clermont-Ferrand", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNO0MP7JQgnVqb074Ps2rpJ_p6miOJECk1qzJ8Gk4JGA&s=10" },
+  { id: 2, name: "Transbordeur", type: "Salle de Concert", capacity: 500, location: "Lyon", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM_Wf26a1Q313DOQnRQEwKq1q4yNwod-ayND_CL5hPIg&s=10" },
+  { id: 3, name: "Le Fil", type: "Salle de Concert", capacity: 500, location: "Saint-Etienne", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbTluNIbPmNWniRTAEikAwfFSk5EqSI0P7eRbNU-DFqg&s=10" },
+];
+</file>
+
+<file path="src/app/pages/participant/participant-page.component.html">
+<app-participant-search/>
+<app-participant-list/>
+</file>
+
+<file path="src/app/pages/schedule/schedule-page.component.html">
+<section class="mx-auto max-w-6xl">
+  <h1 class="mb-10 text-4xl font-black">Programme du festival</h1>
+
+  <div class="mb-16">
+    <app-schedule-form
+      [eventToEdit]="eventToEdit()"
+      (eventCreated)="onEventCreated($event)"
+      (eventUpdated)="onEventUpdated()"
+      (eventEditCancelled)="onEditCancelled()"
+    />
+  </div>
+
+  @if (isLoading()) {
+    <p class="text-stone-500">Chargement du programme...</p>
+  } @else if (sortedDateKeys().length === 0) {
+    <p class="text-stone-500">Aucun événement n'est programmé pour le moment.</p>
+  } @else {
+    <app-schedule-list
+      [dateKeys]="sortedDateKeys()"
+      [groupedEvents]="groupedEvents()"
+      (edit)="onEditRequested($event)"
+    />
+  }
+</section>
+</file>
+
+<file path="src/app/pages/schedule/schedule-page.component.ts">
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { ScheduleService } from '../../services/schedule.service';
+import { ScheduleListComponent } from '../../components/schedule-list/schedule-list.component';
+import { ScheduleFormComponent } from '../../components/schedule-form/schedule-form.component';
+import { FestivalEvent } from '../../types/festival-event.interface';
+
+@Component({
+  selector: 'app-schedule-page',
+  imports: [ScheduleListComponent, ScheduleFormComponent],
+  templateUrl: './schedule-page.component.html',
+})
+export class SchedulePageComponent implements OnInit {
+  private readonly scheduleService = inject(ScheduleService);
+
+  readonly events = this.scheduleService.eventsSignal;
+  isLoading = signal(true);
+  eventToEdit = signal<FestivalEvent | null>(null);
+
+  readonly groupedEvents = computed(() => this.groupByDate(this.events()));
+  readonly sortedDateKeys = computed(() => Object.keys(this.groupedEvents()).sort());
+
+  ngOnInit() {
+    this.loadSchedule();
+  }
+
+  onEventCreated(event: FestivalEvent) {}
+
+  onEditRequested(event: FestivalEvent) {
+    this.eventToEdit.set(event);
+  }
+
+  onEventUpdated() {
+    this.eventToEdit.set(null);
+  }
+
+  onEditCancelled() {
+    this.eventToEdit.set(null);
+  }
+
+  private loadSchedule() {
+    this.isLoading.set(true);
+    this.scheduleService.getEventsFromService().subscribe({
+      next: () => this.isLoading.set(false),
+      error: () => this.isLoading.set(false),
+    });
+  }
+
+  private groupByDate(events: FestivalEvent[]): Record<string, FestivalEvent[]> {
+    const groups: Record<string, FestivalEvent[]> = {};
+
+    for (const event of events) {
+      if (!groups[event.date]) {
+        groups[event.date] = [];
+      }
+      groups[event.date].push(event);
+    }
+
+    for (const dateKey of Object.keys(groups)) {
+      groups[dateKey].sort((a, b) => a.startTime.localeCompare(b.startTime));
+    }
+
+    return groups;
+  }
+}
+</file>
+
+<file path="src/app/pages/ticket-list.component/ticket-list.component.html">
+<button (click)="showForm=!showForm">Création billet :</button>
+@if(isAdmin==true && showForm==true){
+    <app-create-ticket (createdticket)="createdticket($event)"></app-create-ticket>
+}
+<div  class="grid md:grid-cols-5 md:grid-rows-4 grid-cols-2 grid-rows-10 gap-2 p-8 ">
+    @for(ticket of ticketList();track ticket){
+        <app-ticket-card [ticket]="ticket" (selectedTicket)="selectedTicket($event)"></app-ticket-card>
+    }
+</div>
+</file>
+
+<file path="src/app/services/venue-service/venue.service.ts">
+import { Injectable, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Venue } from '../../types/venue.interface';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class VenueServiceTs {
+    private http = inject(HttpClient);
+    private apiUrl = 'http://localhost:3000/api/venues';
+
+    venues = signal<Venue[]>([]);
+    venueIdBeingEdited = signal<number | null>(null);
+
+    addVenue(venue: Omit<Venue, 'id'>) {
+        this.http.post<Venue>(this.apiUrl, venue).subscribe(newVenue => {
+            this.venues.update(current => [...current, newVenue]);
+        });
+    }
+
+    updateVenue(id: number, data: Partial<Omit<Venue, 'id'>>) {
+        this.http.patch<Venue>(`${this.apiUrl}/${id}`, data).subscribe(updatedVenue => {
+            this.venues.update(current =>
+                current.map(venue => venue.id === id ? updatedVenue : venue)
+            );
+        });
+    }
+
+    deleteVenue(id: number) {
+        this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => {
+            this.venues.update(current => current.filter(venue => venue.id !== id));
+        });
+    }
+
+    initVenue() {
+        this.http.get<Venue[]>(this.apiUrl).subscribe(data => {
+            this.venues.set(data);
+        });
+    }
+}
+</file>
+
+<file path="src/app/services/schedule.service.ts">
+import { Injectable, signal } from '@angular/core';
+import { Observable, of, tap } from 'rxjs';
+import { FestivalEvent } from '../types/festival-event.interface';
+import { FESTIVAL_EVENTS } from '../data/festival-events.data';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ScheduleService {
+  private events = signal<FestivalEvent[]>([]);
+  readonly eventsSignal = this.events.asReadonly();
+
+  getEventsFromService(): Observable<FestivalEvent[]> {
+    return of(FESTIVAL_EVENTS).pipe(
+      tap((events) => this.events.set(events)),
+    );
+  }
+
+  createEvent(newEvent: Omit<FestivalEvent, 'id'>): FestivalEvent {
+    const event: FestivalEvent = {
+      ...newEvent,
+      id: this.generateId(),
+    };
+
+    this.events.update((events) => [...events, event]);
+
+    return event;
+  }
+
+  updateEvent(updatedEvent: FestivalEvent): FestivalEvent {
+    this.events.update((events) =>
+      events.map((event) => (event.id === updatedEvent.id ? updatedEvent : event)),
+    );
+
+    return updatedEvent;
+  }
+
+  private generateId(): number {
+    const currentEvents = this.events();
+    const maxId = currentEvents.reduce((max, event) => Math.max(max, event.id), 0);
+    return maxId + 1;
+  }
+}
+</file>
+
+<file path="api/prisma/schema.prisma">
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Artist {
+  id          Int    @id @default(autoincrement())
+  name        String
+  category    String
+  image       String
+  description String
+}
+
+model Venue {
+  id          Int     @id @default(autoincrement())
+  name        String
+  type        String
+  description String?
+  capacity    Int
+  location    String
+  image       String
+}
+
+model Ticket {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  quantity    Int
+  condition   String
+  available   Boolean
+}
+</file>
+
+<file path="src/app/components/participant-search.component/participant-search.component.html">
+<div class="m-3 p-2">
+	<label for="emailSearch">Recherche: </label>
+	<input id="emailSearch" [ngModel]="emailSearch()" (ngModelChange)="emailSearch.set($event); getParticipantsByMail(emailSearch())" class="border" placeholder="e-mail participant" >
+</div>
+</file>
+
+<file path="api/package.json">
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.ts"
+  },
+  "dependencies": {
+    "@prisma/adapter-mariadb": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "joi": "^18.2.8"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.4.1",
+    "prisma": "^7.10.0",
+    "typescript": "^7.0.2"
+  }
+}
+</file>
+
+<file path="src/app/pages/participant/participant-page.component.ts">
+import { Component } from '@angular/core';
+import { ParticipantListComponent } from '../../components/participant-list.component/participant-list.component';
+import { ParticipantSearchComponent } from '../../components/participant-search.component/participant-search.component';
+
+@Component({
+  imports: [ParticipantSearchComponent,ParticipantListComponent],
+  selector: 'app-participant-page',
+  styleUrl: './participant-page.component.css',
+  templateUrl: './participant-page.component.html',
+})
+export class ParticipantPageComponent  {}
+</file>
+
+<file path="src/app/services/artist.service.ts">
+import { Injectable, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Artist } from '../types/artist.interface';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ArtistService {
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:3000/api/artists';
+
+  artists = signal<Artist[]>([]);
+  artistIdBeingEdited = signal<number | null>(null);
+
+  constructor() {
+    this.http.get<Artist[]>(this.apiUrl).subscribe(data => {
+      this.artists.set(data);
+    });
+  }
+
+  getArtists(): Artist[] {
+    return this.artists();
+  }
+
+  getArtist(id: number) {
+    return this.http.get<Artist>(`${this.apiUrl}/${id}`);
+  }
+
+  addArtist(artist: Omit<Artist, 'id'>) {
+    this.http.post<Artist>(this.apiUrl, artist).subscribe(newArtist => {
+      this.artists.update(current => [...current, newArtist]);
+    });
+  }
+
+  updateArtist(id: number, data: Partial<Omit<Artist, 'id'>>) {
+    this.http.patch<Artist>(`${this.apiUrl}/${id}`, data).subscribe(updatedArtist => {
+      this.artists.update(current =>
+        current.map(artist => artist.id === id ? updatedArtist : artist)
+      );
+    });
+  }
+
+  deleteArtist(id: number) {
+    this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => {
+      this.artists.update(current => current.filter(artist => artist.id !== id));
+    });
+  }
+}
+</file>
+
+<file path="src/app/services/ticket.service.ts">
+import { Injectable, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Ticket } from '../types/ticket-type.interface';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TicketService {
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:3000/api/tickets';
+
+  private ticketList = signal<(Ticket & { id: number })[]>([]);
+  readonly ticketListSignal = this.ticketList.asReadonly();
+
+  ticketIdBeingEdited = signal<number | null>(null);
+
+  getTicketList() {
+    this.http.get<(Ticket & { id: number })[]>(this.apiUrl).subscribe(data => {
+      this.ticketList.set(data);
+    });
+  }
+
+  createTicket(ticket: Ticket) {
+    this.http.post<Ticket & { id: number }>(this.apiUrl, ticket).subscribe(newTicket => {
+      this.ticketList.update(current => [...current, newTicket]);
+    });
+  }
+
+  updateTicket(id: number, data: Partial<Ticket>) {
+    this.http.patch<Ticket & { id: number }>(`${this.apiUrl}/${id}`, data).subscribe(updatedTicket => {
+      this.ticketList.update(current =>
+        current.map(ticket => ticket.id === id ? updatedTicket : ticket)
+      );
+    });
+  }
+
+  deleteTicket(id: number) {
+    this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => {
+      this.ticketList.update(current => current.filter(ticket => ticket.id !== id));
+    });
+  }
+}
+</file>
+
+<file path="api/src/routes/artist.router.ts">
+import express from "express";
+import artistController from "../controllers/artist.controller.ts";
+import artistMiddleware from "../middlewares/artist.middleware.ts";
+import validateArtist from "../middlewares/validateArtist.middleware.ts";
+
+const artistRouter = express.Router();
+
+artistRouter.get("/artists", artistController.getAll);
+artistRouter.get("/artists/:id", artistController.getById);
+artistRouter.post("/artists", validateArtist, artistController.create); // On crée à partir de la racine artists, pas avec le futur ID (qui est incrémenté automatiquement)
+artistRouter.patch("/artists/:id", artistMiddleware.checkExists, artistController.update);
+artistRouter.delete("/artists/:id", artistMiddleware.checkExists, artistController.remove);
+
+export default artistRouter;
+</file>
+
+<file path="api/app.ts">
+import Express from "express";
+import rateLimit from "express-rate-limit";
+import cors from "cors";
+import artistRouter from "./src/routes/artist.router.ts";
+import venueRouter from "./src/routes/venue.router.ts";
+import ticketRouter from "./src/routes/ticket.router.ts";
+
+const express = Express;
+const app = express();
+const port = 3000;
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 100,
+});
+
+app.use(express.json());
+app.use(limiter);
+app.use(cors({
+  origin: "http://localhost:4200",
+}));
+app.use("/api", artistRouter);
+app.use("/api", venueRouter);
+app.use("/api", ticketRouter);
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+</file>
+
+<file path="src/app/components/participant-list.component/participant-list.component.html">
+<section class="grid grid-cols-1 md:grid-cols-3">
+	@for(participant of participantTab(); track participant){
+		<app-participant-card [participant] = "participant" (selected)="whenChange($event)"/>
+	}@empty {
+		<p>Aucun participant trouvé.</p>
+	}
+</section>
+</file>
+
+<file path="api/src/controllers/artist.controller.ts">
+import artistService from "../services/artist.apiservice.ts";
+import type { CreateArtistDTO, ArtistDTO } from "../dto/artist.dto.ts";
+
+const getAll = async (req, res, next) => {
+  try {
+    const artists: ArtistDTO[] = await artistService.getAll();
+    res.status(200).json(artists);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getById = async (req, res, next) => {
+  try {
+    const artist: ArtistDTO = await artistService.getById(Number(req.params.id));
+    res.status(200).json(artist);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const create = async (req, res, next) => {
+  try {
+    const data: CreateArtistDTO = req.body;
+    const artist: ArtistDTO = await artistService.create(data);
+    res.status(201).json(artist);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const update = async (req, res, next) => {
+  try {
+    const data: Partial<CreateArtistDTO> = req.body;
+    const artist: ArtistDTO = await artistService.update(Number(req.params.id), data);
+    res.status(200).json(artist);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const remove = async (req, res, next) => {
+  try {
+    await artistService.remove(Number(req.params.id));
+    res.status(200).json({ message: "L'artiste s'est bien fait delete comme il faut." });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { getAll, getById, create, update, remove };
+</file>
+
+<file path="src/app/components/create-ticket.component/create-ticket.component.html">
+<form [formGroup]="createTicketForm" (ngSubmit)="submitTicket()" class="max-w-md mx-auto p-6 bg-white border border-gray-300 rounded-lg shadow-sm space-y-4">
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Nom :</span>
+    <input type="text" placeholder="nom" formControlName="name" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Description :</span>
+    <input type="text" placeholder="description" formControlName="description" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Prix :</span>
+    <input type="number" step="0.01" formControlName="price" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Quantité :</span>
+    <input type="number" formControlName="quantity" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Date début validité :</span>
+    <input type="date" formControlName="dateBeginning" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Date fin validité :</span>
+    <input type="date" formControlName="dateEnd" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  @if(!createTicketForm.valid){
+    <div class="space-y-2">
+      <button type="submit" [disabled]="!createTicketForm.valid" class="w-full bg-gray-300 text-gray-500 font-medium py-2 rounded-md cursor-not-allowed">
+        {{ ticketService.ticketIdBeingEdited() !== null ? 'Update' : 'Créer billet' }}
+      </button>
+      @if(!checkCondition()){
+        <p class="text-sm text-red-500">⚠️ Formulaire incomplet</p>
+      }@else if (createTicketForm.controls.price.value!=null && createTicketForm.controls.price.value<=0) {
+        <p class="text-sm text-red-500">⚠️ Prix inférieur ou égal à 0</p>
+      }@else if (createTicketForm.controls.quantity.value!=null && createTicketForm.controls.quantity.value<0) {
+        <p class="text-sm text-red-500">⚠️ Quantité inférieur à 0</p>
+      }
+    </div>
+  }@else{
+    <div class="space-y-2">
+      @if(!checkDate()){
+        <button type="submit" [disabled]="!createTicketForm.valid" class="w-full bg-gray-300 text-gray-500 font-medium py-2 rounded-md cursor-not-allowed">
+          {{ ticketService.ticketIdBeingEdited() !== null ? 'Update' : 'Créer billet' }}
+        </button>
+        <p class="text-sm text-red-500">⚠️ Date de fin inférieure à date de début ou date de début inférieur à aujourd'hui</p>
+      }@else {
+        <button type="submit" class="w-full bg-indigo-500 text-white font-medium py-2 rounded-md hover:bg-indigo-600 transition-colors">
+          {{ ticketService.ticketIdBeingEdited() !== null ? 'Update' : 'Créer billet' }}
+        </button>
+      }
+    </div>
+  }
+</form>
+</file>
+
+<file path="src/app/pages/ticket-list.component/ticket-list.component.ts">
+import { Component, inject, OnInit } from '@angular/core';
+import { Ticket } from '../../types/ticket-type.interface';
+import { TicketService } from '../../services/ticket.service';
+import { TicketCardComponent } from '../../components/ticket-card.component/ticket-card.component';
+import { CreateTicketComponent } from '../../components/create-ticket.component/create-ticket.component';
+
+@Component({
+  imports: [TicketCardComponent, CreateTicketComponent],
+  selector: 'app-ticket-list.component',
+  styleUrl: './ticket-list.component.css',
+  templateUrl: './ticket-list.component.html',
+})
+export class TicketListComponent implements OnInit {
+  private readonly ticketServiceCall = inject(TicketService);
+  readonly ticketList = this.ticketServiceCall.ticketListSignal;
+  selectedTicketList: Ticket[] = [];
+  showForm = false;
+  isAdmin = true;
+
+  ngOnInit() {
+    this.ticketServiceCall.getTicketList();
+  }
+
+  selectedTicket(ticket: Ticket) {
+    this.selectedTicketList.push(ticket);
+  }
+
+  createdticket(ticket: Ticket) {
+    this.showForm = false;
+  }
+}
+</file>
+
+<file path="src/app/components/create-ticket.component/create-ticket.component.ts">
+import { Component, inject, output } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Ticket } from '../../types/ticket-type.interface';
+import { TicketService } from '../../services/ticket.service';
+
+@Component({
+  imports: [ReactiveFormsModule],
+  selector: 'app-create-ticket',
+  styleUrl: './create-ticket.component.css',
+  templateUrl: './create-ticket.component.html',
+})
+export class CreateTicketComponent {
+  ticketService = inject(TicketService);
+  createdticket = output<Ticket>();
+
+  createTicketForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    price: new FormControl(0, Validators.min(0.50)),
+    quantity: new FormControl(0, Validators.min(0)),
+    dateBeginning: new FormControl('', Validators.required),
+    dateEnd: new FormControl('', Validators.required),
+  });
+
+  dateToday = new Date();
+  yesterday = new Date(this.dateToday);
+
+  submitTicket() {
+    this.yesterday.setDate(this.dateToday.getDate() - 1);
+
+    if (this.checkCondition() && this.checkDate()) {
+      const isAvailable = this.createTicketForm.controls.quantity.value == 0 ? false : true;
+
+      const ticket: Ticket = {
+        name: this.createTicketForm.controls.name.value ? this.createTicketForm.controls.name.value : "",
+        description: this.createTicketForm.controls.description.value ? this.createTicketForm.controls.description.value : "",
+        price: this.createTicketForm.controls.price.value ? this.createTicketForm.controls.price.value : 1,
+        quantity: this.createTicketForm.controls.quantity.value ? this.createTicketForm.controls.quantity.value : 0,
+        available: isAvailable,
+        condition: `Validité : ${this.createTicketForm.controls.dateBeginning.value} au ${this.createTicketForm.controls.dateEnd.value}`,
+      };
+
+      const editingId = this.ticketService.ticketIdBeingEdited();
+
+      if (editingId !== null) {
+        this.ticketService.updateTicket(editingId, ticket);
+        this.ticketService.ticketIdBeingEdited.set(null);
+      } else {
+        this.ticketService.createTicket(ticket);
+      }
+
+      this.createdticket.emit(ticket);
+      this.createTicketForm.reset();
+    }
+  }
+
+  checkCondition(): Boolean {
+    if (this.createTicketForm.controls.name.value == null || this.createTicketForm.controls.description.value == null ||
+      this.createTicketForm.controls.price.value == null || this.createTicketForm.controls.quantity.value == null ||
+      this.createTicketForm.controls.dateBeginning.value == null || this.createTicketForm.controls.dateEnd.value == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  checkDate(): boolean {
+    if (this.createTicketForm.controls.dateBeginning.value != null && this.createTicketForm.controls.dateEnd.value != null &&
+      new Date(this.createTicketForm.controls.dateBeginning.value).getDate() <= new Date(this.createTicketForm.controls.dateEnd.value).getDate()) {
+      return new Date(this.createTicketForm.controls.dateBeginning.value).getTime() > this.yesterday.getTime() ? true : false;
+    } else {
+      return false;
+    }
+  }
+}
+</file>
+
+<file path="src/app/components/venue-form/venue-form.component.html">
+<form [formGroup]="venueForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 max-w-md mx-auto p-5 mt-6">
+<h3 class="text-xl font-semibold text-center mb-6">{{ venueService.venueIdBeingEdited() !== null ? 'Modifier un lieu' : 'Ajouter un lieu' }}</h3>
+
+    <div class="flex flex-col gap-1">
+        <label for="name">Nom du lieu</label>
+        <input id="name" type="text" formControlName="name" class="border rounded-sm p-2"/>
+    </div>
+
+    <div class="flex flex-col gap-1">
+        <label for="type">Type de lieu</label>
+        <input id="type" type="text" formControlName="type" class="border rounded-sm p-2"/>
+    </div>
+
+    <div class="flex flex-col gap-1">
+        <label for="description">Description</label>
+        <input id="description" type="text" formControlName="description" class="border rounded-sm p-2"/>
+    </div>
+
+    <div class="flex flex-col gap-1">
+        <label for="capacity">Capacité d'accueil (en nombre de personnes)</label>
+        <input id="capacity" type="number" formControlName="capacity" class="border rounded-sm p-2"/>
+    </div>
+
+    <div class="flex flex-col gap-1">
+        <label for="location">Ville</label>
+        <input id="location" type="text" formControlName="location" class="border rounded-sm p-2"/>
+    </div>
+
+    <div class="flex flex-col gap-1">
+        <label for="image">URL d'image</label>
+        <input id="image" type="text" formControlName="image" class="border rounded-sm p-2"/>
+    </div>
+
+    <button type="submit" class="bg-red-900 text-white rounded-sm p-2 mt-2">
+        {{ venueService.venueIdBeingEdited() !== null ? 'Update' : 'Valider' }}
+    </button>
+</form>
+</file>
+
+<file path="src/app/components/venue-form/venue-form.component.ts">
+import { Component, inject } from '@angular/core';
+import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { VenueServiceTs } from '../../services/venue-service/venue.service';
+import { Venue } from '../../types/venue.interface';
+
+@Component({
+  imports: [ ReactiveFormsModule ],
+  selector: 'app-venue-form',
+  styleUrl: './venue-form.component.css',
+  templateUrl: './venue-form.component.html',
+})
+export class VenueForm {
+
+  venueService = inject(VenueServiceTs);
+
+  venueForm = new FormGroup({
+    name: new FormControl(''),
+    type: new FormControl(''),
+    description: new FormControl(''),
+    capacity: new FormControl<number | null>(null),
+    location: new FormControl(''),
+    image: new FormControl(''),
+  });
+
+  onSubmit() {
+    const editingId = this.venueService.venueIdBeingEdited();
+    const value = this.venueForm.value;
+
+    if (editingId !== null) {
+      const data: Partial<Omit<Venue, 'id'>> = {};
+      if (value.name) data.name = value.name;
+      if (value.type) data.type = value.type;
+      if (value.description) data.description = value.description;
+      if (value.capacity) data.capacity = value.capacity;
+      if (value.location) data.location = value.location;
+      if (value.image) data.image = value.image;
+
+      this.venueService.updateVenue(editingId, data);
+      this.venueService.venueIdBeingEdited.set(null);
+    } else {
+      this.venueService.addVenue(value as Omit<Venue, 'id'>);
+    }
+
+    this.venueForm.reset();
+  }
+}
+</file>
+
+<file path="src/app/app.routes.ts">
+import { Routes } from '@angular/router';
+import { TicketListComponent } from './pages/ticket-list.component/ticket-list.component';
+import { VenuePageComponent } from './pages/venue/venue-page.component/venue-page.component';
+import { SchedulePageComponent } from './pages/schedule/schedule-page.component';
+import { FestivalPageComponent } from './pages/festival-page.component/festival-page.component';
+import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
+import { ParticipantPageComponent } from './pages/participant/participant-page.component';
+import { FestivalFormComponent } from './pages/festival-form.component/festival-form.component';
+
+export const routes: Routes = [
+  {
+    path: 'tickets',
+    component: TicketListComponent,
+  },
+  {
+    path: 'venues',
+    component: VenuePageComponent,
+  },
+  {
+    path: 'schedule',
+    component: SchedulePageComponent,
+  },
+  {
+    path: 'festival',
+    component: FestivalPageComponent
+  },
+  {
+    path: 'festival/:name/edit',
+    component: FestivalFormComponent
+  },
+  {
+    path: 'participants',
+    component: ParticipantPageComponent,
+  },
+
+  {path: 'artists',
+    component: ArtistPageComponent
+  }
+];
+</file>
+
+</files>

@@ -4,8 +4,12 @@ export interface FestivalEvent {
   id: number;
   artistId: number;
   venueId: number;
-  date: string;      // "2026-08-21"
-  startTime: string; // "20:00"
-  endTime: string;   // "21:30"
+  date: string;
+  startTime: string;
+  endTime: string;
   status: EventStatus;
+  artist?: { id: number; name: string };
+  venue?: { id: number; name: string };
 }
+
+export type EventPayload = Omit<FestivalEvent, 'id' | 'artist' | 'venue'>;

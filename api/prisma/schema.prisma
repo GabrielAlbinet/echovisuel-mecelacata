@@ -8,11 +8,12 @@ datasource db {
 }
 
 model Artist {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   category    String
   image       String
   description String
+  events      Event[]
 }
 
 model Venue {
@@ -23,6 +24,7 @@ model Venue {
   capacity    Int
   location    String
   image       String
+  events      Event[]
 }
 
 model Ticket {
@@ -33,4 +35,21 @@ model Ticket {
   quantity    Int
   condition   String
   available   Boolean
+}
+
+enum EventStatus {
+  scheduled
+  cancelled
+}
+
+model Event {
+  id        Int         @id @default(autoincrement())
+  date      String      // "2026-08-21" (même format que le front)
+  startTime String      // "20:00"
+  endTime   String      // "21:30"
+  status    EventStatus @default(scheduled)
+  artistId  Int
+  venueId   Int
+  artist    Artist      @relation(fields: [artistId], references: [id])
+  venue     Venue       @relation(fields: [venueId], references: [id])
 }

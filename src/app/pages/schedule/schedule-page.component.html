@@ -12,6 +12,8 @@
 
   @if (isLoading()) {
     <p class="text-stone-500">Chargement du programme...</p>
+  } @else if (loadError()) {
+    <p class="text-red-600">Impossible de charger le programme. Vérifiez que l'API est lancée.</p>
   } @else if (sortedDateKeys().length === 0) {
     <p class="text-stone-500">Aucun événement n'est programmé pour le moment.</p>
   } @else {
@@ -19,6 +21,36 @@
       [dateKeys]="sortedDateKeys()"
       [groupedEvents]="groupedEvents()"
       (edit)="onEditRequested($event)"
+      (remove)="onRemoveRequested($event)"
     />
   }
 </section>
+
+@if (eventToDelete(); as event) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 px-6">
+    <div class="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-sm">
+      <p class="text-lg font-bold text-stone-900">Supprimer cet événement ?</p>
+      <p class="mt-2 text-sm text-stone-500">
+        {{ event.artist?.name ?? 'Cet artiste' }} le {{ event.date }} à {{ event.startTime }} sera retiré du programme.
+      </p>
+
+      <div class="mt-6 flex justify-center gap-3">
+        <button
+          type="button"
+          (click)="cancelRemove()"
+          class="rounded-full border border-stone-200 px-6 py-2 text-xs font-semibold uppercase tracking-wide text-stone-500 transition hover:bg-stone-50"
+        >
+          Annuler
+        </button>
+
+        <button
+          type="button"
+          (click)="confirmRemove()"
+          class="rounded-full bg-red-100 px-6 py-2 text-xs font-semibold uppercase tracking-wide text-red-600 transition hover:bg-red-200"
+        >
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+}

@@ -59,6 +59,10 @@
   }
 </form>
 
+@if (showInvalidFormMessage()) {
+  <p class="mt-2 text-sm text-red-600">Choisissez un artiste et un lieu, puis renseignez la date et les horaires.</p>
+}
+
 @if (showTimeErrorModal()) {
   <div class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 px-6">
     <div class="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-sm">
@@ -73,6 +77,23 @@
         class="mt-6 rounded-full bg-orange-100 px-6 py-2 text-xs font-semibold uppercase tracking-wide text-orange-600 transition hover:bg-orange-200"
       >
         Annuler
+      </button>
+    </div>
+  </div>
+}
+
+@if (apiErrorMessage()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 px-6">
+    <div class="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-sm">
+      <p class="text-lg font-bold text-stone-900">Programmation refusée</p>
+      <p class="mt-2 text-sm text-stone-500">{{ apiErrorMessage() }}</p>
+
+      <button
+        type="button"
+        (click)="closeApiErrorModal()"
+        class="mt-6 rounded-full bg-orange-100 px-6 py-2 text-xs font-semibold uppercase tracking-wide text-orange-600 transition hover:bg-orange-200"
+      >
+        Fermer
       </button>
     </div>
   </div>

@@ -1,13 +1,15 @@
+import "dotenv/config";
 import Express from "express";
 import rateLimit from "express-rate-limit";
 import cors from "cors";
 import artistRouter from "./src/routes/artist.router.ts";
 import venueRouter from "./src/routes/venue.router.ts";
 import ticketRouter from "./src/routes/ticket.router.ts";
+import eventRouter from "./src/routes/event.router.ts";
 
 const express = Express;
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -22,6 +24,7 @@ app.use(cors({
 app.use("/api", artistRouter);
 app.use("/api", venueRouter);
 app.use("/api", ticketRouter);
+app.use("/api", eventRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
