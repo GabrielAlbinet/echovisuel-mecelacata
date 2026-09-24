@@ -1,0 +1,950 @@
+openapi: 3.0.3
+info:
+  title: API EchoVisuel
+  version: 1.0.0
+  description: >-
+    API de gestion de festivals. Les lectures (GET) sont publiques. Les écritures (POST, PATCH, DELETE)
+    demandent d'être connecté : le token JWT est transmis dans le cookie httpOnly « token », posé par /auth/login.
+servers:
+  - url: http://localhost:3000/api
+tags:
+  - name: Auth
+  - name: Artists
+  - name: Venues
+  - name: Tickets
+  - name: Events
+  - name: Participants
+  - name: Festivals
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 1
+
+  responses:
+    BadRequest:
+      description: Données invalides ou règle métier non respectée
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthorized:
+      description: Pas de cookie, ou token invalide ou expiré
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            message: Vous devez être connecté(e) pour cette action
+    NotFound:
+      description: Ressource introuvable
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    ServerError:
+      description: Erreur non gérée (ressource introuvable sans checkExists, ou élément encore lié à un autre)
+    NoContent:
+      description: Supprimé
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        details:
+          type: string
+
+    Credentials:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+          example: oyamo@echovisuel.fr
+        password:
+          type: string
+          minLength: 8
+          maxLength: 72
+          example: motdepasse123
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        email:
+          type: string
+          example: oyamo@echovisuel.fr
+
+    Identifier:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+
+    ArtistFields:
+      type: object
+      properties:
+        name:
+          type: string
+          example: PsyCat de la rime
+        category:
+          type: string
+          example: Rap
+        image:
+          type: string
+          example: https://exemple.fr/artiste.jpg
+        description:
+          type: string
+          example: Rappeur clermontois
+    ArtistInput:
+      allOf:
+        - $ref: "#/components/schemas/ArtistFields"
+        - required: [name, category, image, description]
+    Artist:
+      allOf:
+        - $ref: "#/components/schemas/Identifier"
+        - $ref: "#/components/schemas/ArtistFields"
+
+    VenueFields:
+      type: object
+      properties:
+        name:
+          type: string
+          example: La Coopérative de Mai
+        type:
+          type: string
+          example: Salle de concert
+        description:
+          type: string
+          nullable: true
+          example: Grande salle, 1500 places debout
+        capacity:
+          type: number
+          example: 1500
+        location:
+          type: string
+          example: Clermont-Ferrand
+        image:
+          type: string
+          example: https://exemple.fr/salle.jpg
+    VenueInput:
+      allOf:
+        - $ref: "#/components/schemas/VenueFields"
+        - required: [name, type, capacity, location, image]
+    Venue:
+      allOf:
+        - $ref: "#/components/schemas/Identifier"
+        - $ref: "#/components/schemas/VenueFields"
+
+    TicketFields:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Pass 3 jours
+        description:
+          type: string
+          example: Accès à tous les concerts
+        price:
+          type: number
+          example: 89.9
+        quantity:
+          type: number
+          example: 500
+        condition:
+          type: string
+          example: Non remboursable
+        available:
+          type: boolean
+          example: true
+    TicketInput:
+      allOf:
+        - $ref: "#/components/schemas/TicketFields"
+        - required: [name, description, price, quantity, condition, available]
+    Ticket:
+      allOf:
+        - $ref: "#/components/schemas/Identifier"
+        - $ref: "#/components/schemas/TicketFields"
+
+    EventFields:
+      type: object
+      properties:
+        artistId:
+          type: integer
+          minimum: 1
+          example: 1
+        venueId:
+          type: integer
+          minimum: 1
+          example: 1
+        date:
+          type: string
+          pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+          example: "2026-08-21"
+        startTime:
+          type: string
+          pattern: "^([01]\\d|2[0-3]):[0-5]\\d$"
+          example: "20:00"
+        endTime:
+          type: string
+          pattern: "^([01]\\d|2[0-3]):[0-5]\\d$"
+          example: "21:30"
+        status:
+          type: string
+          enum: [scheduled, cancelled]
+          example: scheduled
+    EventInput:
+      allOf:
+        - $ref: "#/components/schemas/EventFields"
+        - required: [artistId, venueId, date, startTime, endTime]
+    EventUpdate:
+      allOf:
+        - $ref: "#/components/schemas/EventFields"
+        - minProperties: 1
+    Event:
+      allOf:
+        - $ref: "#/components/schemas/Identifier"
+        - $ref: "#/components/schemas/EventFields"
+        - type: object
+          properties:
+            artist:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+            venue:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+
+    ParticipantFields:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Bob
+        lastName:
+          type: string
+          example: Leponge
+        email:
+          type: string
+          format: email
+          example: bob.leponge@gmail.com
+        status:
+          type: string
+          example: spectateur
+        ticketId:
+          type: integer
+          minimum: 1
+          example: 1
+    ParticipantInput:
+      allOf:
+        - $ref: "#/components/schemas/ParticipantFields"
+        - required: [firstName, lastName, email, status, ticketId]
+    ParticipantUpdate:
+      allOf:
+        - $ref: "#/components/schemas/ParticipantFields"
+        - minProperties: 1
+    Participant:
+      allOf:
+        - $ref: "#/components/schemas/Identifier"
+        - $ref: "#/components/schemas/ParticipantFields"
+        - type: object
+          properties:
+            ticket:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+
+    FestivalFields:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Festival de Jazz
+        description:
+          type: string
+          example: Un festival de jazz exceptionnel
+        mainLocation:
+          type: string
+          example: Clermont-Ferrand
+        poster:
+          type: string
+          format: uri
+          example: https://exemple.fr/affiche.jpg
+        startDate:
+          type: string
+          pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+          example: "2026-07-11"
+        endDate:
+          type: string
+          pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+          example: "2026-07-13"
+    FestivalInput:
+      allOf:
+        - $ref: "#/components/schemas/FestivalFields"
+        - required: [name, description, mainLocation, poster, startDate, endDate]
+    FestivalUpdate:
+      allOf:
+        - $ref: "#/components/schemas/FestivalFields"
+        - minProperties: 1
+    Festival:
+      allOf:
+        - $ref: "#/components/schemas/Identifier"
+        - $ref: "#/components/schemas/FestivalFields"
+
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Créer un compte
+      description: Crée le compte et connecte directement l'utilisateur en posant le cookie « token ».
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Credentials"
+      responses:
+        "201":
+          description: Compte créé
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: token=eyJhbGciOi...; Path=/; HttpOnly; SameSite=Strict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Se connecter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Credentials"
+      responses:
+        "200":
+          description: Connecté
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: token=eyJhbGciOi...; Path=/; HttpOnly; SameSite=Strict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          description: Identifiants invalides (email inconnu ou mauvais mot de passe)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Se déconnecter
+      responses:
+        "204":
+          description: Cookie effacé
+
+  /artists:
+    get:
+      tags: [Artists]
+      summary: Lister les artistes
+      responses:
+        "200":
+          description: Liste des artistes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Artist"
+    post:
+      tags: [Artists]
+      summary: Créer un artiste
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArtistInput"
+      responses:
+        "201":
+          description: Artiste créé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Artist"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /artists/{id}:
+    parameters:
+      - $ref: "#/components/parameters/Id"
+    get:
+      tags: [Artists]
+      summary: Lire un artiste
+      responses:
+        "200":
+          description: L'artiste
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Artist"
+        "500":
+          $ref: "#/components/responses/ServerError"
+    patch:
+      tags: [Artists]
+      summary: Modifier un artiste
+      description: Seuls les champs envoyés sont modifiés. Le body n'est pas validé par Joi.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArtistFields"
+      responses:
+        "200":
+          description: Artiste modifié
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Artist"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags: [Artists]
+      summary: Supprimer un artiste
+      description: Impossible si l'artiste est encore programmé dans un événement (erreur 500).
+      security:
+        - cookieAuth: []
+      responses:
+        "200":
+          description: Artiste supprimé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                message: L'artiste s'est bien fait delete comme il faut.
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /venues:
+    get:
+      tags: [Venues]
+      summary: Lister les lieux
+      responses:
+        "200":
+          description: Liste des lieux
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Venue"
+    post:
+      tags: [Venues]
+      summary: Créer un lieu
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VenueInput"
+      responses:
+        "201":
+          description: Lieu créé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Venue"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /venues/{id}:
+    parameters:
+      - $ref: "#/components/parameters/Id"
+    get:
+      tags: [Venues]
+      summary: Lire un lieu
+      responses:
+        "200":
+          description: Le lieu
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Venue"
+        "500":
+          $ref: "#/components/responses/ServerError"
+    patch:
+      tags: [Venues]
+      summary: Modifier un lieu
+      description: Seuls les champs envoyés sont modifiés. Le body n'est pas validé par Joi.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VenueFields"
+      responses:
+        "200":
+          description: Lieu modifié
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Venue"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags: [Venues]
+      summary: Supprimer un lieu
+      description: Impossible si le lieu accueille encore un événement (erreur 500).
+      security:
+        - cookieAuth: []
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /tickets:
+    get:
+      tags: [Tickets]
+      summary: Lister les billets
+      responses:
+        "200":
+          description: Liste des billets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ticket"
+    post:
+      tags: [Tickets]
+      summary: Créer un billet
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketInput"
+      responses:
+        "201":
+          description: Billet créé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /tickets/{id}:
+    parameters:
+      - $ref: "#/components/parameters/Id"
+    get:
+      tags: [Tickets]
+      summary: Lire un billet
+      responses:
+        "200":
+          description: Le billet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+        "500":
+          $ref: "#/components/responses/ServerError"
+    patch:
+      tags: [Tickets]
+      summary: Modifier un billet
+      description: Seuls les champs envoyés sont modifiés. Le body n'est pas validé par Joi.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketFields"
+      responses:
+        "200":
+          description: Billet modifié
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags: [Tickets]
+      summary: Supprimer un billet
+      description: Impossible si des participants possèdent encore ce billet (erreur 500).
+      security:
+        - cookieAuth: []
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /events:
+    get:
+      tags: [Events]
+      summary: Lister les événements
+      responses:
+        "200":
+          description: Liste triée par date puis heure de début, avec le nom de l'artiste et du lieu
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+    post:
+      tags: [Events]
+      summary: Programmer un événement
+      description: >-
+        La fin doit être après le début, l'artiste et le lieu doivent exister, et le lieu ne doit pas
+        être occupé sur ce créneau le même jour (sauf événement annulé).
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventInput"
+      responses:
+        "201":
+          description: Événement créé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /events/{id}:
+    parameters:
+      - $ref: "#/components/parameters/Id"
+    get:
+      tags: [Events]
+      summary: Lire un événement
+      responses:
+        "200":
+          description: L'événement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      tags: [Events]
+      summary: Modifier un événement
+      description: Seuls les champs envoyés sont modifiés. Les règles métier s'appliquent à l'événement tel qu'il sera après modification.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventUpdate"
+            example:
+              startTime: "21:00"
+              endTime: "22:30"
+      responses:
+        "200":
+          description: Événement modifié
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags: [Events]
+      summary: Supprimer un événement
+      security:
+        - cookieAuth: []
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /participants:
+    get:
+      tags: [Participants]
+      summary: Lister les participants
+      parameters:
+        - name: email
+          in: query
+          required: false
+          description: Filtre les participants dont l'email contient cette valeur
+          schema:
+            type: string
+            example: bob
+      responses:
+        "200":
+          description: Liste triée par nom puis prénom, avec le nom du billet
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Participant"
+    post:
+      tags: [Participants]
+      summary: Inscrire un participant
+      description: L'email ne doit pas être déjà utilisé, et le billet doit exister et être disponible.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParticipantInput"
+      responses:
+        "201":
+          description: Participant créé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /participants/{id}:
+    parameters:
+      - $ref: "#/components/parameters/Id"
+    get:
+      tags: [Participants]
+      summary: Lire un participant
+      responses:
+        "200":
+          description: Le participant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      tags: [Participants]
+      summary: Modifier un participant
+      description: Seuls les champs envoyés sont modifiés. L'email et le billet sont revérifiés s'ils changent.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParticipantUpdate"
+            example:
+              status: musicien
+      responses:
+        "200":
+          description: Participant modifié
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags: [Participants]
+      summary: Supprimer un participant
+      security:
+        - cookieAuth: []
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /festivals:
+    get:
+      tags: [Festivals]
+      summary: Lister les festivals
+      responses:
+        "200":
+          description: Liste triée par date de début
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Festival"
+    post:
+      tags: [Festivals]
+      summary: Créer un festival
+      description: La date de fin doit être égale ou postérieure à la date de début.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FestivalInput"
+      responses:
+        "201":
+          description: Festival créé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Festival"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /festivals/{id}:
+    parameters:
+      - $ref: "#/components/parameters/Id"
+    get:
+      tags: [Festivals]
+      summary: Lire un festival
+      responses:
+        "200":
+          description: Le festival
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Festival"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    patch:
+      tags: [Festivals]
+      summary: Modifier un festival
+      description: Seuls les champs envoyés sont modifiés. Les dates sont revérifiées sur le festival tel qu'il sera après modification.
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FestivalUpdate"
+            example:
+              endDate: "2026-07-14"
+      responses:
+        "200":
+          description: Festival modifié
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Festival"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags: [Festivals]
+      summary: Supprimer un festival
+      security:
+        - cookieAuth: []
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
