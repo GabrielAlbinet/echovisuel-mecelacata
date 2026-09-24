@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FestivalServiceService } from '../../services/festival-service.service';
+import { AuthService } from '../../services/auth.service';
 import { FestivalDatesComponent } from '../../components/festival-dates.component/festival-dates.component';
 import { FestivalInfoComponent } from '../../components/festival-info.component/festival-info.component';
 import { FestivalType } from '../../types/festival.type';
@@ -13,6 +14,10 @@ import { FestivalType } from '../../types/festival.type';
 })
 export class FestivalPageComponent implements OnInit {
   private festivalService = inject(FestivalServiceService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  readonly currentUser = this.authService.currentUser;
 
   festivals = this.festivalService.festivalsList;
   isLoading = signal(true);
@@ -27,6 +32,11 @@ export class FestivalPageComponent implements OnInit {
         this.loadError.set(true);
       },
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   onRemoveRequested(festival: FestivalType) {

@@ -6,8 +6,13 @@ import { FestivalPageComponent } from './pages/festival-page.component/festival-
 import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
 import { ParticipantPageComponent } from './pages/participant/participant-page.component';
 import { FestivalFormComponent } from './pages/festival-form.component/festival-form.component';
+import { LoginPageComponent } from './pages/login/login-page.component';
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginPageComponent,
+  },
   {
     path: 'tickets',
     component: TicketListComponent,

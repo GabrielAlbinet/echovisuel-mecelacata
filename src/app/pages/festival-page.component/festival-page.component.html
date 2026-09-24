@@ -1,3 +1,18 @@
+@if (currentUser(); as user) {
+  <div class="mb-5 flex items-center gap-3">
+    <p class="inline-block rounded-full bg-green-100 px-4 py-1.5 text-sm font-medium text-green-700">
+      Connecté en tant que {{ user.email }}
+    </p>
+    <button
+      type="button"
+      (click)="logout()"
+      class="rounded-full border border-stone-200 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-stone-500 transition hover:bg-stone-50"
+    >
+      Déconnexion
+    </button>
+  </div>
+}
+
 <div class="mb-5">
   <button
     [routerLink]="['/festival', 'new']"
