@@ -1,4 +1,5 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { FestivalServiceService } from '../../services/festival-service.service';
 import { AuthService } from '../../services/auth.service';
@@ -23,6 +24,7 @@ export class FestivalPageComponent implements OnInit {
   isLoading = signal(true);
   loadError = signal(false);
   festivalToDelete = signal<FestivalType | null>(null);
+  deleteErrorMessage = signal<string | null>(null);
 
   ngOnInit() {
     this.festivalService.loadFestivals().subscribe({
@@ -53,7 +55,18 @@ export class FestivalPageComponent implements OnInit {
 
     this.festivalService.deleteFestival(festival.id).subscribe({
       next: () => this.festivalToDelete.set(null),
-      error: () => this.festivalToDelete.set(null),
+      error: (error: HttpErrorResponse) => {
+        this.festivalToDelete.set(null);
+        this.deleteErrorMessage.set(
+          error.status === 401
+            ? 'Vous devez être connecté(e) pour supprimer un festival.'
+            : 'La suppression a échoué, réessayez.',
+        );
+      },
     });
+  }
+
+  closeDeleteError() {
+    this.deleteErrorMessage.set(null);
   }
 }

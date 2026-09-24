@@ -1,9 +1,8 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { AuthResponse, Credentials, User } from '../types/user.interface';
+import { Credentials, User } from '../types/user.interface';
 
-const TOKEN_KEY = 'echovisuel_token';
 const USER_KEY = 'echovisuel_user';
 
 @Injectable({
@@ -18,21 +17,20 @@ export class AuthService {
   readonly currentUser = this.user.asReadonly();
   readonly isLoggedIn = computed(() => this.user() !== null);
 
-  login(credentials: Credentials): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
-      tap((response) => {
+  login(credentials: Credentials): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/login`, credentials).pipe(
+      tap((user) => {
         try {
-          localStorage.setItem(TOKEN_KEY, response.token);
-          localStorage.setItem(USER_KEY, JSON.stringify(response.user));
+          localStorage.setItem(USER_KEY, JSON.stringify(user));
         } catch {}
-        this.user.set(response.user);
+        this.user.set(user);
       }),
     );
   }
 
   logout() {
+    this.http.post<void>(`${this.apiUrl}/logout`, {}).subscribe({ error: () => {} });
     try {
-      localStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(USER_KEY);
     } catch {}
     this.user.set(null);
