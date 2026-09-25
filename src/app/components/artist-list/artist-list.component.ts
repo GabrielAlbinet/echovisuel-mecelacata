@@ -1,7 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
-import {ArtistService} from '../../services/artist.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { ArtistService } from '../../services/artist.service';
 import { ArtistCardComponent } from '../artist-card/artist-card.component';
-import { Artist } from '../../types/artist.interface';
 
 @Component({
   imports: [ArtistCardComponent],
@@ -9,11 +8,14 @@ import { Artist } from '../../types/artist.interface';
   styleUrl: './artist-list.component.css',
   templateUrl: './artist-list.component.html',
 })
-export class ArtistListComponent {  
-private artistService = inject(ArtistService);
+export class ArtistListComponent implements OnInit {
+  private artistService = inject(ArtistService);
 
-artists = this.artistService.artists;
+  artists = this.artistService.artists;
 
+  ngOnInit() {
+    this.artistService.getArtists();
+  }
 
-updateSelectedArtist(artistSelected: { name: string; isSelected: boolean }) {}
+  updateSelectedArtist(artistSelected: { name: string; isSelected: boolean }) {}
 }

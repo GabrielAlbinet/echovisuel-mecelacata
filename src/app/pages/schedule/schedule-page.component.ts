@@ -14,7 +14,9 @@ export class SchedulePageComponent implements OnInit {
 
   readonly events = this.scheduleService.eventsSignal;
   isLoading = signal(true);
+  loadError = signal(false);
   eventToEdit = signal<FestivalEvent | null>(null);
+  eventToDelete = signal<FestivalEvent | null>(null);
 
   readonly groupedEvents = computed(() => this.groupByDate(this.events()));
   readonly sortedDateKeys = computed(() => Object.keys(this.groupedEvents()).sort());
@@ -27,6 +29,7 @@ export class SchedulePageComponent implements OnInit {
 
   onEditRequested(event: FestivalEvent) {
     this.eventToEdit.set(event);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   onEventUpdated() {
@@ -37,11 +40,38 @@ export class SchedulePageComponent implements OnInit {
     this.eventToEdit.set(null);
   }
 
+  onRemoveRequested(event: FestivalEvent) {
+    this.eventToDelete.set(event);
+  }
+
+  cancelRemove() {
+    this.eventToDelete.set(null);
+  }
+
+  confirmRemove() {
+    const event = this.eventToDelete();
+    if (!event) return;
+
+    this.scheduleService.deleteEvent(event.id).subscribe({
+      next: () => {
+        if (this.eventToEdit()?.id === event.id) {
+          this.eventToEdit.set(null);
+        }
+        this.eventToDelete.set(null);
+      },
+      error: () => this.eventToDelete.set(null),
+    });
+  }
+
   private loadSchedule() {
     this.isLoading.set(true);
+    this.loadError.set(false);
     this.scheduleService.getEventsFromService().subscribe({
       next: () => this.isLoading.set(false),
-      error: () => this.isLoading.set(false),
+      error: () => {
+        this.isLoading.set(false);
+        this.loadError.set(true);
+      },
     });
   }
 

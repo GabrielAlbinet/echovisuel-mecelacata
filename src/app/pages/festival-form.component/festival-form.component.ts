@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FestivalServiceService } from '../../services/festival-service.service';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FestivalType } from '../../types/festival.type';
+import { FestivalServiceService } from '../../services/festival-service.service';
+import { FestivalPayload } from '../../types/festival.type';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -16,45 +17,43 @@ export class FestivalFormComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
-  private formatDate(date: Date): string {
-    return date.toISOString().split('T')[0];
-  }
+  festivalId: number | null = null;
+  apiErrorMessage = signal<string | null>(null);
 
-  originName !: string;
-  festivalForm!: FormGroup;
+  festivalForm = this.formBuilder.group({
+    infos: this.formBuilder.group({
+      name: ['', Validators.required],
+      mainLocation: ['', Validators.required],
+      description: ['', Validators.required],
+      poster: ['', Validators.required],
+    }),
+    dates: this.formBuilder.group({
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+    }),
+  });
 
   ngOnInit(): void {
-    this.festivalForm = this.formBuilder.group({
-      infos: this.formBuilder.group({
-        name: ['', Validators.required],
-        mainLocation: ['', Validators.required],
-        description: ['', Validators.required],
-        poster: ['', Validators.required],
-      }),
-      dates: this.formBuilder.group({
-        startDate: ['', Validators.required],
-        endDate: ['', Validators.required]
-      })
-    });
+    const idParam = this.route.snapshot.paramMap.get('id');
+    this.festivalId = idParam ? Number(idParam) : null;
 
-    this.originName = this.route.snapshot.paramMap.get('name') || '';
-
-    const fest = this.festivalService.getFestivalByName(this.originName);
-
-    if (fest) {
-      const date = fest.dates[0];
-
-      this.festivalForm.patchValue({
-        infos: {
-          name: fest.name,
-          mainLocation: fest.mainLocation,
-          description: fest.description,
-          poster: fest.poster
+    if (this.festivalId) {
+      this.festivalService.getFestivalById(this.festivalId).subscribe({
+        next: (festival) => {
+          this.festivalForm.patchValue({
+            infos: {
+              name: festival.name,
+              mainLocation: festival.mainLocation,
+              description: festival.description,
+              poster: festival.poster,
+            },
+            dates: {
+              startDate: festival.startDate,
+              endDate: festival.endDate,
+            },
+          });
         },
-        dates: {
-          startDate: date ? this.formatDate(date.startDate) : '',
-          endDate: date ? this.formatDate(date.endDate) : ''
-        }
+        error: () => this.router.navigate(['/festival']),
       });
     }
   }
@@ -65,25 +64,27 @@ export class FestivalFormComponent implements OnInit {
       return;
     }
 
-    const formValue = this.festivalForm.value;
+    this.apiErrorMessage.set(null);
 
-    const updatedFestival: FestivalType = {
-      ...formValue.infos,
-
-      dates: [
-        {
-          startDate: new Date(formValue.dates.startDate),
-          endDate: new Date(formValue.dates.endDate)
-        }
-      ]
+    const { infos, dates } = this.festivalForm.getRawValue();
+    const payload: FestivalPayload = {
+      name: infos.name!,
+      mainLocation: infos.mainLocation!,
+      description: infos.description!,
+      poster: infos.poster!,
+      startDate: dates.startDate!,
+      endDate: dates.endDate!,
     };
 
-    this.festivalService.updateFestival(
-      this.originName,
-      updatedFestival
-    );
+    const request$ = this.festivalId
+      ? this.festivalService.updateFestival(this.festivalId, payload)
+      : this.festivalService.createFestival(payload);
 
-    this.router.navigate(['/festival']);
+    request$.subscribe({
+      next: () => this.router.navigate(['/festival']),
+      error: (error: HttpErrorResponse) => {
+        this.apiErrorMessage.set(error.error?.message ?? "L'enregistrement a échoué, réessayez.");
+      },
+    });
   }
-
 }

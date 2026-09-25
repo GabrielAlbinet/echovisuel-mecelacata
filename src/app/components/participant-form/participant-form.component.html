@@ -1,0 +1,76 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+  class="m-3 flex flex-wrap items-center gap-3 rounded-2xl border border-stone-200 bg-white p-6 shadow-sm"
+>
+  <input
+    type="text"
+    formControlName="firstName"
+    placeholder="Prénom"
+    class="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm text-stone-900"
+  />
+
+  <input
+    type="text"
+    formControlName="lastName"
+    placeholder="Nom"
+    class="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm text-stone-900"
+  />
+
+  <input
+    type="email"
+    formControlName="email"
+    placeholder="E-mail"
+    class="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm text-stone-900"
+  />
+
+  <select
+    formControlName="status"
+    class="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm text-stone-900"
+  >
+    <option value="">Statut</option>
+    @for (status of statuses; track status) {
+      <option [value]="status">{{ status }}</option>
+    }
+  </select>
+
+  <select
+    formControlName="ticketId"
+    class="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm text-stone-900"
+  >
+    <option [ngValue]="null">Billet</option>
+    @for (ticket of tickets(); track ticket.id) {
+      <option
+        [ngValue]="ticket.id"
+        [disabled]="!ticket.available && ticket.id !== participantToEdit()?.ticketId"
+      >
+        {{ ticket.name }}{{ ticket.available ? '' : ' (indisponible)' }}
+      </option>
+    }
+  </select>
+
+  <button
+    type="submit"
+    class="rounded-full bg-orange-100 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-orange-600 transition hover:bg-orange-200"
+  >
+    {{ participantToEdit() ? 'Modifier' : 'Ajouter' }}
+  </button>
+
+  @if (participantToEdit()) {
+    <button
+      type="button"
+      (click)="cancelEdit()"
+      class="rounded-full border border-stone-200 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-stone-500 transition hover:bg-stone-50"
+    >
+      Annuler l'édition
+    </button>
+  }
+</form>
+
+@if (showInvalidFormMessage()) {
+  <p class="mx-3 text-sm text-red-600">Renseignez tous les champs avec un e-mail valide, puis choisissez un statut et un billet.</p>
+}
+
+@if (apiErrorMessage()) {
+  <p class="mx-3 text-sm text-red-600">{{ apiErrorMessage() }}</p>
+}

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { VenueServiceTs } from '../../services/venue-service/venue.service';
 import { Venue } from '../../types/venue.interface';
 
@@ -14,28 +14,33 @@ export class VenueForm {
   venueService = inject(VenueServiceTs);
 
   venueForm = new FormGroup({
-    name: new FormControl('', { validators : Validators.required, nonNullable: true}),
-    type: new FormControl('', { validators : Validators.required, nonNullable: true}),
-    description: new FormControl('', { validators : Validators.required, nonNullable: true}),
-    capacity: new FormControl<number>(0, { validators : [Validators.required, Validators.min(1)] ,nonNullable: true}),
-    location: new FormControl('', { validators : Validators.required, nonNullable: true}),
-    image: new FormControl('', { validators : Validators.required, nonNullable: true}),
+    name: new FormControl(''),
+    type: new FormControl(''),
+    description: new FormControl(''),
+    capacity: new FormControl<number | null>(null),
+    location: new FormControl(''),
+    image: new FormControl(''),
   });
 
   onSubmit() {
-    const newVenue: Venue = {
-      id: this.venueService.venues().length + 1,
-      name: this.venueForm.getRawValue().name,
-      type: this.venueForm.getRawValue().type,
-      description: this.venueForm.getRawValue().description,
-      capacity: this.venueForm.getRawValue().capacity,
-      location: this.venueForm.getRawValue().location,
-      image: this.venueForm.getRawValue().image,
+    const editingId = this.venueService.venueIdBeingEdited();
+    const value = this.venueForm.value;
+
+    if (editingId !== null) {
+      const data: Partial<Omit<Venue, 'id'>> = {};
+      if (value.name) data.name = value.name;
+      if (value.type) data.type = value.type;
+      if (value.description) data.description = value.description;
+      if (value.capacity) data.capacity = value.capacity;
+      if (value.location) data.location = value.location;
+      if (value.image) data.image = value.image;
+
+      this.venueService.updateVenue(editingId, data);
+      this.venueService.venueIdBeingEdited.set(null);
+    } else {
+      this.venueService.addVenue(value as Omit<Venue, 'id'>);
     }
 
-    if(this.venueForm.valid){
-      this.venueService.addVenue(newVenue);
-      this.venueForm.reset();
-    }
+    this.venueForm.reset();
   }
 }

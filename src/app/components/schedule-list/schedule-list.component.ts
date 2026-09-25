@@ -11,6 +11,7 @@ export class ScheduleListComponent {
   dateKeys = input.required<string[]>();
   groupedEvents = input.required<Record<string, FestivalEvent[]>>();
   edit = output<FestivalEvent>();
+  remove = output<FestivalEvent>();
 
   formatDate(dateKey: string): string {
     return new Date(dateKey).toLocaleDateString('fr-FR', {

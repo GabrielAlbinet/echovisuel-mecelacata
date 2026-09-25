@@ -1,10 +1,9 @@
 import { Component, OnInit, inject, signal, input, output, effect } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ArtistService } from '../../services/artist.service';
-import { VenueServiceTs } from '../../services/venue.service';
+import { VenueServiceTs } from '../../services/venue-service/venue.service';
 import { ScheduleService } from '../../services/schedule.service';
-import { Artist } from '../../types/artist.interface';
-import { Venue } from '../../types/venue.interface';
 import { FestivalEvent } from '../../types/festival-event.interface';
 
 interface PendingEvent {
@@ -28,12 +27,14 @@ export class ScheduleFormComponent implements OnInit {
   eventUpdated = output<FestivalEvent>();
   eventEditCancelled = output<void>();
 
-  artists = signal<Artist[]>([]);
-  venues = signal<Venue[]>([]);
+  readonly artists = this.artistService.artists;
+  readonly venues = this.venueService.venues;
 
   showTimeErrorModal = signal(false);
   showConfirmModal = signal(false);
+  showInvalidFormMessage = signal(false);
   pendingEvent = signal<PendingEvent | null>(null);
+  apiErrorMessage = signal<string | null>(null);
 
   form = new FormGroup({
     artistId: new FormControl<number | null>(null, Validators.required),
@@ -46,32 +47,42 @@ export class ScheduleFormComponent implements OnInit {
   constructor() {
     effect(() => {
       const event = this.eventToEdit();
+      const artists = this.artists();
+      const venues = this.venues();
 
-      if (event) {
-        this.form.patchValue({
-          artistId: event.artistId,
-          venueId: event.venueId,
-          date: event.date,
-          startTime: event.startTime,
-          endTime: event.endTime,
-        });
-      } else {
+      if (!event) {
         this.form.reset();
+        return;
       }
+
+      if (artists.length === 0 || venues.length === 0) {
+        return;
+      }
+
+      this.form.patchValue({
+        artistId: event.artistId,
+        venueId: event.venueId,
+        date: event.date,
+        startTime: event.startTime,
+        endTime: event.endTime,
+      });
     });
   }
 
   ngOnInit() {
-    this.artists.set(this.artistService.getArtists());
-    this.venues.set(this.venueService.getVenuesFromService());
+    this.venueService.initVenue();
   }
 
   submit() {
-    const { artistId, venueId, date, startTime, endTime } = this.form.value;
+    const { artistId, date, startTime, endTime } = this.form.value;
 
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.showInvalidFormMessage.set(true);
       return;
     }
+
+    this.showInvalidFormMessage.set(false);
 
     if (!startTime || !endTime || endTime <= startTime) {
       this.showTimeErrorModal.set(true);
@@ -89,37 +100,41 @@ export class ScheduleFormComponent implements OnInit {
     this.showTimeErrorModal.set(false);
   }
 
+  closeApiErrorModal() {
+    this.apiErrorMessage.set(null);
+  }
+
   confirmSubmit() {
     const { artistId, venueId, date, startTime, endTime } = this.form.value;
     const editingEvent = this.eventToEdit();
+    const payload = {
+      artistId: artistId!,
+      venueId: venueId!,
+      date: date!,
+      startTime: startTime!,
+      endTime: endTime!,
+    };
 
-    if (editingEvent) {
-      const updated = this.scheduleService.updateEvent({
-        id: editingEvent.id,
-        artistId: artistId!,
-        venueId: venueId!,
-        date: date!,
-        startTime: startTime!,
-        endTime: endTime!,
-        status: editingEvent.status,
-      });
-
-      this.eventUpdated.emit(updated);
-    } else {
-      const created = this.scheduleService.createEvent({
-        artistId: artistId!,
-        venueId: venueId!,
-        date: date!,
-        startTime: startTime!,
-        endTime: endTime!,
-        status: 'scheduled',
-      });
-
-      this.eventCreated.emit(created);
-    }
-
-    this.form.reset();
     this.showConfirmModal.set(false);
+
+    const request$ = editingEvent
+      ? this.scheduleService.updateEvent(editingEvent.id, payload)
+      : this.scheduleService.createEvent({ ...payload, status: 'scheduled' });
+
+    request$.subscribe({
+      next: (event) => {
+        if (editingEvent) {
+          this.eventUpdated.emit(event);
+        } else {
+          this.eventCreated.emit(event);
+        }
+        this.form.reset();
+        this.showInvalidFormMessage.set(false);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.apiErrorMessage.set(error.error?.message ?? "L'enregistrement a échoué, réessayez.");
+      },
+    });
   }
 
   cancelSubmit() {
@@ -128,6 +143,7 @@ export class ScheduleFormComponent implements OnInit {
 
   cancelEdit() {
     this.form.reset();
+    this.showInvalidFormMessage.set(false);
     this.eventEditCancelled.emit();
   }
 }

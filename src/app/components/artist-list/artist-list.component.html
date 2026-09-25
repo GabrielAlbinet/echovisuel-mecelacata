@@ -1,14 +1,12 @@
-<div class="grid gap-10 md:grid-cols-3">
-
-
-@for (artist of artists(); track artist.name){
-<div>
-    <app-artist-card (selectedArtist)="updateSelectedArtist($event)" [artist]='artist'></app-artist-card>
+<div class="p-6">
+  <div class="grid gap-6 md:grid-cols-3">
+    @for (artist of artists(); track artist.name){
+    <div>
+        <app-artist-card (selectedArtist)="updateSelectedArtist($event)" [artist]='artist'></app-artist-card>
+    </div>
+    }
+    @empty {
+     <p class="text-gray-500 italic col-span-full">Aucun artiste trouvé.</p>
+     }
+  </div>
 </div>
-}
-
-@empty {
- <p>Aucun artiste trouvé.</p>
- }
-</div>
- 

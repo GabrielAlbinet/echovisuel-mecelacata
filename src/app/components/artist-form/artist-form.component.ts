@@ -10,27 +10,37 @@ import { Artist } from '../../types/artist.interface';
   templateUrl: './artist-form.component.html',
 })
 export class ArtistFormComponent {
-private artistService = inject(ArtistService);
+  artistService = inject(ArtistService);
 
   form = new FormGroup({
-
-    name: new FormControl('',[Validators.required]),
-    category: new FormControl('',[Validators.required]),
-    image: new FormControl('',[Validators.required]),
-    description: new FormControl('',[Validators.required, Validators.maxLength(300)])
-
+    name: new FormControl(''),
+    category: new FormControl(''),
+    image: new FormControl(''),
+    description: new FormControl('',[Validators.maxLength(300)])
   });
+
   onSubmit(){
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    const artist = this.form.value as Artist;
-    this.artistService.addArtist(artist);
-    
+    const editingId = this.artistService.artistIdBeingEdited();
+    const value = this.form.value;
+
+    if (editingId !== null) {
+      const data: Partial<Omit<Artist, 'id'>> = {};
+      if (value.name) data.name = value.name;
+      if (value.category) data.category = value.category;
+      if (value.image) data.image = value.image;
+      if (value.description) data.description = value.description;
+
+      this.artistService.updateArtist(editingId, data);
+      this.artistService.artistIdBeingEdited.set(null);
+    } else {
+      this.artistService.addArtist(value as Artist);
+    }
+
+    this.form.reset();
   }
-
-  
-
 }

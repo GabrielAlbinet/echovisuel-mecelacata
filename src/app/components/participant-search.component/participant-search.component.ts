@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, OnDestroy, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ParticipantService } from '../../services/participant.service';
 
@@ -8,14 +8,27 @@ import { ParticipantService } from '../../services/participant.service';
   styleUrl: './participant-search.component.css',
   templateUrl: './participant-search.component.html',
 })
-export class ParticipantSearchComponent {
+export class ParticipantSearchComponent implements OnDestroy {
   private readonly participantService = inject(ParticipantService);
-  
+  private searchTimeout: ReturnType<typeof setTimeout> | null = null;
+
   emailSearch = signal<string>('');
 
+  onSearchChange(value: string) {
+    this.emailSearch.set(value);
 
-  getParticipantsByMail(emailSearch:string){
-    let regex = new RegExp(".*" + emailSearch + ".*");
-    this.participantService.setParticipantTab(regex);
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+
+    this.searchTimeout = setTimeout(() => {
+      this.participantService.getParticipants(value.trim()).subscribe();
+    }, 300);
+  }
+
+  ngOnDestroy() {
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
   }
 }

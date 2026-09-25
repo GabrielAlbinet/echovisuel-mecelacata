@@ -12,9 +12,16 @@ export class EventCardComponent {
 
   event = input.required<FestivalEvent>();
   edit = output<FestivalEvent>();
+  remove = output<FestivalEvent>();
 
   artistName = computed(() => {
-    const artist = this.artistService.getArtists().find((artist) => artist.id === this.event().artistId);
-    return artist?.name ?? 'Artiste inconnu';
+    const event = this.event();
+    return (
+      event.artist?.name ??
+      this.artistService.artists().find((artist) => artist.id === event.artistId)?.name ??
+      'Artiste inconnu'
+    );
   });
+
+  venueName = computed(() => this.event().venue?.name ?? `Lieu #${this.event().venueId}`);
 }

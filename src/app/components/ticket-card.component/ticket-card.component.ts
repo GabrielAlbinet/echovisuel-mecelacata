@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Ticket } from '../../types/ticket-type.interface';
+import { TicketService } from '../../services/ticket.service';
 
 @Component({
   imports: [],
@@ -8,9 +9,20 @@ import { Ticket } from '../../types/ticket-type.interface';
   templateUrl: './ticket-card.component.html',
 })
 export class TicketCardComponent {
-  ticket=input.required<Ticket>(); //parent vers enfant
-  selectedTicket=output<Ticket>(); //Enfant vers parent
-  select(ticket:Ticket){
+  private ticketService = inject(TicketService);
+
+  ticket = input.required<Ticket & { id: number }>();
+  selectedTicket = output<Ticket>();
+
+  select(ticket: Ticket) {
     this.selectedTicket.emit(ticket);
+  }
+
+  onEdit() {
+    this.ticketService.ticketIdBeingEdited.set(this.ticket().id);
+  }
+
+  onDelete() {
+    this.ticketService.deleteTicket(this.ticket().id);
   }
 }

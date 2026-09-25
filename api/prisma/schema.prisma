@@ -8,9 +8,75 @@ datasource db {
 }
 
 model Artist {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   category    String
   image       String
   description String
+  events      Event[]
+}
+
+model Venue {
+  id          Int     @id @default(autoincrement())
+  name        String
+  type        String
+  description String?
+  capacity    Int
+  location    String
+  image       String
+  events      Event[]
+}
+
+model Ticket {
+  id           Int           @id @default(autoincrement())
+  name         String
+  description  String
+  price        Float
+  quantity     Int
+  condition    String
+  available    Boolean
+  participants Participant[]
+}
+
+enum EventStatus {
+  scheduled
+  cancelled
+}
+
+model Event {
+  id        Int         @id @default(autoincrement())
+  date      String
+  startTime String
+  endTime   String
+  status    EventStatus @default(scheduled)
+  artistId  Int
+  venueId   Int
+  artist    Artist      @relation(fields: [artistId], references: [id])
+  venue     Venue       @relation(fields: [venueId], references: [id])
+}
+
+model Participant {
+  id        Int    @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String @unique
+  status    String
+  ticketId  Int
+  ticket    Ticket @relation(fields: [ticketId], references: [id])
+}
+
+model Festival {
+  id           Int    @id @default(autoincrement())
+  name         String
+  description  String
+  mainLocation String
+  poster       String
+  startDate    String
+  endDate      String
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
 }

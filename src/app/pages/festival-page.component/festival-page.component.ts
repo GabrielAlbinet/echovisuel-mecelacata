@@ -1,10 +1,11 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router, RouterLink } from '@angular/router';
 import { FestivalServiceService } from '../../services/festival-service.service';
+import { AuthService } from '../../services/auth.service';
 import { FestivalDatesComponent } from '../../components/festival-dates.component/festival-dates.component';
 import { FestivalInfoComponent } from '../../components/festival-info.component/festival-info.component';
 import { FestivalType } from '../../types/festival.type';
-import { RouterLink } from '@angular/router';
-
 
 @Component({
   imports: [FestivalDatesComponent, FestivalInfoComponent, RouterLink],
@@ -12,8 +13,60 @@ import { RouterLink } from '@angular/router';
   styleUrl: './festival-page.component.css',
   templateUrl: './festival-page.component.html',
 })
-export class FestivalPageComponent {
-  private festivalservice = inject(FestivalServiceService);
+export class FestivalPageComponent implements OnInit {
+  private festivalService = inject(FestivalServiceService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  festivals = this.festivalservice.festivalsList;
+  readonly currentUser = this.authService.currentUser;
+
+  festivals = this.festivalService.festivalsList;
+  isLoading = signal(true);
+  loadError = signal(false);
+  festivalToDelete = signal<FestivalType | null>(null);
+  deleteErrorMessage = signal<string | null>(null);
+
+  ngOnInit() {
+    this.festivalService.loadFestivals().subscribe({
+      next: () => this.isLoading.set(false),
+      error: () => {
+        this.isLoading.set(false);
+        this.loadError.set(true);
+      },
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  onRemoveRequested(festival: FestivalType) {
+    this.festivalToDelete.set(festival);
+  }
+
+  cancelRemove() {
+    this.festivalToDelete.set(null);
+  }
+
+  confirmRemove() {
+    const festival = this.festivalToDelete();
+    if (!festival) return;
+
+    this.festivalService.deleteFestival(festival.id).subscribe({
+      next: () => this.festivalToDelete.set(null),
+      error: (error: HttpErrorResponse) => {
+        this.festivalToDelete.set(null);
+        this.deleteErrorMessage.set(
+          error.status === 401
+            ? 'Vous devez être connecté(e) pour supprimer un festival.'
+            : 'La suppression a échoué, réessayez.',
+        );
+      },
+    });
+  }
+
+  closeDeleteError() {
+    this.deleteErrorMessage.set(null);
+  }
 }

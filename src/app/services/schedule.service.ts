@@ -1,43 +1,41 @@
-import { Injectable, signal } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
-import { FestivalEvent } from '../types/festival-event.interface';
-import { FESTIVAL_EVENTS } from '../data/festival-events.data';
+import { Injectable, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { EventPayload, FestivalEvent } from '../types/festival-event.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ScheduleService {
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:3000/api/events';
+
   private events = signal<FestivalEvent[]>([]);
   readonly eventsSignal = this.events.asReadonly();
 
   getEventsFromService(): Observable<FestivalEvent[]> {
-    return of(FESTIVAL_EVENTS).pipe(
+    return this.http.get<FestivalEvent[]>(this.apiUrl).pipe(
       tap((events) => this.events.set(events)),
     );
   }
 
-  createEvent(newEvent: Omit<FestivalEvent, 'id'>): FestivalEvent {
-    const event: FestivalEvent = {
-      ...newEvent,
-      id: this.generateId(),
-    };
-
-    this.events.update((events) => [...events, event]);
-
-    return event;
-  }
-
-  updateEvent(updatedEvent: FestivalEvent): FestivalEvent {
-    this.events.update((events) =>
-      events.map((event) => (event.id === updatedEvent.id ? updatedEvent : event)),
+  createEvent(newEvent: EventPayload): Observable<FestivalEvent> {
+    return this.http.post<FestivalEvent>(this.apiUrl, newEvent).pipe(
+      tap((created) => this.events.update((events) => [...events, created])),
     );
-
-    return updatedEvent;
   }
 
-  private generateId(): number {
-    const currentEvents = this.events();
-    const maxId = currentEvents.reduce((max, event) => Math.max(max, event.id), 0);
-    return maxId + 1;
+  updateEvent(id: number, data: Partial<EventPayload>): Observable<FestivalEvent> {
+    return this.http.patch<FestivalEvent>(`${this.apiUrl}/${id}`, data).pipe(
+      tap((updated) =>
+        this.events.update((events) => events.map((event) => (event.id === id ? updated : event))),
+      ),
+    );
+  }
+
+  deleteEvent(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      tap(() => this.events.update((events) => events.filter((event) => event.id !== id))),
+    );
   }
 }

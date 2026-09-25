@@ -1,7 +1,27 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-<label>Nom :<input type="text" formControlName="name"></label>
-<label>Categorie :<input type="text" formControlName="category"></label>
-<label>Image :<input type="text" formControlName="image"></label>
-<label>Description : <textarea type="text" formControlName="description"></textarea></label>
-<button type="submit">Send</button>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-md mx-auto p-6 bg-white border border-gray-300 rounded-lg shadow-sm space-y-4">
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Nom :</span>
+    <input type="text" formControlName="name" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Categorie :</span>
+    <input type="text" formControlName="category" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Image :</span>
+    <input type="text" formControlName="image" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+  </label>
+
+  <label class="block">
+    <span class="text-sm font-medium text-gray-700">Description :</span>
+    <textarea formControlName="description" rows="3" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+  </label>
+
+  <button type="submit" class="w-full bg-indigo-500 text-white font-medium py-2 rounded-md hover:bg-indigo-600 transition-colors">
+    {{ artistService.artistIdBeingEdited() !== null ? 'Update' : 'Send' }}
+  </button>
+
 </form>

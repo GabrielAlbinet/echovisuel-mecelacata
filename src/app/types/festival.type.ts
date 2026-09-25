@@ -1,11 +1,11 @@
 export interface FestivalType {
-    name: string;
-    description: string;
-    dates: Dates[];
-    mainLocation: string;
-    poster: string;
+  id: number;
+  name: string;
+  description: string;
+  mainLocation: string;
+  poster: string;
+  startDate: string;
+  endDate: string;
 }
-export interface Dates {
-    startDate: Date;
-    endDate: Date;
-}
+
+export type FestivalPayload = Omit<FestivalType, 'id'>;

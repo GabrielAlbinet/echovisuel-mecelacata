@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject, output } from '@angular/core';
 import { ParticipantService } from '../../services/participant.service';
 import { ParticipantCardComponent } from '../participant-card.component/participant-card.component';
 import { Participant } from '../../types/participant.interface';
@@ -10,13 +10,15 @@ import { Participant } from '../../types/participant.interface';
   templateUrl: './participant-list.component.html',
 })
 export class ParticipantListComponent implements OnInit {
-    private readonly participantService = inject(ParticipantService);
-    readonly participantTab = this.participantService.participantsSignal;
+  private readonly participantService = inject(ParticipantService);
+  readonly participantTab = this.participantService.participantsSignal;
 
-  ngOnInit(){
+  edit = output<Participant>();
+  remove = output<Participant>();
+
+  ngOnInit() {
     this.participantService.getParticipants().subscribe();
   }
 
-  whenChange(selectedParticipant:{participant: Participant, isChecked:boolean}){}
-
+  whenChange(selectedParticipant: { participant: Participant; isChecked: boolean }) {}
 }
