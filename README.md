@@ -3,7 +3,7 @@
 Le projet tient sur 4 conteneurs :
 - front (l'appli Angular)
 - api (côté back, API Express + Prisma)
-- db (la bse MariaDB)
+- db (la base MariaDB)
 - phpmyadmin (l'interface PMA de la BDD)
 
 Lien de la docu Swagger : http://localhost:3000/api-docs
