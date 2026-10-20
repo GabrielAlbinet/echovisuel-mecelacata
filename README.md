@@ -24,20 +24,28 @@ Puis se mettre dans le nouveau dossier.
 Ensuite, se baser sur le .env.exemple pour se créer un .env à la racine du projet. 
 
 Et rentrer ton mdp et ta clé secrète :
-
+```
 DB_PASSWORD= ton mot de passe
 JWT_SECRET=la clé secrète
+```
 
 Construire les images et lancer les conteneurs : 
+```
     docker compose up --build
+```
 
 Le faire en deux commandes séparées :
+```
     docker build -t nom_image .
     docker run --rm -it -p 3333:3000 -v "$(pwd):/app" -v /app/node_modules first-docker
+```
 
 Le client (prisma generate) est fait dans le build, mais il faut faire les migrations (sinon, il y a 0 tables) 
 
-La commande : docker compose exec api npx prisma migrate deploy --config prisma7.config.ts
+La commande : 
+```
+docker compose exec api npx prisma migrate deploy --config prisma7.config.ts
+```
 
 Pour finir, il faut se créer un compte via Swagger.
 Il y a pas de pages Register côté front, donc faut passer par le back. 
@@ -48,10 +56,12 @@ Il y a pas de pages Register côté front, donc faut passer par le back.
 - Dérouler la section POST /auth/register
 - Cliquer sur Try it out.
 - Dans le champ "Edit Value, insérer un corps JSON de ce format :
+```
     {
         "email": "exemple au format mail",
         "password": "un mot de passe"
     }
+```
 
 Ensuite, aller sur la page login du ite et se connecter avec les nouveaux identifiants : http://localhost:4200/login
 
@@ -86,8 +96,9 @@ Exemples (déjà subis) :
 Modification du schema.prisma -> le conteneur garde l'ancien dossier generated, donc le client ne prendra pas les modifs.
 
 La commande pour éviter ce soucis :
+```
 docker compose up --build -V
-
+```
 
 
 
@@ -99,13 +110,6 @@ docker compose up --build -V
 
 
 -----------------------------------
-
-Lancer le projet
-
-```
-npm run start
-```
-
 Lancer le lint
 
 ```
