@@ -37,7 +37,7 @@ Construire les images et lancer les conteneurs :
 Le faire en deux commandes séparées :
 ```
     docker build -t nom_image .
-    docker run --rm -it -p 3333:3000 -v "$(pwd):/app" -v /app/node_modules first-docker
+    docker run --rm -it -p 3333:3000 -v "$(pwd):/app" -v /app/node_modules nom_image
 ```
 
 Le client (prisma generate) est fait dans le build, mais il faut faire les migrations (sinon, il y a 0 tables) 
