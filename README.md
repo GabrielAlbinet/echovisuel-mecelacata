@@ -70,21 +70,21 @@ Ensuite, aller sur la page login du site et se connecter avec les nouveaux ident
 URL du site : http://localhost:4200
 
 Les routes :
-/login : Page de connexion (redirige vers Festival)
-/festival : Festivals (accueil)
-/artists : Artistes
-/venues : Lieux
-/tickets : Billets
-/participants : Participants
-/schedule : Programmations des artistes
+- /login : Page de connexion (redirige vers Festival)
+- /festival : Festivals (accueil)
+- /artists : Artistes
+- /venues : Lieux
+- /tickets : Billets
+- /participants : Participants
+- /schedule : Programmations des artistes
 
 Note : il faudra tout créer puisque la base est vide. 
 
 # SERVICES
 
-l'API : http://localhost:3000/api
-La doc Swagger : http://localhost:3000/api-docs
-L'interface PMA de la database : http://localhost:9988
+- l'API : http://localhost:3000/api
+- La doc Swagger : http://localhost:3000/api-docs
+- L'interface PMA de la database : http://localhost:9988
 
 # EN CAS DE BUG SUR LE CONTENEUR API
 
