@@ -6,3 +6,45 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+
+  api:
+    build: ./api
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+      - /app/generated
+    environment:
+      - PORT=3000
+      - DATABASE_URL=mysql://root:${DB_PASSWORD}@db:3306/echovisuel
+      - DATABASE_HOST=db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=${DB_PASSWORD}
+      - DATABASE_NAME=echovisuel
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.6
+    command: --lower-case-table-names=1
+    environment:
+      - MYSQL_DATABASE=echovisuel
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    ports:
+      - 3506:3306
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 9988:80
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=${DB_PASSWORD}
+
+volumes:
+  db_data:
