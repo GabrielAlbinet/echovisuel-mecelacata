@@ -93,7 +93,7 @@ Donc sans faire de docker compose down avant de relancer docker compose up --bui
 
 Exemples (déjà subis) : 
 - Ajout d'une dépendance dans le package.json -> le node_modules ne sera pas à jour.
-Modification du schema.prisma -> le conteneur garde l'ancien dossier generated, donc le client ne prendra pas les modifs.
+- Modification du schema.prisma -> le conteneur garde l'ancien dossier generated, donc le client ne prendra pas les modifs.
 
 La commande pour éviter ce soucis :
 ```
