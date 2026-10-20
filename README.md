@@ -39,7 +39,7 @@ Le faire en deux commandes séparées :
     docker build -t nom_image .
     docker run --rm -it -p 3333:3000 -v "$(pwd):/app" -v /app/node_modules nom_image
 ```
-
+Pas de nom d'image à définir sur la 1ère commande.
 Le client (prisma generate) est fait dans le build, mais il faut faire les migrations (sinon, il y a 0 tables) 
 
 La commande : 
@@ -55,7 +55,7 @@ Il y a pas de pages Register côté front, donc faut passer par le back.
 - Aller sur http://localhost:3000/api-docs
 - Dérouler la section POST /auth/register
 - Cliquer sur Try it out.
-- Dans le champ "Edit Value, insérer un corps JSON de ce format :
+- Dans le champ "Edit Value", insérer un corps JSON de ce format :
 ```
     {
         "email": "exemple au format mail",
