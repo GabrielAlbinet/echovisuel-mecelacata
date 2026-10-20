@@ -103,25 +103,3 @@ docker compose up --build -V
 
 
 
-
-
-
-
-
-
------------------------------------
-Lancer le lint
-
-```
-npm run lint
-```
-
-Lancer le lint(fix)
-
-```
-npm run lint:fix
-```
-
-
-
-
