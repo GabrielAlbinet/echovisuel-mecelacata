@@ -63,7 +63,7 @@ Il y a pas de pages Register côté front, donc faut passer par le back.
     }
 ```
 
-Ensuite, aller sur la page login du ite et se connecter avec les nouveaux identifiants : http://localhost:4200/login
+Ensuite, aller sur la page login du site et se connecter avec les nouveaux identifiants : http://localhost:4200/login
 
 # LE SITE 
 
@@ -77,6 +77,8 @@ Les routes :
 /tickets : Billets
 /participants : Participants
 /schedule : Programmations des artistes
+
+Note : il faudra tout créer puisque la base est vide. 
 
 # SERVICES
 
