@@ -11,8 +11,8 @@ Lien de la docu Swagger : http://localhost:3000/api-docs
 # PRÉ-REQUIS
 
 - Les ports 4200, 3000, 3506 et 9988 doivent être libres
-- Git (lol)
-- Docker (lol)
+- Git
+- Docker
 
 # INSTALLATION et INITIALISATION
 
@@ -48,8 +48,7 @@ docker compose exec api npx prisma migrate deploy --config prisma7.config.ts
 ```
 
 Pour finir, il faut se créer un compte via Swagger.
-Il y a pas de pages Register côté front, donc faut passer par le back. 
-**Contacter bin.noresponse@echovisuel.fr pour toute plainte. 
+Il y a pas de pages Register côté front, donc faut passer par le back.
 
 ÉTAPES :
 - Aller sur http://localhost:3000/api-docs
@@ -78,7 +77,7 @@ Les routes :
 - /participants : Participants
 - /schedule : Programmations des artistes
 
-Note : il faudra tout créer puisque la base est vide. 
+Note : il faudra tout créer puisque la base est vide.
 
 # SERVICES
 
@@ -88,7 +87,7 @@ Note : il faudra tout créer puisque la base est vide.
 
 # EN CAS DE BUG SUR LE CONTENEUR API
 
-On crée des volumes anonymes pour node_modules et generated (client prisma), pour ne pas les écraser au moment du build (c'est compliqué à expliquer).
+On crée des volumes anonymes pour node_modules et generated (client prisma), pour ne pas les écraser au moment du build.
 
 Mais ils ne sont remplis qu'à la création. 
 Donc sans faire de docker compose down avant de relancer docker compose up --build, les conteneurs sont recrées mais avec les anciens volumes anonymes (qui ne sont pas refaits).
